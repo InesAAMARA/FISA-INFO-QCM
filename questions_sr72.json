@@ -1,0 +1,480 @@
+{
+  "titre": "QCM - Architecture des Systèmes d'Exploitation (SR70 & SR72)",
+  "categories": [
+    {
+      "nom": "Problématique de synchronisation",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Qu'est-ce que le non-déterminisme dans l'exécution de threads concurrents ?",
+          "reponses": [
+            {"texte": "Le résultat dépend de l'ordre d'entrelacement des instructions, pouvant varier d'une exécution à l'autre", "correct": true},
+            {"texte": "Les threads s'exécutent toujours dans un ordre prédéfini et fixe", "correct": false},
+            {"texte": "Chaque thread possède sa propre copie des données partagées", "correct": false},
+            {"texte": "Les threads ne peuvent pas partager de données entre eux", "correct": false}
+          ],
+          "explication": "Le non-déterminisme signifie que plusieurs threads concurrents peuvent s'exécuter dans des ordres d'entrelacement différents, donnant des résultats différents et parfois indésirables."
+        },
+        {
+          "id": 2,
+          "question": "Qu'est-ce qu'une section critique (CritSect) ?",
+          "reponses": [
+            {"texte": "Une partie du code dont l'exécution ne doit pas s'entrelacer avec d'autres processus accédant aux mêmes données", "correct": true},
+            {"texte": "Une zone mémoire réservée au système d'exploitation", "correct": false},
+            {"texte": "Un algorithme de tri des threads par priorité", "correct": false},
+            {"texte": "Une instruction machine indivisible du processeur", "correct": false}
+          ],
+          "explication": "La section critique est une portion de code qui manipule des données partagées et doit être exécutée de façon indivisible (atomique) pour éviter les problèmes de concurrence."
+        },
+        {
+          "id": 3,
+          "question": "Quelles sont les trois exigences pour une solution valide au problème de la section critique ?",
+          "reponses": [
+            {"texte": "Exclusion mutuelle, déroulement (pas d'interblocage), et attente bornée (pas de famine)", "correct": true},
+            {"texte": "Vitesse maximale, mémoire minimale, et synchronisation automatique", "correct": false},
+            {"texte": "Priorité des threads, équité absolue, et exécution séquentielle", "correct": false},
+            {"texte": "Isolation des données, réplication des ressources, et rollback automatique", "correct": false}
+          ],
+          "explication": "Les trois exigences sont : (1) Exclusion mutuelle : un seul thread en CritSect à la fois ; (2) Déroulement : un thread en attente peut finir par entrer ; (3) Attente bornée : aucun thread ne peut être exclu indéfiniment."
+        },
+        {
+          "id": 4,
+          "question": "Quelle est la différence entre interblocage (deadlock) et famine (starvation) ?",
+          "reponses": [
+            {"texte": "L'interblocage = tous les threads bloqués mutuellement ; la famine = un thread n'obtient jamais la ressource même si elle se libère", "correct": true},
+            {"texte": "L'interblocage = un seul thread bloqué ; la famine = tous les threads bloqués", "correct": false},
+            {"texte": "Ce sont deux termes synonymes pour le même problème", "correct": false},
+            {"texte": "L'interblocage est géré par le matériel ; la famine par le logiciel", "correct": false}
+          ],
+          "explication": "L'interblocage signifie que plusieurs threads se bloquent mutuellement (aucun ne peut avancer). La famine signifie qu'un thread attend indéfiniment même si la ressource est parfois disponible (monopolisée par d'autres)."
+        },
+        {
+          "id": 5,
+          "question": "Dans la structure typique d'un programme concurrent, quel est l'ordre correct des sections ?",
+          "reponses": [
+            {"texte": "Section d'entrée → Section critique → Section de sortie → Section non-critique", "correct": true},
+            {"texte": "Section critique → Section d'entrée → Section de sortie → Section non-critique", "correct": false},
+            {"texte": "Section non-critique → Section critique → Section d'entrée → Section de sortie", "correct": false},
+            {"texte": "Section de sortie → Section critique → Section d'entrée → Section non-critique", "correct": false}
+          ],
+          "explication": "La structure est : le thread demande la permission (section d'entrée), exécute la CritSect, libère le verrou (section de sortie), puis exécute le reste du code (section non-critique)."
+        }
+      ]
+    },
+    {
+      "nom": "Exclusion mutuelle par logiciel",
+      "questions": [
+        {
+          "id": 6,
+          "question": "Quel est le problème principal de l'Algorithme 1 (alternance de tour) pour l'exclusion mutuelle ?",
+          "reponses": [
+            {"texte": "Il viole l'exigence de déroulement : les threads doivent strictement alterner même si l'un n'a pas besoin de la CritSect", "correct": true},
+            {"texte": "Il ne garantit pas l'exclusion mutuelle", "correct": false},
+            {"texte": "Il provoque une famine immédiate", "correct": false},
+            {"texte": "Il nécessite des instructions matérielles spéciales", "correct": false}
+          ],
+          "explication": "L'Algo 1 (variable 'tour') garantit l'exclusion mutuelle mais impose une alternance stricte T0→T1→T0→T1, même si un thread n'a pas besoin d'entrer en CritSect."
+        },
+        {
+          "id": 7,
+          "question": "L'algorithme de Peterson résout le problème de la section critique pour deux threads. Quelles variables utilise-t-il ?",
+          "reponses": [
+            {"texte": "Un tableau booléen 'veut[]' indiquant l'intention d'entrer, et une variable 'tour' pour départager", "correct": true},
+            {"texte": "Uniquement une variable entière 'compteur'", "correct": false},
+            {"texte": "Un sémaphore binaire et un mutex", "correct": false},
+            {"texte": "Un tableau de priorités et une file d'attente", "correct": false}
+          ],
+          "explication": "Peterson utilise veut[i] (le thread i veut entrer en CritSect) et tour (qui cède sa place en cas de conflit). C'est une solution logicielle pure qui satisfait les 3 exigences."
+        },
+        {
+          "id": 8,
+          "question": "Qu'est-ce que l'attente active (busy waiting ou spin lock) ?",
+          "reponses": [
+            {"texte": "Un thread vérifie en boucle une condition sans se bloquer, consommant du temps CPU inutilement", "correct": true},
+            {"texte": "Un thread se met en sommeil et est réveillé par le système d'exploitation", "correct": false},
+            {"texte": "Un mécanisme hardware qui suspend automatiquement un thread", "correct": false},
+            {"texte": "Une technique d'ordonnancement qui donne la priorité aux threads en attente", "correct": false}
+          ],
+          "explication": "L'attente active (while(condition);) garde le thread en exécution en consommant du CPU sans faire de travail utile. C'est inefficace mais simple à implémenter."
+        },
+        {
+          "id": 9,
+          "question": "Quelle instruction hardware 'TestAndSet' retourne-t-elle et que fait-elle ?",
+          "reponses": [
+            {"texte": "Elle retourne l'ancienne valeur d'un verrou ET le met à vrai (true) en une opération atomique", "correct": true},
+            {"texte": "Elle teste si un thread est actif et l'arrête si nécessaire", "correct": false},
+            {"texte": "Elle crée une nouvelle copie d'une variable partagée", "correct": false},
+            {"texte": "Elle libère un sémaphore et réveille le prochain thread en attente", "correct": false}
+          ],
+          "explication": "TestAndSet(verrou) lit l'ancienne valeur de verrou, met verrou=true, et retourne l'ancienne valeur, le tout de façon indivisible. Si l'ancienne valeur était false, le thread entre en CritSect."
+        },
+        {
+          "id": 10,
+          "question": "Pourquoi les solutions purement logicielles pour l'exclusion mutuelle sont-elles limitées sur les architectures modernes ?",
+          "reponses": [
+            {"texte": "Les compilateurs et processeurs peuvent réordonner les instructions, brisant les hypothèses de ces algorithmes", "correct": true},
+            {"texte": "Elles consomment trop de mémoire RAM", "correct": false},
+            {"texte": "Elles ne fonctionnent qu'avec un seul cœur de processeur", "correct": false},
+            {"texte": "Elles sont trop lentes comparées aux solutions hardware", "correct": false}
+          ],
+          "explication": "Les CPUs modernes et compilateurs réordonnent les instructions pour optimiser les performances. Les algorithmes comme Peterson supposent un ordre d'exécution strict qui n'est plus garanti."
+        }
+      ]
+    },
+    {
+      "nom": "Sémaphores",
+      "questions": [
+        {
+          "id": 11,
+          "question": "Qu'est-ce qu'un sémaphore et quelles sont ses deux opérations fondamentales ?",
+          "reponses": [
+            {"texte": "Une variable entière partagée avec les opérations acquire (P/wait) et release (V/signal) qui sont atomiques", "correct": true},
+            {"texte": "Un fichier de verrouillage avec des opérations read et write", "correct": false},
+            {"texte": "Un registre processeur avec les opérations push et pop", "correct": false},
+            {"texte": "Une structure de données FIFO avec enqueue et dequeue", "correct": false}
+          ],
+          "explication": "Un sémaphore est une variable entière S. acquire(S) décrémente S (bloque si S≤0). release(S) incrémente S (réveille un thread si nécessaire). Ces opérations sont indivisibles."
+        },
+        {
+          "id": 12,
+          "question": "Quelle est la différence entre un sémaphore binaire et un sémaphore compteur ?",
+          "reponses": [
+            {"texte": "Le sémaphore binaire vaut 0 ou 1 (mutex) ; le sémaphore compteur peut prendre n'importe quelle valeur entière positive", "correct": true},
+            {"texte": "Le sémaphore binaire est géré par le hardware ; le compteur par le software", "correct": false},
+            {"texte": "Le sémaphore binaire est pour les threads ; le compteur pour les processus", "correct": false},
+            {"texte": "Il n'y a aucune différence fonctionnelle entre les deux", "correct": false}
+          ],
+          "explication": "Un sémaphore binaire (mutex) ne peut valoir que 0 ou 1, utilisé pour l'exclusion mutuelle. Un sémaphore compteur peut valoir N, permettant de contrôler l'accès à N ressources identiques."
+        },
+        {
+          "id": 13,
+          "question": "Comment utilise-t-on un sémaphore pour implémenter l'exclusion mutuelle ?",
+          "reponses": [
+            {"texte": "On initialise le sémaphore à 1, puis on fait acquire() avant la CritSect et release() après", "correct": true},
+            {"texte": "On initialise le sémaphore à 0, puis on fait release() avant et acquire() après", "correct": false},
+            {"texte": "On utilise deux sémaphores initialisés à 0 et on les échange", "correct": false},
+            {"texte": "On initialise le sémaphore à -1 pour signaler l'exclusion", "correct": false}
+          ],
+          "explication": "Initialiser à 1 signifie qu'une ressource est disponible. acquire() la réserve (S→0), les autres threads se bloquent. release() la libère (S→1) et réveille un thread en attente."
+        },
+        {
+          "id": 14,
+          "question": "Quel est le problème des sémaphores sans file d'attente (avec attente active) ?",
+          "reponses": [
+            {"texte": "Ils gaspillent du temps CPU car les threads bouclent en attendant au lieu de se bloquer", "correct": true},
+            {"texte": "Ils ne garantissent pas l'exclusion mutuelle", "correct": false},
+            {"texte": "Ils ne peuvent être utilisés qu'avec un seul thread", "correct": false},
+            {"texte": "Ils provoquent systématiquement un interblocage", "correct": false}
+          ],
+          "explication": "Les sémaphores avec attente active (spinlocks) consomment du CPU inutilement. Les sémaphores avec file d'attente bloquent le thread (suspension) jusqu'à ce que la ressource soit disponible."
+        },
+        {
+          "id": 15,
+          "question": "Qu'est-ce que le problème du producteur-consommateur et comment les sémaphores le résolvent-ils ?",
+          "reponses": [
+            {"texte": "Un producteur remplit un tampon, un consommateur le vide. On utilise 3 sémaphores : mutex (exclusion), plein (nb éléments), vide (nb places libres)", "correct": true},
+            {"texte": "Un thread produit de la mémoire, un autre la consomme. On utilise un seul mutex", "correct": false},
+            {"texte": "Deux threads se disputent le processeur. On utilise un sémaphore compteur initialisé à 2", "correct": false},
+            {"texte": "Un processus écrit dans un fichier, un autre le lit. On verrouille le fichier avec un sémaphore binaire", "correct": false}
+          ],
+          "explication": "Le problème producteur-consommateur nécessite : mutex pour protéger l'accès au tampon, plein (initialisé à 0) pour compter les éléments disponibles, vide (initialisé à N) pour compter les places libres."
+        },
+        {
+          "id": 16,
+          "question": "Que se passe-t-il si on inverse l'ordre des acquire() dans le problème producteur-consommateur (acquire(mutex) avant acquire(vide)) ?",
+          "reponses": [
+            {"texte": "Un interblocage peut survenir : le producteur tient le mutex et attend vide, pendant que le consommateur attend le mutex", "correct": true},
+            {"texte": "Le programme fonctionne plus rapidement", "correct": false},
+            {"texte": "L'exclusion mutuelle est renforcée", "correct": false},
+            {"texte": "Le tampon peut déborder", "correct": false}
+          ],
+          "explication": "Si acquire(mutex) est fait avant acquire(vide/plein), un thread peut tenir le mutex et se bloquer sur vide/plein. L'autre thread ne peut pas entrer pour modifier vide/plein car le mutex est pris → deadlock."
+        },
+        {
+          "id": 17,
+          "question": "Dans le problème des lecteurs-rédacteurs, quelle est la règle de cohérence ?",
+          "reponses": [
+            {"texte": "Plusieurs lecteurs peuvent lire simultanément, mais un rédacteur doit avoir un accès exclusif (aucun autre lecteur ni rédacteur)", "correct": true},
+            {"texte": "Un seul lecteur et un seul rédacteur peuvent accéder simultanément", "correct": false},
+            {"texte": "Les rédacteurs ont toujours la priorité sur les lecteurs", "correct": false},
+            {"texte": "L'accès est toujours séquentiel : un seul thread à la fois, qu'il soit lecteur ou rédacteur", "correct": false}
+          ],
+          "explication": "Plusieurs lectures simultanées sont safe car elles ne modifient pas les données. Mais une écriture doit être exclusive pour éviter des lectures de données partiellement modifiées."
+        },
+        {
+          "id": 18,
+          "question": "Qu'est-ce que le problème des philosophes dîneurs illustre-t-il ?",
+          "reponses": [
+            {"texte": "Le risque d'interblocage et de famine quand plusieurs processus partagent des ressources et doivent en acquérir plusieurs simultanément", "correct": true},
+            {"texte": "Le problème de la gestion de la mémoire virtuelle", "correct": false},
+            {"texte": "L'algorithme optimal d'ordonnancement des processus", "correct": false},
+            {"texte": "La communication entre processus via des pipes", "correct": false}
+          ],
+          "explication": "5 philosophes partagent 5 fourchettes. Chacun a besoin de 2 fourchettes. Si tous prennent leur fourchette gauche simultanément, interblocage ! Ce problème illustre les difficultés de l'allocation de ressources multiples."
+        }
+      ]
+    },
+    {
+      "nom": "Moniteurs",
+      "questions": [
+        {
+          "id": 19,
+          "question": "Qu'est-ce qu'un moniteur en programmation concurrente ?",
+          "reponses": [
+            {"texte": "Une construction de haut niveau qui encapsule des données partagées et garantit qu'un seul thread à la fois exécute ses procédures", "correct": true},
+            {"texte": "Un programme de surveillance du CPU qui mesure les performances", "correct": false},
+            {"texte": "Un type de sémaphore avancé avec file d'attente prioritaire", "correct": false},
+            {"texte": "Un mécanisme hardware de protection de la mémoire", "correct": false}
+          ],
+          "explication": "Un moniteur est un module de programmation qui regroupe données partagées + procédures + exclusion mutuelle automatique. Un seul thread peut être actif dans le moniteur à la fois."
+        },
+        {
+          "id": 20,
+          "question": "Quelle est l'utilité des variables de condition dans un moniteur ?",
+          "reponses": [
+            {"texte": "Elles permettent à un thread de se suspendre à l'intérieur du moniteur (wait) et d'être réveillé par un autre thread (signal)", "correct": true},
+            {"texte": "Elles stockent les valeurs des variables partagées entre threads", "correct": false},
+            {"texte": "Elles indiquent le nombre de threads en attente du moniteur", "correct": false},
+            {"texte": "Elles définissent les priorités d'accès au moniteur", "correct": false}
+          ],
+          "explication": "Une variable de condition c permet : c.wait() (le thread se suspend et libère le moniteur) et c.signal() (réveille un thread suspendu sur c). Cela permet la synchronisation conditionnelle à l'intérieur du moniteur."
+        },
+        {
+          "id": 21,
+          "question": "Quelle est la différence entre la sémantique de Hoare et de Mesa pour signal() dans un moniteur ?",
+          "reponses": [
+            {"texte": "Hoare : le thread signalant cède immédiatement le moniteur au thread réveillé. Mesa : le thread réveillé attend que le signalant quitte", "correct": true},
+            {"texte": "Hoare utilise des sémaphores, Mesa utilise des mutex", "correct": false},
+            {"texte": "Hoare est pour les systèmes temps-réel, Mesa pour les systèmes généraux", "correct": false},
+            {"texte": "Il n'y a pas de différence pratique entre les deux sémantiques", "correct": false}
+          ],
+          "explication": "Hoare : signal() transfère immédiatement l'exécution au thread réveillé (garantit que la condition est toujours vraie). Mesa (Java) : signal() met le thread réveillé dans la file, qui doit revérifier la condition avec while()."
+        }
+      ]
+    },
+    {
+      "nom": "Interblocages (Deadlocks)",
+      "questions": [
+        {
+          "id": 22,
+          "question": "Quelles sont les 4 conditions de Coffman nécessaires pour qu'un interblocage se produise ?",
+          "reponses": [
+            {"texte": "Exclusion mutuelle, détention et attente, pas de préemption, attente circulaire", "correct": true},
+            {"texte": "Famine, concurrence, parallélisme, synchronisation", "correct": false},
+            {"texte": "Priorité des processus, manque de mémoire, accès disque, conflit réseau", "correct": false},
+            {"texte": "Exclusion mutuelle, préemption forcée, attente non-bornée, isolation des ressources", "correct": false}
+          ],
+          "explication": "Les 4 conditions de Coffman : (1) Exclusion mutuelle ; (2) Détention et attente (un processus tient une ressource ET attend une autre) ; (3) Pas de préemption (pas de retrait forcé) ; (4) Attente circulaire (cycle dans les dépendances)."
+        },
+        {
+          "id": 23,
+          "question": "Dans le graphe d'allocation des ressources (RAG), que signifie un arc d'un processus vers une ressource ?",
+          "reponses": [
+            {"texte": "Le processus est bloqué en attente de cette ressource (demande non satisfaite)", "correct": true},
+            {"texte": "La ressource est allouée à ce processus", "correct": false},
+            {"texte": "Le processus a terminé d'utiliser la ressource", "correct": false},
+            {"texte": "Le processus a créé la ressource", "correct": false}
+          ],
+          "explication": "Dans le RAG : arc processus→ressource = le processus demande/attend la ressource. Arc ressource→processus = la ressource est allouée au processus."
+        },
+        {
+          "id": 24,
+          "question": "Si le graphe d'allocation des ressources ne contient pas de cycle, qu'est-ce que cela implique ?",
+          "reponses": [
+            {"texte": "Il n'y a pas d'interblocage", "correct": true},
+            {"texte": "Il y a forcément un interblocage", "correct": false},
+            {"texte": "Certains processus sont en famine", "correct": false},
+            {"texte": "Toutes les ressources sont occupées", "correct": false}
+          ],
+          "explication": "Pas de cycle = pas d'interblocage. Présence d'un cycle : si chaque ressource a exactement 1 instance → interblocage certain ; si plusieurs instances → interblocage possible mais pas certain."
+        },
+        {
+          "id": 25,
+          "question": "Quelles sont les 4 stratégies pour traiter les interblocages ?",
+          "reponses": [
+            {"texte": "Prévention, esquive (évitement), détection et récupération, ignorer le problème", "correct": true},
+            {"texte": "Verrouillage, déverrouillage, réplication, migration", "correct": false},
+            {"texte": "Priorité, préemption, partition, pagination", "correct": false},
+            {"texte": "Compilation, exécution, interruption, terminaison", "correct": false}
+          ],
+          "explication": "Les 4 approches : (1) Prévention : éliminer une condition de Coffman ; (2) Esquive (Banker) : refuser les allocations risquées ; (3) Détection+récupération : détecter les deadlocks et les corriger ; (4) Ignorer (ostrich algorithm) comme Unix."
+        },
+        {
+          "id": 26,
+          "question": "Comment la prévention d'interblocage par élimination de l'attente circulaire fonctionne-t-elle ?",
+          "reponses": [
+            {"texte": "On impose un ordre total sur les ressources et les processus doivent les acquérir dans cet ordre croissant uniquement", "correct": true},
+            {"texte": "On interdit aux processus de détenir plus d'une ressource à la fois", "correct": false},
+            {"texte": "On préempte les ressources des processus qui attendent trop longtemps", "correct": false},
+            {"texte": "On réplique toutes les ressources pour qu'elles ne soient jamais en exclusion mutuelle", "correct": false}
+          ],
+          "explication": "En imposant un ordre numérique sur les ressources (R1 < R2 < R3...) et en exigeant que les acquisitions se fassent dans l'ordre croissant, on empêche la formation de cycles dans le graphe d'allocation."
+        },
+        {
+          "id": 27,
+          "question": "Qu'est-ce qu'un état sûr dans le contexte de l'algorithme du Banquier ?",
+          "reponses": [
+            {"texte": "Un état depuis lequel il existe une séquence d'allocation permettant à tous les processus de terminer sans interblocage", "correct": true},
+            {"texte": "Un état où toutes les ressources sont libres et non allouées", "correct": false},
+            {"texte": "Un état où chaque processus a obtenu toutes ses ressources maximales", "correct": false},
+            {"texte": "Un état où aucun processus n'est en attente de ressources", "correct": false}
+          ],
+          "explication": "Un état sûr = il existe une séquence sûre (P1, P2, ..., Pn) telle que les ressources demandées par chaque Pi peuvent être satisfaites avec les ressources disponibles + celles que les Pj (j<i) libèreront."
+        },
+        {
+          "id": 28,
+          "question": "Dans l'algorithme du Banquier, qu'est-ce que la matrice 'Need' représente ?",
+          "reponses": [
+            {"texte": "Need[i] = Max[i] - Allocation[i] : le maximum de ressources supplémentaires que le processus i peut encore demander", "correct": true},
+            {"texte": "Le nombre de ressources actuellement allouées à chaque processus", "correct": false},
+            {"texte": "Le nombre de ressources disponibles dans le système", "correct": false},
+            {"texte": "La priorité de chaque processus pour l'allocation de ressources", "correct": false}
+          ],
+          "explication": "Need[i][j] = Max[i][j] - Allocation[i][j]. C'est ce dont le processus i a encore besoin au maximum pour terminer son exécution. L'algorithme du Banquier vérifie si ces besoins peuvent être satisfaits."
+        },
+        {
+          "id": 29,
+          "question": "Comment l'algorithme du Banquier décide-t-il d'accorder ou refuser une demande de ressources ?",
+          "reponses": [
+            {"texte": "Il simule l'allocation, vérifie si l'état résultant est sûr (séquence sûre existe), et n'accorde la demande que si l'état est sûr", "correct": true},
+            {"texte": "Il accorde toujours la demande si les ressources sont disponibles immédiatement", "correct": false},
+            {"texte": "Il refuse toute demande si un processus est déjà en attente", "correct": false},
+            {"texte": "Il utilise une file de priorité FIFO pour décider de l'ordre d'allocation", "correct": false}
+          ],
+          "explication": "L'algorithme du Banquier : (1) Vérifie que la demande ≤ Need et ≤ Available ; (2) Simule l'allocation ; (3) Lance l'algorithme de sécurité sur le nouvel état ; (4) Accorde si sûr, met en attente sinon."
+        },
+        {
+          "id": 30,
+          "question": "Quelle est la principale limitation de l'algorithme du Banquier en pratique ?",
+          "reponses": [
+            {"texte": "Il nécessite que chaque processus déclare à l'avance son maximum de ressources, ce qui est rarement connu", "correct": true},
+            {"texte": "Il ne fonctionne qu'avec une seule ressource", "correct": false},
+            {"texte": "Il consomme trop de mémoire pour les grands systèmes", "correct": false},
+            {"texte": "Il ne peut gérer que 5 processus maximum", "correct": false}
+          ],
+          "explication": "L'algo du Banquier est théoriquement élégant mais peu pratique : il faut connaître Max (le maximum de ressources que chaque processus demandera jamais), ce qui est impossible dans les systèmes réels."
+        }
+      ]
+    },
+    {
+      "nom": "Détection et récupération des interblocages",
+      "questions": [
+        {
+          "id": 31,
+          "question": "Quelle est la différence entre l'algorithme d'évitement (Banquier) et l'algorithme de détection d'interblocage ?",
+          "reponses": [
+            {"texte": "L'évitement refuse les allocations risquées proactivement ; la détection permet toutes les allocations et corrige les deadlocks une fois détectés", "correct": true},
+            {"texte": "L'évitement est plus lent que la détection", "correct": false},
+            {"texte": "La détection nécessite plus d'informations que l'évitement", "correct": false},
+            {"texte": "Ce sont deux noms pour le même algorithme", "correct": false}
+          ],
+          "explication": "Évitement (Banquier) : conservatif, refuse les allocations qui pourraient mener à un deadlock. Détection : permissif, alloue tout ce qui est possible et vérifie périodiquement si un deadlock existe."
+        },
+        {
+          "id": 32,
+          "question": "Quelles sont les stratégies de récupération après détection d'un interblocage ?",
+          "reponses": [
+            {"texte": "Terminer un ou plusieurs processus impliqués dans le deadlock, ou préempter des ressources (rollback de processus)", "correct": true},
+            {"texte": "Redémarrer l'ensemble du système d'exploitation", "correct": false},
+            {"texte": "Augmenter la quantité de RAM disponible", "correct": false},
+            {"texte": "Convertir les ressources en ressources partagées", "correct": false}
+          ],
+          "explication": "Deux approches : (1) Termination de processus (tuer tous les processus deadlockés, ou un par un jusqu'à résolution) ; (2) Préemption de ressources (retirer des ressources à des processus et les rollback à un état sûr antérieur)."
+        },
+        {
+          "id": 33,
+          "question": "Dans l'algorithme de détection d'interblocage (avec ressources multiples), quelle est la condition pour marquer un processus comme pouvant terminer ?",
+          "reponses": [
+            {"texte": "Finish[i] est faux ET Request[i] ≤ Work (ses demandes actuelles peuvent être satisfaites avec les ressources disponibles Work)", "correct": true},
+            {"texte": "Le processus n'a aucune ressource allouée", "correct": false},
+            {"texte": "Le processus a une priorité supérieure à tous les autres", "correct": false},
+            {"texte": "Le processus est le seul à attendre cette ressource", "correct": false}
+          ],
+          "explication": "L'algo de détection initialise Work=Available et Finish[i]=false. Pour chaque processus i : si Finish[i]=false et Request[i]≤Work, simuler sa complétion (Work += Allocation[i], Finish[i]=true). Si certains Finish[i] restent false → deadlock."
+        },
+        {
+          "id": 34,
+          "question": "Pourquoi Unix et la plupart des systèmes n'implémentent-ils généralement pas de gestion des interblocages ?",
+          "reponses": [
+            {"texte": "Le coût de la prévention/détection est jugé trop élevé par rapport à la rareté des deadlocks (ostrich algorithm)", "correct": true},
+            {"texte": "Unix est trop simple pour implémenter ces mécanismes", "correct": false},
+            {"texte": "Les interblocages sont impossibles avec le scheduler d'Unix", "correct": false},
+            {"texte": "Les processus Unix ne partagent jamais de ressources", "correct": false}
+          ],
+          "explication": "L'algorithme de l'autruche : ignorer le problème. Les deadlocks sont rares et le overhead de les prévenir/détecter tout le temps est jugé trop coûteux. En pratique, on redémarre le processus ou le système si nécessaire."
+        }
+      ]
+    },
+    {
+      "nom": "Questions avancées et transversales",
+      "questions": [
+        {
+          "id": 35,
+          "question": "Quelle solution résout le problème des philosophes dîneurs sans risque d'interblocage ?",
+          "reponses": [
+            {"texte": "Permettre à au plus N-1 philosophes d'être assis simultanément, OU imposer qu'un philosophe prenne les deux fourchettes en une opération atomique", "correct": true},
+            {"texte": "Donner à chaque philosophe sa propre paire de fourchettes", "correct": false},
+            {"texte": "Obliger les philosophes à manger séquentiellement un par un", "correct": false},
+            {"texte": "Utiliser un seul sémaphore global pour toutes les fourchettes", "correct": false}
+          ],
+          "explication": "Solutions : (1) Au plus N-1 philosophes assis (brise l'attente circulaire) ; (2) Acquérir les deux fourchettes atomiquement (brise la détention+attente) ; (3) Ordre asymétrique (philosophe impair prend gauche d'abord, pair prend droite)."
+        },
+        {
+          "id": 36,
+          "question": "Qu'est-ce qu'une condition de course (race condition) ?",
+          "reponses": [
+            {"texte": "Une situation où le résultat du programme dépend de l'ordre d'exécution relatif de plusieurs threads accédant à des données partagées", "correct": true},
+            {"texte": "Une compétition entre threads pour obtenir le plus de temps CPU", "correct": false},
+            {"texte": "Un algorithme de tri concurrent utilisant plusieurs threads", "correct": false},
+            {"texte": "Un mécanisme d'optimisation des accès mémoire en multi-cœurs", "correct": false}
+          ],
+          "explication": "Une race condition survient quand plusieurs threads lisent et écrivent des données partagées sans synchronisation. Le résultat dépend de qui arrive 'en premier' → comportement imprévisible."
+        },
+        {
+          "id": 37,
+          "question": "Comment la prévention d'interblocage par élimination de 'détention et attente' fonctionne-t-elle, et quel est son inconvénient ?",
+          "reponses": [
+            {"texte": "Un processus doit demander toutes ses ressources d'un coup au début ; inconvénient : faible utilisation des ressources et risque de famine", "correct": true},
+            {"texte": "Un processus libère toutes ses ressources avant d'en demander une nouvelle ; inconvénient : impossible en pratique", "correct": false},
+            {"texte": "Les ressources sont multipliées pour éviter le partage ; inconvénient : coût hardware élevé", "correct": false},
+            {"texte": "Les processus ont un timeout sur les attentes ; inconvénient : complexité de l'implémentation", "correct": false}
+          ],
+          "explication": "Éliminer 'détention et attente' : soit demander tout dès le début (faible utilisation des ressources), soit libérer tout avant de redemander (risque de famine pour les processus qui ont besoin de beaucoup de ressources)."
+        },
+        {
+          "id": 38,
+          "question": "Quelle est la relation entre la valeur d'un sémaphore S et le nombre de threads en attente ?",
+          "reponses": [
+            {"texte": "Si S < 0, |S| représente le nombre de threads bloqués en attente sur ce sémaphore", "correct": true},
+            {"texte": "La valeur de S est toujours positive et indique le nombre de ressources disponibles", "correct": false},
+            {"texte": "S représente directement le PID du prochain thread qui sera réveillé", "correct": false},
+            {"texte": "S négatif signifie que le sémaphore est cassé et doit être réinitialisé", "correct": false}
+          ],
+          "explication": "Dans l'implémentation avec file d'attente : S peut devenir négatif. Si S = -3, cela signifie qu'il y a 3 threads bloqués en attente. acquire() décrémente S (peut le rendre négatif), release() incrémente S et réveille un thread si S≤0."
+        },
+        {
+          "id": 39,
+          "question": "Qu'est-ce que la préemption de ressources comme méthode de prévention d'interblocage ?",
+          "reponses": [
+            {"texte": "Le système d'exploitation peut forcer un processus à libérer ses ressources et le remettre dans un état antérieur (rollback) pour briser un cycle d'attente", "correct": true},
+            {"texte": "Les processus peuvent se voler mutuellement leurs ressources sans intervention du SE", "correct": false},
+            {"texte": "Le matériel interrompt automatiquement un processus qui détient une ressource trop longtemps", "correct": false},
+            {"texte": "Les ressources sont automatiquement libérées si elles ne sont pas utilisées pendant un certain temps", "correct": false}
+          ],
+          "explication": "La préemption de ressources signifie que le SE peut retirer des ressources à un processus et le faire revenir à un état checkpoint antérieur. Cela brise la condition 'pas de préemption' de Coffman."
+        },
+        {
+          "id": 40,
+          "question": "Dans le contexte des sémaphores, qu'est-ce que l'opération V (ou release/signal) fait exactement ?",
+          "reponses": [
+            {"texte": "Elle incrémente la valeur du sémaphore et, si des threads sont en attente (S≤0 avant incrémentation), réveille l'un d'eux", "correct": true},
+            {"texte": "Elle décrémente la valeur du sémaphore et bloque le thread si S≤0", "correct": false},
+            {"texte": "Elle remet le sémaphore à sa valeur initiale", "correct": false},
+            {"texte": "Elle vérifie si le sémaphore est libre sans le modifier", "correct": false}
+          ],
+          "explication": "V/release/signal : S++ ; si S≤0 (il y avait des threads en attente), réveiller un thread de la file d'attente. Cette opération signifie 'je libère une ressource'."
+        }
+      ]
+    }
+  ]
+}

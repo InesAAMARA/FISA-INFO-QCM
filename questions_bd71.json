@@ -1,0 +1,378 @@
+{
+  "titre": "BD71 - Big Data & NoSQL",
+  "categories": [
+
+    {
+      "nom": "1️⃣ Fondamentaux Big Data",
+      "questions": [
+
+        {
+          "id": 1,
+          "question": "Quelles sont les 3 caractéristiques historiques du Big Data ?",
+          "reponses": [
+            {"texte": "Volume, Variété, Vélocité", "correct": true},
+            {"texte": "Vitesse, Valeur, Virtualisation", "correct": false},
+            {"texte": "Volume, Véracité, Valeur", "correct": false},
+            {"texte": "Variété, Visualisation, Vitesse", "correct": false}
+          ],
+          "explication": "Les 3V : Volume, Variété, Vélocité."
+        },
+        {
+          "id": 2,
+          "question": "Quel V supplémentaire est souvent ajouté ?",
+          "reponses": [
+            {"texte": "Virtualisation", "correct": false},
+            {"texte": "Véracité", "correct": true},
+            {"texte": "Visibilité", "correct": false},
+            {"texte": "Vitesse CPU", "correct": false}
+          ],
+          "explication": "La Véracité concerne la qualité des données."
+        },
+        {
+          "id": 3,
+          "question": "Pourquoi le Big Data nécessite-t-il une architecture distribuée ?",
+          "reponses": [
+            {"texte": "Pour gérer des volumes massifs efficacement", "correct": true},
+            {"texte": "Pour remplacer SQL", "correct": false},
+            {"texte": "Pour éviter le réseau", "correct": false},
+            {"texte": "Pour réduire la RAM", "correct": false}
+          ],
+          "explication": "Une seule machine ne suffit pas pour traiter de très gros volumes."
+        },
+        {
+          "id": 4,
+          "question": "⚠ Le Big Data remplace-t-il totalement les bases relationnelles ?",
+          "reponses": [
+            {"texte": "Oui", "correct": false},
+            {"texte": "Non, il les complète", "correct": true},
+            {"texte": "Uniquement en cloud", "correct": false},
+            {"texte": "Seulement pour l’IA", "correct": false}
+          ],
+          "explication": "⚠ Question piège : SQL reste essentiel."
+        },
+        {
+          "id": 5,
+          "question": "La scalabilité horizontale signifie :",
+          "reponses": [
+            {"texte": "Ajouter des serveurs", "correct": true},
+            {"texte": "Ajouter de la RAM", "correct": false},
+            {"texte": "Augmenter CPU unique", "correct": false},
+            {"texte": "Compresser données", "correct": false}
+          ],
+          "explication": "Scale-out = ajouter des machines."
+        },
+        {
+          "id": 6,
+          "question": "La scalabilité verticale signifie :",
+          "reponses": [
+            {"texte": "Ajouter des serveurs", "correct": false},
+            {"texte": "Ajouter des ressources à une machine", "correct": true},
+            {"texte": "Shard automatique", "correct": false},
+            {"texte": "Réplication réseau", "correct": false}
+          ],
+          "explication": "Scale-up = améliorer une machine existante."
+        },
+        {
+          "id": 7,
+          "question": "Pourquoi le parallélisme est clé en Big Data ?",
+          "reponses": [
+            {"texte": "Réduire le temps de traitement", "correct": true},
+            {"texte": "Réduire stockage", "correct": false},
+            {"texte": "Éviter réplication", "correct": false},
+            {"texte": "Supprimer partitions", "correct": false}
+          ],
+          "explication": "On divise le travail entre plusieurs nœuds."
+        }
+      ]
+    },
+
+    {
+      "nom": "2️⃣ HDFS & Hadoop",
+      "questions": [
+
+        {
+          "id": 8,
+          "question": "HDFS est optimisé pour :",
+          "reponses": [
+            {"texte": "Gros fichiers séquentiels", "correct": true},
+            {"texte": "Beaucoup de petits fichiers", "correct": false},
+            {"texte": "Transactions bancaires", "correct": false},
+            {"texte": "Jointures SQL", "correct": false}
+          ],
+          "explication": "⚠ Question piège : HDFS gère mal les petits fichiers."
+        },
+        {
+          "id": 9,
+          "question": "Qui gère les métadonnées dans HDFS ?",
+          "reponses": [
+            {"texte": "NameNode", "correct": true},
+            {"texte": "DataNode", "correct": false},
+            {"texte": "ReduceNode", "correct": false},
+            {"texte": "WorkerNode", "correct": false}
+          ],
+          "explication": "Le NameNode contient les informations des blocs."
+        },
+        {
+          "id": 10,
+          "question": "Rôle du DataNode ?",
+          "reponses": [
+            {"texte": "Stocker les blocs", "correct": true},
+            {"texte": "Gérer transactions", "correct": false},
+            {"texte": "Orchestrer cluster", "correct": false},
+            {"texte": "Faire requêtes SQL", "correct": false}
+          ],
+          "explication": "Le DataNode stocke physiquement les données."
+        },
+        {
+          "id": 11,
+          "question": "Un fichier de 1 Go avec blocs de 128 Mo crée combien de blocs ?",
+          "reponses": [
+            {"texte": "8", "correct": true},
+            {"texte": "6", "correct": false},
+            {"texte": "10", "correct": false},
+            {"texte": "12", "correct": false}
+          ],
+          "explication": "1024 / 128 = 8 blocs."
+        },
+        {
+          "id": 12,
+          "question": "Facteur réplication 3, fichier 200 Mo → espace utilisé ?",
+          "reponses": [
+            {"texte": "600 Mo", "correct": true},
+            {"texte": "200 Mo", "correct": false},
+            {"texte": "400 Mo", "correct": false},
+            {"texte": "800 Mo", "correct": false}
+          ],
+          "explication": "200 × 3 = 600 Mo."
+        },
+        {
+          "id": 13,
+          "question": "Que fait HDFS si un bloc est perdu ?",
+          "reponses": [
+            {"texte": "Recrée une copie automatiquement", "correct": true},
+            {"texte": "Supprime fichier", "correct": false},
+            {"texte": "Arrête cluster", "correct": false},
+            {"texte": "Ignore erreur", "correct": false}
+          ],
+          "explication": "HDFS maintient le facteur de réplication."
+        }
+      ]
+    },
+
+    {
+      "nom": "3️⃣ MapReduce & Traitement",
+      "questions": [
+
+        {
+          "id": 14,
+          "question": "La phase Map produit :",
+          "reponses": [
+            {"texte": "Paires clé-valeur", "correct": true},
+            {"texte": "Blocs HDFS", "correct": false},
+            {"texte": "Transactions SQL", "correct": false},
+            {"texte": "Copies réseau", "correct": false}
+          ],
+          "explication": "Sortie intermédiaire clé-valeur."
+        },
+        {
+          "id": 15,
+          "question": "Sans Reduce :",
+          "reponses": [
+            {"texte": "Pas d’agrégation finale", "correct": true},
+            {"texte": "Cluster tombe", "correct": false},
+            {"texte": "Blocs supprimés", "correct": false},
+            {"texte": "CPU désactivé", "correct": false}
+          ],
+          "explication": "⚠ Question piège : Map fonctionne mais sans consolidation."
+        },
+        {
+          "id": 16,
+          "question": "10 000 événements/s pendant 5 min = ?",
+          "reponses": [
+            {"texte": "3 000 000", "correct": true},
+            {"texte": "300 000", "correct": false},
+            {"texte": "30 000", "correct": false},
+            {"texte": "600 000", "correct": false}
+          ],
+          "explication": "10 000 × 60 × 5."
+        },
+        {
+          "id": 17,
+          "question": "2 millions/min pendant 1h = ?",
+          "reponses": [
+            {"texte": "120 millions", "correct": true},
+            {"texte": "60 millions", "correct": false},
+            {"texte": "12 millions", "correct": false},
+            {"texte": "240 millions", "correct": false}
+          ],
+          "explication": "2M × 60."
+        }
+      ]
+    },
+
+    {
+      "nom": "4️⃣ NoSQL & Modèles",
+      "questions": [
+
+        {
+          "id": 18,
+          "question": "MongoDB est une base :",
+          "reponses": [
+            {"texte": "Document", "correct": true},
+            {"texte": "Clé-valeur", "correct": false},
+            {"texte": "Graphe", "correct": false},
+            {"texte": "Relationnelle", "correct": false}
+          ],
+          "explication": "Documents JSON."
+        },
+        {
+          "id": 19,
+          "question": "Cassandra est orientée :",
+          "reponses": [
+            {"texte": "Colonnes", "correct": true},
+            {"texte": "Documents", "correct": false},
+            {"texte": "Graphes", "correct": false},
+            {"texte": "Tables SQL classiques", "correct": false}
+          ],
+          "explication": "Base colonne distribuée."
+        },
+        {
+          "id": 20,
+          "question": "Base idéale pour réseau social complexe :",
+          "reponses": [
+            {"texte": "Graphe", "correct": true},
+            {"texte": "Clé-valeur", "correct": false},
+            {"texte": "Document simple", "correct": false},
+            {"texte": "Fichier texte", "correct": false}
+          ],
+          "explication": "Relations optimisées."
+        },
+        {
+          "id": 21,
+          "question": "⚠ NoSQL signifie :",
+          "reponses": [
+            {"texte": "Not Only SQL", "correct": true},
+            {"texte": "No SQL Allowed", "correct": false},
+            {"texte": "New SQL Only", "correct": false},
+            {"texte": "Non Structuré", "correct": false}
+          ],
+          "explication": "⚠ Question piège classique."
+        }
+      ]
+    },
+
+    {
+      "nom": "5️⃣ CAP & Cohérence",
+      "questions": [
+
+        {
+          "id": 22,
+          "question": "CAP signifie :",
+          "reponses": [
+            {"texte": "Consistency, Availability, Partition tolerance", "correct": true},
+            {"texte": "Compression, Architecture, Partition", "correct": false},
+            {"texte": "Cloud, Access, Processing", "correct": false},
+            {"texte": "Control, Access, Performance", "correct": false}
+          ],
+          "explication": "Théorème des systèmes distribués."
+        },
+        {
+          "id": 23,
+          "question": "En cas de partition réseau, on doit choisir entre :",
+          "reponses": [
+            {"texte": "C et A", "correct": true},
+            {"texte": "C et P", "correct": false},
+            {"texte": "A et P", "correct": false},
+            {"texte": "Les trois", "correct": false}
+          ],
+          "explication": "⚠ Question piège : P est imposé."
+        },
+        {
+          "id": 24,
+          "question": "Un système AP privilégie :",
+          "reponses": [
+            {"texte": "Disponibilité", "correct": true},
+            {"texte": "Cohérence stricte", "correct": false},
+            {"texte": "Transactions ACID strictes", "correct": false},
+            {"texte": "SQL pur", "correct": false}
+          ],
+          "explication": "Disponibilité + partition tolerance."
+        },
+        {
+          "id": 25,
+          "question": "Eventual consistency signifie :",
+          "reponses": [
+            {"texte": "Convergence finale", "correct": true},
+            {"texte": "Incohérence permanente", "correct": false},
+            {"texte": "Pas de réplication", "correct": false},
+            {"texte": "Suppression réseau", "correct": false}
+          ],
+          "explication": "⚠ Question piège fréquente."
+        }
+      ]
+    },
+
+    {
+      "nom": "6️⃣ Architecture & Performance",
+      "questions": [
+
+        {
+          "id": 26,
+          "question": "Le sharding permet :",
+          "reponses": [
+            {"texte": "Répartition horizontale des données", "correct": true},
+            {"texte": "Réplication simple", "correct": false},
+            {"texte": "Compression", "correct": false},
+            {"texte": "Supprimer index", "correct": false}
+          ],
+          "explication": "Distribution sur plusieurs serveurs."
+        },
+        {
+          "id": 27,
+          "question": "Pourquoi éviter jointures distribuées ?",
+          "reponses": [
+            {"texte": "Coût réseau élevé", "correct": true},
+            {"texte": "Interdites", "correct": false},
+            {"texte": "Impossible techniquement", "correct": false},
+            {"texte": "Non supportées", "correct": false}
+          ],
+          "explication": "Latence réseau dominante."
+        },
+        {
+          "id": 28,
+          "question": "3 appels réseau de 50ms → latence minimale ?",
+          "reponses": [
+            {"texte": "150 ms", "correct": true},
+            {"texte": "50 ms", "correct": false},
+            {"texte": "100 ms", "correct": false},
+            {"texte": "200 ms", "correct": false}
+          ],
+          "explication": "3 × 50 ms."
+        },
+        {
+          "id": 29,
+          "question": "Un cluster double ses nœuds → temps divisé par 2 si scalabilité parfaite ?",
+          "reponses": [
+            {"texte": "Oui théoriquement", "correct": true},
+            {"texte": "Toujours non", "correct": false},
+            {"texte": "Impossible", "correct": false},
+            {"texte": "CPU limité", "correct": false}
+          ],
+          "explication": "Hypothèse idéale sans overhead."
+        },
+        {
+          "id": 30,
+          "question": "Pourquoi la latence réseau est critique en distribué ?",
+          "reponses": [
+            {"texte": "Communications dominent le temps total", "correct": true},
+            {"texte": "CPU inutiles", "correct": false},
+            {"texte": "RAM lente", "correct": false},
+            {"texte": "Stockage absent", "correct": false}
+          ],
+          "explication": "Le réseau devient le goulot d’étranglement."
+        }
+      ]
+    }
+
+  ]
+}

@@ -1,0 +1,518 @@
+{
+  "titre": "QCM – Management de Projet (GE79)",
+  "categories": [
+    {
+      "nom": "Human Resources – Fondamentaux",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Quels sont les processus inclus dans le management des ressources humaines ?",
+          "reponses": [
+            {"texte": "Définition du plan RH, acquisition, développement, management et contrôle des ressources", "correct": true},
+            {"texte": "Recrutement, formation, évaluation et licenciement", "correct": false},
+            {"texte": "Planification, exécution, contrôle et clôture du projet", "correct": false},
+            {"texte": "Identification des stakeholders, communication, négociation et arbitrage", "correct": false}
+          ],
+          "explication": "Le management des RH inclut : (1) Définition du plan RH, (2) Acquisition de l'équipe, (3) Développement de l'équipe, (4) Management de l'équipe, (5) Contrôle des ressources."
+        },
+        {
+          "id": 2,
+          "question": "Que définit le plan de ressources humaines ?",
+          "reponses": [
+            {"texte": "Comment les ressources seront identifiées, acquises, gérées, développées et libérées, avec rôles, RACI, OBS et plan de formation", "correct": true},
+            {"texte": "Uniquement les salaires et avantages sociaux des membres de l'équipe", "correct": false},
+            {"texte": "Le planning détaillé des tâches de chaque membre de l'équipe", "correct": false},
+            {"texte": "La liste des fournisseurs et sous-traitants du projet", "correct": false}
+          ],
+          "explication": "Le plan RH définit comment les ressources seront identifiées, acquises, gérées, développées et libérées. Il comprend : rôles et responsabilités, OBS, matrice RACI, stratégie d'acquisition, plan de formation, méthodes d'évaluation et stratégie de gestion des conflits."
+        },
+        {
+          "id": 3,
+          "question": "Dans la matrice RACI, que signifie 'A' (Accountable) ?",
+          "reponses": [
+            {"texte": "La personne qui est responsable de s'assurer que la tâche est accomplie et qui a l'autorité finale", "correct": true},
+            {"texte": "La personne qui réalise effectivement la tâche", "correct": false},
+            {"texte": "La personne consultée pour son expertise mais qui ne décide pas", "correct": false},
+            {"texte": "La personne informée de l'avancement sans être impliquée dans la décision", "correct": false}
+          ],
+          "explication": "RACI : R (Responsible) = qui fait, A (Accountable) = qui est garant/responsable final, C (Consulted) = qui est consulté, I (Informed) = qui est informé. Il ne peut y avoir qu'un seul A par tâche."
+        },
+        {
+          "id": 4,
+          "question": "Quels sont les facteurs d'influence lors de l'acquisition de l'équipe projet ?",
+          "reponses": [
+            {"texte": "La structure organisationnelle (fonctionnelle, matricielle, projetisée), le pouvoir du chef de projet et les contraintes budgétaires", "correct": true},
+            {"texte": "La météo, la saison et les congés des employés", "correct": false},
+            {"texte": "Le type de contrat client et la durée du projet uniquement", "correct": false},
+            {"texte": "La localisation géographique des membres et le fuseau horaire", "correct": false}
+          ],
+          "explication": "Les facteurs d'influence pour l'acquisition sont : la structure organisationnelle (qui détermine le pouvoir du PM), le pouvoir effectif du chef de projet et les contraintes budgétaires disponibles pour recruter ou sous-traiter."
+        },
+        {
+          "id": 5,
+          "question": "Quelles sont les 5 phases du modèle de développement d'équipe de Tuckman ?",
+          "reponses": [
+            {"texte": "Forming (constitution), Storming (conflits), Norming (normalisation), Performing (performance), Adjourning (dissolution)", "correct": true},
+            {"texte": "Planning, Executing, Monitoring, Controlling, Closing", "correct": false},
+            {"texte": "Initiation, Croissance, Maturité, Déclin, Renouveau", "correct": false},
+            {"texte": "Recrutement, Intégration, Collaboration, Autonomie, Séparation", "correct": false}
+          ],
+          "explication": "Le modèle de Tuckman décrit 5 phases : Forming (les membres se découvrent), Storming (conflits et tensions), Norming (règles établies), Performing (haute performance), Adjourning (dissolution à la fin du projet). Le PM adapte son style à chaque phase."
+        },
+        {
+          "id": 6,
+          "question": "Quelle est la différence entre la Théorie X et la Théorie Y de McGregor ?",
+          "reponses": [
+            {"texte": "X : les employés doivent être contrôlés et dirigés ; Y : les employés sont autonomes, responsables et motivés intrinsèquement", "correct": true},
+            {"texte": "X : management par objectifs ; Y : management par l'exemple", "correct": false},
+            {"texte": "X : employés experts ; Y : employés débutants", "correct": false},
+            {"texte": "X : management agile ; Y : management traditionnel", "correct": false}
+          ],
+          "explication": "Théorie X (Taylor) : les employés n'aiment pas le travail, doivent être contrôlés et dirigés. Théorie Y (McGregor) : les employés sont naturellement motivés, créatifs, capables de s'autocontrôler et de prendre des responsabilités."
+        },
+        {
+          "id": 7,
+          "question": "Dans la pyramide de Maslow, quel est l'ordre correct des besoins de la base au sommet ?",
+          "reponses": [
+            {"texte": "Physiologiques → Sécurité → Appartenance → Estime → Accomplissement", "correct": true},
+            {"texte": "Accomplissement → Estime → Appartenance → Sécurité → Physiologiques", "correct": false},
+            {"texte": "Sécurité → Physiologiques → Appartenance → Accomplissement → Estime", "correct": false},
+            {"texte": "Appartenance → Estime → Sécurité → Physiologiques → Accomplissement", "correct": false}
+          ],
+          "explication": "La pyramide de Maslow (base vers sommet) : (1) Besoins physiologiques (manger, dormir), (2) Sécurité, (3) Appartenance sociale, (4) Estime de soi, (5) Accomplissement personnel. Un manager doit satisfaire les besoins inférieurs avant de motiver sur les supérieurs."
+        },
+        {
+          "id": 8,
+          "question": "Un collaborateur est compétent mais peu motivé. Quel style de management est adapté selon la matrice des styles ?",
+          "reponses": [
+            {"texte": "Participatif : le manager implique le collaborateur dans la prise de décision pour restaurer sa motivation", "correct": true},
+            {"texte": "Directif : le manager décide seul et informe le collaborateur", "correct": false},
+            {"texte": "Délégatif : le collaborateur décide dans le cadre de sa délégation", "correct": false},
+            {"texte": "Persuasif : le manager décide seul et prend le temps d'expliquer", "correct": false}
+          ],
+          "explication": "La matrice des styles : Directif (- compétent, - motivé), Persuasif (- compétent, + motivé), Participatif (+ compétent, - motivé), Délégatif (+ compétent, + motivé). Un collaborateur compétent mais peu motivé nécessite le style Participatif."
+        },
+        {
+          "id": 9,
+          "question": "Qu'est-ce qu'un objectif SMART ?",
+          "reponses": [
+            {"texte": "Spécifique, Mesurable, Ambitieux, Réaliste, Temporel", "correct": true},
+            {"texte": "Simple, Motivant, Approuvé, Rapide, Traçable", "correct": false},
+            {"texte": "Structuré, Managé, Aligné, Résolu, Technique", "correct": false},
+            {"texte": "Stratégique, Maîtrisé, Agile, Rentable, Transférable", "correct": false}
+          ],
+          "explication": "SMART : Spécifique (précis, sans équivoque), Mesurable (indicateurs permettant de savoir si atteint), Ambitieux (effort requis), Réaliste (moyens et compétences disponibles), Temporel (date butoir, étapes définies)."
+        }
+      ]
+    },
+    {
+      "nom": "Gestion des conflits",
+      "questions": [
+        {
+          "id": 10,
+          "question": "Quelle technique de gestion des conflits est privilégiée par le PMP et pourquoi ?",
+          "reponses": [
+            {"texte": "Collaborating, car elle produit une solution gagnant-gagnant basée sur les faits, durable et améliorant la relation", "correct": true},
+            {"texte": "Forcing, car elle est rapide et efficace en situation de crise", "correct": false},
+            {"texte": "Compromising, car elle satisfait toutes les parties équitablement", "correct": false},
+            {"texte": "Avoiding, car elle évite l'escalade émotionnelle", "correct": false}
+          ],
+          "explication": "Le PMP privilégie Collaborating car : solution durable, améliore la relation, favorise la confiance, augmente la qualité décisionnelle et réduit la récurrence du conflit. Elle est basée sur les faits et vise une solution win-win."
+        },
+        {
+          "id": 11,
+          "question": "Quand utiliser la technique 'Forcing' dans la gestion des conflits ?",
+          "reponses": [
+            {"texte": "En situation d'urgence, de sécurité critique ou de non-respect grave des règles", "correct": true},
+            {"texte": "Lors de conflits mineurs entre collègues", "correct": false},
+            {"texte": "Quand le temps est limité et les solutions alternatives nombreuses", "correct": false},
+            {"texte": "Pour des désaccords stratégiques avec une équipe mature", "correct": false}
+          ],
+          "explication": "Forcing (imposer par autorité) est adapté en : urgence, sécurité critique, non-respect grave des règles. Avantages : rapide, efficace en crise. Inconvénients : génère résistance, dégrade le climat, diminue l'engagement."
+        },
+        {
+          "id": 12,
+          "question": "Quels sont les principaux inconvénients de la technique 'Avoiding' ?",
+          "reponses": [
+            {"texte": "Le problème persiste, peut empirer, perte de crédibilité du PM et favorise les conflits latents", "correct": true},
+            {"texte": "Trop longue à mettre en œuvre et exige des données objectives", "correct": false},
+            {"texte": "Solution sous-optimale et aucun camp pleinement satisfait", "correct": false},
+            {"texte": "Génère résistance et diminue l'engagement de l'équipe", "correct": false}
+          ],
+          "explication": "Avoiding (reporter/ignorer) : avantages = apaisement temporaire, utile si information insuffisante. Inconvénients = problème non résolu qui persiste et peut empirer, perte de crédibilité du PM, favorise les conflits latents."
+        },
+        {
+          "id": 13,
+          "question": "La technique 'Smoothing' consiste à :",
+          "reponses": [
+            {"texte": "Mettre en avant les points d'accord et minimiser les différences pour préserver l'harmonie à court terme", "correct": true},
+            {"texte": "Imposer une décision par autorité formelle pour résoudre rapidement", "correct": false},
+            {"texte": "Trouver un compromis où chaque partie renonce à une partie de ses demandes", "correct": false},
+            {"texte": "Reporter le conflit à un moment plus opportun pour analyser la situation", "correct": false}
+          ],
+          "explication": "Smoothing = mettre en avant les points communs, minimiser les divergences. Utile pour conflits mineurs, préserver l'harmonie, enjeux faibles. Problème : le fond du conflit n'est pas résolu, risque de frustration accumulée."
+        },
+        {
+          "id": 14,
+          "question": "Dans quelles situations la technique 'Compromising' est-elle la plus adaptée ?",
+          "reponses": [
+            {"texte": "Quand le temps est limité, le pouvoir équilibré et les solutions alternatives limitées", "correct": true},
+            {"texte": "Pour des conflits techniques complexes avec une équipe mature", "correct": false},
+            {"texte": "Lors d'une situation d'urgence avec risque sécurité", "correct": false},
+            {"texte": "Quand le conflit est trivial et le moment inopportun pour le traiter", "correct": false}
+          ],
+          "explication": "Compromising (chaque partie cède) est adapté en temps limité, pouvoir équilibré, solutions alternatives limitées. Avantages : rapide, acceptable pour tous. Inconvénients : solution sous-optimale, frustration latente possible."
+        }
+      ]
+    },
+    {
+      "nom": "Leadership",
+      "questions": [
+        {
+          "id": 15,
+          "question": "Quelles sont les 4 dimensions du leadership transformationnel ?",
+          "reponses": [
+            {"texte": "Influence idéalisée, Motivation inspirante, Stimulation intellectuelle, Considération individualisée", "correct": true},
+            {"texte": "Planification, Organisation, Direction, Contrôle", "correct": false},
+            {"texte": "Vision, Mission, Stratégie, Tactique", "correct": false},
+            {"texte": "Autorité, Délégation, Communication, Évaluation", "correct": false}
+          ],
+          "explication": "Les 4 dimensions : Influence idéalisée (leader exemplaire → crédibilité technique), Motivation inspirante (vision mobilisatrice → alignement stratégique), Stimulation intellectuelle (innovation → résolution créative), Considération individualisée (coaching → développement des compétences)."
+        },
+        {
+          "id": 16,
+          "question": "Quelle est la différence entre leadership transformationnel et transactionnel ?",
+          "reponses": [
+            {"texte": "Transformationnel : inspire une vision et développe l'autonomie ; Transactionnel : basé sur récompense/sanction", "correct": true},
+            {"texte": "Transformationnel : pour petites équipes ; Transactionnel : pour grandes organisations", "correct": false},
+            {"texte": "Transformationnel : court terme ; Transactionnel : long terme", "correct": false},
+            {"texte": "Transformationnel : projets techniques ; Transactionnel : projets RH", "correct": false}
+          ],
+          "explication": "Le leadership transformationnel vise à inspirer, transformer les comportements, développer l'autonomie. Le leadership transactionnel est basé sur un système de récompenses et sanctions (management par objectifs classique)."
+        },
+        {
+          "id": 17,
+          "question": "Quel style de leadership est adapté à un projet en situation de changement organisationnel majeur ?",
+          "reponses": [
+            {"texte": "Transformationnel : il inspire une vision, transforme les comportements et élève la maturité collective", "correct": true},
+            {"texte": "Directif : il fixe les règles et donne des directives claires", "correct": false},
+            {"texte": "Délégatif : il laisse l'équipe décider dans le cadre de sa délégation", "correct": false},
+            {"texte": "Transactionnel : il motive par récompenses et pénalités", "correct": false}
+          ],
+          "explication": "Le leadership transformationnel est recommandé pour : projets de transformation, changement organisationnel, fusion/réorganisation, déploiement technologique majeur, projets internationaux complexes."
+        },
+        {
+          "id": 18,
+          "question": "Dans le modèle de Hofstede, que représente la dimension 'Distance hiérarchique' ?",
+          "reponses": [
+            {"texte": "Le degré d'acceptation de l'inégalité de pouvoir par les membres moins puissants d'une société : impact sur l'autorité du PM", "correct": true},
+            {"texte": "La distance physique entre les membres de l'équipe projet", "correct": false},
+            {"texte": "La différence de compétences entre les niveaux hiérarchiques", "correct": false},
+            {"texte": "Le nombre de niveaux hiérarchiques dans l'organisation", "correct": false}
+          ],
+          "explication": "La distance hiérarchique (Hofstede) = degré auquel les membres moins puissants d'une société acceptent la répartition inégale du pouvoir. Forte distance → autorité du PM acceptée sans remise en question (ex: Inde). Faible distance → décisions plus participatives (ex: pays nordiques)."
+        }
+      ]
+    },
+    {
+      "nom": "Communication",
+      "questions": [
+        {
+          "id": 19,
+          "question": "Quelle est la formule pour calculer le nombre de canaux de communication dans un projet ?",
+          "reponses": [
+            {"texte": "n(n-1)/2 où n est le nombre de personnes", "correct": true},
+            {"texte": "n² où n est le nombre de personnes", "correct": false},
+            {"texte": "n*(n+1) où n est le nombre de personnes", "correct": false},
+            {"texte": "2n-1 où n est le nombre de personnes", "correct": false}
+          ],
+          "explication": "Le nombre de canaux de communication = n(n-1)/2. Exemple : 5 personnes → 5*4/2 = 10 canaux. Avec 10 personnes → 45 canaux ! Cela illustre pourquoi la communication représente 80% du travail du chef de projet."
+        },
+        {
+          "id": 20,
+          "question": "À qui appartient la responsabilité de la compréhension d'un message selon le cours GE79 ?",
+          "reponses": [
+            {"texte": "À l'émetteur : c'est lui qui doit s'assurer que son message est compris", "correct": true},
+            {"texte": "Au récepteur : c'est lui qui doit faire l'effort de comprendre", "correct": false},
+            {"texte": "Aux deux parties de façon égale", "correct": false},
+            {"texte": "Au chef de projet qui supervise toutes les communications", "correct": false}
+          ],
+          "explication": "Principe fondamental : la responsabilité de la compréhension appartient à l'émetteur. C'est au chef de projet (émetteur principal) de s'assurer que son message est adapté au récepteur, clair et compris."
+        },
+        {
+          "id": 21,
+          "question": "Dans la matrice Pouvoir/Intérêt de gestion des stakeholders, que faire avec un stakeholder à fort pouvoir mais faible intérêt ?",
+          "reponses": [
+            {"texte": "Garder satisfait : il a le pouvoir de bloquer le projet même s'il est peu impliqué", "correct": true},
+            {"texte": "Manager étroitement : suivre et impliquer fortement", "correct": false},
+            {"texte": "Suivre avec un effort minimal : il n'est pas prioritaire", "correct": false},
+            {"texte": "Garder informé : lui envoyer des rapports réguliers", "correct": false}
+          ],
+          "explication": "Matrice Pouvoir/Intérêt : Fort pouvoir + faible intérêt → Garder satisfait. Fort pouvoir + fort intérêt → Manager étroitement. Faible pouvoir + faible intérêt → Suivre (effort minimal). Faible pouvoir + fort intérêt → Garder informé."
+        },
+        {
+          "id": 22,
+          "question": "Quels éléments composent une communication projet selon le modèle vu en cours ?",
+          "reponses": [
+            {"texte": "Émetteur, contenu, média, bruit, fréquence (événementielle ou rituelle) et récepteurs", "correct": true},
+            {"texte": "Expéditeur, message, canal et destinataire uniquement", "correct": false},
+            {"texte": "Objectif, méthode, indicateur et résultat", "correct": false},
+            {"texte": "Planification, exécution, feedback et archivage", "correct": false}
+          ],
+          "explication": "Les composants d'une communication : Émetteur (chef de projet ou autre), Contenu (message), Média (réunion, mail, messagerie...), Bruit (obstacles : langage, culture, historique...), Fréquence (événementielle ou rituelle), Récepteurs (unique/pluriel, moteur/détracteur)."
+        },
+        {
+          "id": 23,
+          "question": "Quel est le principal risque de la communication en organisation matricielle ?",
+          "reponses": [
+            {"texte": "Messages contradictoires, conflits de priorité et manque de clarté dû aux deux lignes hiérarchiques", "correct": true},
+            {"texte": "Trop peu de communication entre les équipes dispersées géographiquement", "correct": false},
+            {"texte": "Surcharge d'information causée par trop de réunions de coordination", "correct": false},
+            {"texte": "Absence de reporting formalisé vers la direction", "correct": false}
+          ],
+          "explication": "En organisation matricielle, les membres ont deux lignes hiérarchiques (manager fonctionnel + chef de projet). Risques : messages contradictoires, conflits de priorité, manque de clarté. Solutions : alignement sponsor, RACI clair, reporting formalisé, escalade structurée."
+        }
+      ]
+    },
+    {
+      "nom": "Procurement (Achats)",
+      "questions": [
+        {
+          "id": 24,
+          "question": "Quelles sont les raisons de faire appel à des sous-traitants ou fournisseurs dans un projet ?",
+          "reponses": [
+            {"texte": "Produits/services non réalisables en interne, coûts inférieurs, transfert de risque, compétences spécifiques, renforts d'équipe", "correct": true},
+            {"texte": "Uniquement pour réduire les coûts de main d'œuvre", "correct": false},
+            {"texte": "Pour se décharger de toute responsabilité sur les livrables", "correct": false},
+            {"texte": "Car c'est une obligation légale pour les projets dépassant un certain budget", "correct": false}
+          ],
+          "explication": "On fait appel aux fournisseurs pour : produits/services non réalisables en interne, réduire les coûts, transférer un risque, apporter des compétences spécifiques, ou apporter des renforts. Les fournisseurs peuvent aussi apporter des idées intéressantes !"
+        },
+        {
+          "id": 25,
+          "question": "Quelle est la répartition du risque entre acheteur et vendeur selon les types de contrats ?",
+          "reponses": [
+            {"texte": "FFP : risque faible acheteur / élevé vendeur ; CR : risque élevé acheteur / faible vendeur ; T&M : risque moyen des deux côtés", "correct": true},
+            {"texte": "FFP : risque élevé acheteur / faible vendeur ; CR : risque faible acheteur / élevé vendeur", "correct": false},
+            {"texte": "Le risque est toujours équitablement partagé quel que soit le type de contrat", "correct": false},
+            {"texte": "T&M : risque faible acheteur ; FFP : risque élevé acheteur", "correct": false}
+          ],
+          "explication": "Firm Fixed Price (FFP) : prix fixe → faible risque acheteur, élevé vendeur (s'il dépasse le budget c'est pour lui). Cost-Reimbursable (CR) : coûts remboursés → élevé acheteur, faible vendeur. Time & Material (T&M) : hybride → risque moyen partagé."
+        },
+        {
+          "id": 26,
+          "question": "Dans l'exemple du cours, quel fournisseur remporte le marché avec le scoring pondéré (Technique 50%, Prix 30%, Expérience 20%) : Fournisseur A (80, 60, 90) vs Fournisseur B (70, 90, 60) ?",
+          "reponses": [
+            {"texte": "Fournisseur A avec un score de 76 contre 75 pour B (A: 80×0,5 + 60×0,3 + 90×0,2 = 40+18+18=76)", "correct": true},
+            {"texte": "Fournisseur B avec un score de 78 contre 74 pour A", "correct": false},
+            {"texte": "Égalité parfaite entre les deux fournisseurs", "correct": false},
+            {"texte": "Fournisseur B car il a le meilleur prix (score 90)", "correct": false}
+          ],
+          "explication": "Fournisseur A : 80×0,5 + 60×0,3 + 90×0,2 = 40 + 18 + 18 = 76. Fournisseur B : 70×0,5 + 90×0,3 + 60×0,2 = 35 + 27 + 12 = 74. A gagne avec 76 > 74."
+        },
+        {
+          "id": 27,
+          "question": "Quelles sont les étapes de la procédure de gestion des litiges (claims) selon l'approche PMP ?",
+          "reponses": [
+            {"texte": "Négociation → Médiation → Arbitrage → Litige judiciaire (dernier recours)", "correct": true},
+            {"texte": "Litige judiciaire immédiat → Arbitrage → Médiation → Négociation", "correct": false},
+            {"texte": "Arbitrage → Médiation → Négociation → Résiliation du contrat", "correct": false},
+            {"texte": "Alerte → Escalade → Décision unilatérale → Pénalités", "correct": false}
+          ],
+          "explication": "L'approche PMP pour les litiges : (1) Négociation (solution amiable d'abord), (2) Médiation (tiers facilitateur), (3) Arbitrage (tiers décisionnaire), (4) Litige judiciaire (dernier recours car coûteux et long)."
+        },
+        {
+          "id": 28,
+          "question": "Qu'est-ce que la Make-or-Buy Analysis ?",
+          "reponses": [
+            {"texte": "Une décision d'internalisation ou d'externalisation basée sur coût total, compétences internes, capacité, confidentialité et risque stratégique", "correct": true},
+            {"texte": "Une analyse financière comparant le coût de fabrication interne vs achat externe uniquement", "correct": false},
+            {"texte": "Un outil pour décider si on achète des ressources matérielles ou humaines", "correct": false},
+            {"texte": "Une méthode d'évaluation de la qualité des fournisseurs potentiels", "correct": false}
+          ],
+          "explication": "La Make-or-Buy Analysis décide de faire en interne ou externaliser selon : coût total, compétence interne disponible, capacité de production, niveau de confidentialité requis, risque stratégique. Elle s'applique à chaque package du WBS."
+        }
+      ]
+    },
+    {
+      "nom": "Gestion des risques",
+      "questions": [
+        {
+          "id": 29,
+          "question": "Quelle est la différence entre un risque et une issue (problème) ?",
+          "reponses": [
+            {"texte": "Le risque est incertain et futur (suivi dans le Risk Register) ; l'issue est certain et présent (suivi dans l'Issue Log)", "correct": true},
+            {"texte": "Le risque est positif (opportunité) ; l'issue est négatif (menace)", "correct": false},
+            {"texte": "Le risque concerne les ressources humaines ; l'issue concerne les aspects techniques", "correct": false},
+            {"texte": "Le risque est géré par le PM ; l'issue est géré par le sponsor", "correct": false}
+          ],
+          "explication": "Risque = événement incertain, futur, dont la concrétisation aurait un impact → suivi dans le Risk Register. Issue = problème certain, présent, qui nécessite une action immédiate → suivi dans l'Issue Log."
+        },
+        {
+          "id": 30,
+          "question": "Quels sont les 7 processus du management des risques selon le PMP ?",
+          "reponses": [
+            {"texte": "Plan → Identify → Qualitative Analysis → Quantitative Analysis → Plan Responses → Implement Responses → Monitor", "correct": true},
+            {"texte": "Identify → Assess → Mitigate → Transfer → Accept → Monitor → Close", "correct": false},
+            {"texte": "Define → Analyze → Prioritize → Respond → Track → Escalate → Report", "correct": false},
+            {"texte": "Plan → Execute → Check → Act → Monitor → Control → Close", "correct": false}
+          ],
+          "explication": "Les 7 processus : (1) Plan Risk Management, (2) Identify Risks, (3) Qualitative Risk Analysis, (4) Quantitative Risk Analysis, (5) Plan Risk Responses, (6) Implement Risk Responses, (7) Monitor Risks."
+        },
+        {
+          "id": 31,
+          "question": "Comment calculer l'enveloppe budgétaire pour un risque dans l'analyse quantitative ?",
+          "reponses": [
+            {"texte": "Enveloppe = Probabilité × Impact (%) × Coût des conséquences", "correct": true},
+            {"texte": "Enveloppe = Impact × Coût uniquement, sans considérer la probabilité", "correct": false},
+            {"texte": "Enveloppe = (Probabilité + Impact) / 2 × Budget total du projet", "correct": false},
+            {"texte": "Enveloppe = Probabilité² × Coût des conséquences", "correct": false}
+          ],
+          "explication": "Enveloppe = Probabilité × Impacts × Conséquences. Exemple : Probabilité=0,5 (Moderate), Impact=0,5 (Moderate), Conséquences=10 000€ → Enveloppe = 0,5 × 0,5 × 10 000 = 2 500€. Cette enveloppe est intégrée dans la contingency reserve du budget."
+        },
+        {
+          "id": 32,
+          "question": "Quelles sont les 4 stratégies de réponse aux menaces (risques négatifs) ?",
+          "reponses": [
+            {"texte": "Éviter, Accepter, Mitiger (réduire impact/occurrence), Transférer à un tiers", "correct": true},
+            {"texte": "Exploiter, Partager, Optimiser, Accepter", "correct": false},
+            {"texte": "Ignorer, Reporter, Documenter, Escalader", "correct": false},
+            {"texte": "Prévenir, Détecter, Corriger, Capitaliser", "correct": false}
+          ],
+          "explication": "Pour les menaces : Éviter (modifier le projet pour éliminer le risque), Accepter (vivre avec), Mitiger (réduire probabilité ou impact), Transférer (assurance, sous-traitance). Pour les opportunités : Exploiter, Accepter, Optimiser, Partager."
+        },
+        {
+          "id": 33,
+          "question": "La technique Delphi pour l'identification des risques consiste à :",
+          "reponses": [
+            {"texte": "Collecter des opinions d'experts de façon anonyme, en plusieurs itérations avec synthèse intermédiaire, jusqu'à convergence vers un consensus", "correct": true},
+            {"texte": "Réunir tous les experts dans une même salle pour un brainstorming collectif", "correct": false},
+            {"texte": "Interroger un seul expert reconnu dans le domaine du projet", "correct": false},
+            {"texte": "Analyser les données historiques des projets précédents pour en extraire les risques récurrents", "correct": false}
+          ],
+          "explication": "Méthode Delphi : collecte anonyme d'opinions d'experts, en plusieurs tours successifs avec synthèse entre chaque tour, jusqu'à convergence vers un consensus. Avantage : évite les biais de groupe, les pressions hiérarchiques. Utilisée pour identifier risques, estimer probabilité/impact, estimer coûts incertains."
+        },
+        {
+          "id": 34,
+          "question": "Dans la matrice qualitative des risques, un risque 'Likely' avec impact 'Major' est classé comme :",
+          "reponses": [
+            {"texte": "Extreme : nécessite une réponse prioritaire et immédiate", "correct": true},
+            {"texte": "High : important mais gérable normalement", "correct": false},
+            {"texte": "Moderate : à surveiller sans action urgente", "correct": false},
+            {"texte": "Low : risque acceptable sans action spécifique", "correct": false}
+          ],
+          "explication": "Selon la matrice du cours : Likely (≤90%) × Major (≥50% coûts ou délais) = Extreme. La matrice montre que tout risque Likely ou Certain avec impact Moderate ou supérieur est au minimum Extreme."
+        }
+      ]
+    },
+    {
+      "nom": "Qualité",
+      "questions": [
+        {
+          "id": 35,
+          "question": "Quelles sont les deux grandes catégories du coût de la qualité (CoQ) ?",
+          "reponses": [
+            {"texte": "Coûts de conformité (prévention + évaluation) et coûts de non-conformité (internes + externes)", "correct": true},
+            {"texte": "Coûts directs (main d'œuvre, matériaux) et coûts indirects (overhead)", "correct": false},
+            {"texte": "Coûts fixes (certifications, audits) et coûts variables (corrections, rework)", "correct": false},
+            {"texte": "Coûts de détection et coûts de correction uniquement", "correct": false}
+          ],
+          "explication": "CoQ = Coûts de conformité (prévention : planning, formation, analyse risques ; évaluation : audits, tests, recettes) + Coûts de non-conformité (internes : gaspillage, rework, retard ; externes : plaintes, rappels, pénalités)."
+        },
+        {
+          "id": 36,
+          "question": "Quels sont les 4 principes fondamentaux de la qualité en management de projet ?",
+          "reponses": [
+            {"texte": "Satisfaction du client, Prévention plutôt qu'inspection, Responsabilité de la Direction, Amélioration Continue (PDCA)", "correct": true},
+            {"texte": "Coût, Délai, Qualité, Scope", "correct": false},
+            {"texte": "Planifier, Faire, Vérifier, Agir uniquement", "correct": false},
+            {"texte": "ISO 9001, CMMI, Six Sigma, Lean", "correct": false}
+          ],
+          "explication": "Les 4 principes : (1) Satisfaction du client (produire ce qui était prévu ET satisfaire les besoins réels), (2) Prévention > inspection (anticiper coûte moins cher que subir), (3) Responsabilité de la Direction (l'équipe est fournie par la Direction), (4) Amélioration continue (PDCA)."
+        },
+        {
+          "id": 37,
+          "question": "Que représente le niveau 3 (standardisé) dans le modèle de maturité CMMI ?",
+          "reponses": [
+            {"texte": "Les processus sont communs à tous et obligatoires, avec un taux de retours en arrière de 5% à 15%", "correct": true},
+            {"texte": "Les processus existent mais ne sont pas obligatoires, retours en arrière de 25% à 50%", "correct": false},
+            {"texte": "Une mesure de l'efficacité des processus est réalisée, retours en arrière inférieurs à 5%", "correct": false},
+            {"texte": "L'efficacité dépend des individus, retours en arrière supérieurs à 50%", "correct": false}
+          ],
+          "explication": "CMMI Niveaux : 1-Initial (>50% retours), 2-Piloté (25-50%), 3-Standardisé (5-15%, processus communs et obligatoires), 4-Mesuré (<5%, efficacité mesurée), 5-Optimisé (processus maîtrisés). Le Cost of Quality représente 23 à 34% du coût de développement."
+        },
+        {
+          "id": 38,
+          "question": "Qu'est-ce que la méthode 8D et quelle est son étape D4 ?",
+          "reponses": [
+            {"texte": "Méthode de résolution de problèmes en 8 disciplines ; D4 = Déterminer les causes racines du problème", "correct": true},
+            {"texte": "Méthode d'audit qualité en 8 dimensions ; D4 = Définir les indicateurs de performance", "correct": false},
+            {"texte": "Méthode de développement agile en 8 sprints ; D4 = Démontrer le produit au client", "correct": false},
+            {"texte": "Méthode de gestion des risques en 8 étapes ; D4 = Documenter les risques résiduels", "correct": false}
+          ],
+          "explication": "8D : D1-Constitution équipe, D2-Description problème, D3-Actions immédiates, D4-Déterminer causes racines, D5-Actions correctives définitives, D6-Mise en œuvre solutions, D7-Éviter réapparition, D8-Féliciter l'équipe. Méthode structurée de résolution de problèmes qualité."
+        },
+        {
+          "id": 39,
+          "question": "Dans l'outil PDCA, à quoi correspond la phase 'Act' ?",
+          "reponses": [
+            {"texte": "Améliorer le système de travail et répéter les solutions qui se sont avérées appropriées", "correct": true},
+            {"texte": "Mettre en pratique la méthode et mesurer les résultats", "correct": false},
+            {"texte": "Vérifier si le standard est atteint et ce qui fonctionne ou non", "correct": false},
+            {"texte": "Définir les problèmes, établir les objectifs et choisir les méthodes", "correct": false}
+          ],
+          "explication": "PDCA : Plan (définir problèmes, objectifs, méthodes), Do (mettre en pratique, mesurer), Check (vérifier si standard atteint), Act (améliorer le système, répéter les solutions qui ont fonctionné). C'est un cycle d'amélioration continue."
+        },
+        {
+          "id": 40,
+          "question": "Quelles sont les conséquences d'une sous-qualité sur un projet ?",
+          "reponses": [
+            {"texte": "Augmentation des coûts, des ressources, insatisfaction client et risques accrus (ex. non-certification)", "correct": true},
+            {"texte": "Uniquement une augmentation des coûts et des délais", "correct": false},
+            {"texte": "Réduction des coûts à court terme mais problèmes à long terme uniquement", "correct": false},
+            {"texte": "Aucune conséquence si le client ne s'en aperçoit pas", "correct": false}
+          ],
+          "explication": "Sur-qualité → augmentation coûts et délais. Sous-qualité → augmentation coûts (rework), ressources, insatisfaction client, risques (non-certification, pénalités...). D'où l'importance du niveau de qualité 'au plus juste' qui minimise le coût total de qualité."
+        },
+        {
+          "id": 41,
+          "question": "Qu'est-ce que le QRQC (Quick Response Quality Control) et quel est son principal avantage ?",
+          "reponses": [
+            {"texte": "Un système de gestion des problèmes qualité basé sur la réaction rapide, l'analyse des causes racines et la collaboration multi-métiers à tous les niveaux", "correct": true},
+            {"texte": "Un logiciel de suivi des non-conformités clients uniquement", "correct": false},
+            {"texte": "Une certification qualité équivalente à l'ISO 9001 pour les PME", "correct": false},
+            {"texte": "Un audit qualité annuel réalisé par un organisme externe certifié", "correct": false}
+          ],
+          "explication": "QRQC : réponse immédiate (0-4h), sécurisation (24h), analyse+correction (5j), vérification (10j), apprentissage (30j). Avantages : résolution rapide, capitalisation, implication du management, analyse multi-métiers sur le terrain. Inconvénient : chronophage."
+        }
+      ]
+    },
+    {
+      "nom": "Organisation matricielle",
+      "questions": [
+        {
+          "id": 42,
+          "question": "Quelle est la caractéristique principale d'une organisation matricielle forte ?",
+          "reponses": [
+            {"texte": "Le chef de projet a un pouvoir élevé et la structure est orientée projet", "correct": true},
+            {"texte": "Le manager fonctionnel a tout le pouvoir et le PM a un rôle très limité", "correct": false},
+            {"texte": "Les décisions sont prises collectivement par co-décision entre PM et manager fonctionnel", "correct": false},
+            {"texte": "Il n'y a pas de chef de projet désigné, chaque fonctionnel s'auto-gère", "correct": false}
+          ],
+          "explication": "Types de matrice : Faible (PM très limité, organisation fonctionnelle dominante), Équilibrée (pouvoir partagé, co-décision), Forte (PM à pouvoir élevé, structure orientée projet). Plus la matrice est forte, plus le PM a d'autorité."
+        },
+        {
+          "id": 43,
+          "question": "Quels sont les conflits typiques en organisation matricielle ?",
+          "reponses": [
+            {"texte": "Priorité des ressources, charge de travail, objectifs divergents et évaluation de performance", "correct": true},
+            {"texte": "Uniquement les conflits liés aux augmentations de salaire", "correct": false},
+            {"texte": "Problèmes techniques liés à l'intégration des systèmes informatiques", "correct": false},
+            {"texte": "Conflits entre clients et fournisseurs sur les spécifications contractuelles", "correct": false}
+          ],
+          "explication": "En organisation matricielle, un membre d'équipe dépend de deux chefs. Conflits typiques : priorité des ressources (quel projet prime ?), charge de travail (surallocation), objectifs divergents (fonctionnel vs projet), évaluation performance (qui évalue ?)."
+        }
+      ]
+    }
+  ]
+}
