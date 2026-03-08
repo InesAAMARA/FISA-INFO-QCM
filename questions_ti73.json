@@ -1,0 +1,326 @@
+{
+  "titre": "TI73 - Communication Professionnelle",
+  "categories": [
+
+    {
+      "nom": "1️⃣ PowerPoint Performant",
+      "questions": [
+        {
+          "question": "Un PowerPoint performant doit atteindre quel objectif prioritaire ?",
+          "reponses": [
+            {"texte": "Transmettre un message clair, engageant et efficace", "correct": true},
+            {"texte": "Contenir le maximum d'informations possibles", "correct": false},
+            {"texte": "Montrer la maîtrise technique du présentateur", "correct": false},
+            {"texte": "Remplacer complètement le discours oral", "correct": false}
+          ],
+          "explication": "Un PPT performant = message simple et structuré, design épuré, complémentaire à l'oral. Il sert le message, il n'est pas le message."
+        },
+        {
+          "question": "La règle de composition graphique des 1/3 – 2/3 sert à :",
+          "reponses": [
+            {"texte": "Équilibrer et hiérarchiser visuellement le contenu de la diapositive", "correct": true},
+            {"texte": "Diviser la diapositive en 3 colonnes égales", "correct": false},
+            {"texte": "Limiter le texte à 1/3 de la slide", "correct": false},
+            {"texte": "Allouer 2/3 du temps à la conclusion", "correct": false}
+          ],
+          "explication": "La règle 1/3-2/3 est une règle de composition visuelle classique : 1/3 pour le titre/élément secondaire, 2/3 pour l'élément principal."
+        },
+        {
+          "question": "⚠️ Concernant les bullet points (listes à puces), le cours recommande :",
+          "reponses": [
+            {"texte": "De les éviter : ils distraient et éloignent de l'objectif initial", "correct": true},
+            {"texte": "D'en mettre au moins 5 par slide pour structurer", "correct": false},
+            {"texte": "De les utiliser systématiquement pour organiser l'information", "correct": false},
+            {"texte": "De les limiter à 3 niveaux d'imbrication maximum", "correct": false}
+          ],
+          "explication": "⚠️ Le cours dit explicitement 'Tu ne construiras pas de bullet-point slide' : trop de puces = diaporama ressemblant à une liste, distrait du message."
+        },
+        {
+          "question": "Concernant l'utilisation des MAJUSCULES dans un PPT :",
+          "reponses": [
+            {"texte": "À éviter pour les longs passages : moins lisibles et perçues comme agressives", "correct": true},
+            {"texte": "Recommandées pour les titres car plus visibles", "correct": false},
+            {"texte": "Obligatoires pour les mots clés importants", "correct": false},
+            {"texte": "Neutres, sans impact sur la lisibilité", "correct": false}
+          ],
+          "explication": "Les minuscules sont plus lisibles (hampes, formes descendantes). Les majuscules 'remplissent l'espace' et peuvent exprimer la colère du rédacteur."
+        },
+        {
+          "question": "Combien de couleurs maximum est-il recommandé d'utiliser dans une présentation ?",
+          "reponses": [
+            {"texte": "4 couleurs maximum", "correct": true},
+            {"texte": "2 couleurs maximum", "correct": false},
+            {"texte": "6 couleurs maximum", "correct": false},
+            {"texte": "Aucune limite, selon le sujet", "correct": false}
+          ],
+          "explication": "4 couleurs maxi pour garder cohérence et lisibilité. Types de palettes : complémentaires, analogues, triadiques, tétradiques, monochromatiques."
+        },
+        {
+          "question": "Un storyboard dans le contexte d'une présentation PowerPoint est :",
+          "reponses": [
+            {"texte": "Un organisateur graphique qui planifie les diapositives et leur enchaînement", "correct": true},
+            {"texte": "Le logiciel de conception des slides", "correct": false},
+            {"texte": "Le script mot-à-mot du discours oral", "correct": false},
+            {"texte": "La grille de mise en page d'une diapositive", "correct": false}
+          ],
+          "explication": "Storyboard = 1 idée par feuille, dessinée/écrite, organisée en séquence. Outils : feuilles + couleurs, ou Canva. Indispensable avant de créer les slides."
+        },
+        {
+          "question": "La 'Big Picture' dans une présentation désigne :",
+          "reponses": [
+            {"texte": "La vue d'ensemble et vision globale du sujet traité", "correct": true},
+            {"texte": "La grande image de couverture de la première slide", "correct": false},
+            {"texte": "Le slide de conclusion récapitulatif", "correct": false},
+            {"texte": "Le titre principal en grand format", "correct": false}
+          ],
+          "explication": "La Big Picture = déterminer la perspective globale, les idées-forces et mots clés, avant de descendre dans les détails. Clarifier 'ce que je veux que mes interlocuteurs retiennent'."
+        }
+      ]
+    },
+
+    {
+      "nom": "2️⃣ Prise de Parole en Public",
+      "questions": [
+        {
+          "question": "Selon la règle de Mehrabian sur la communication orale, quelle proportion correspond au langage corporel (gestes, posture, regard) ?",
+          "reponses": [
+            {"texte": "55%", "correct": true},
+            {"texte": "38%", "correct": false},
+            {"texte": "7%", "correct": false},
+            {"texte": "25%", "correct": false}
+          ],
+          "explication": "Règle des 3V : Mots = 7%, Voix (débit, intonation, silences) = 38%, Langage corporel (gestes, posture, regard) = 55%."
+        },
+        {
+          "question": "Quel est le moment le plus difficile lors d'une prise de parole en public ?",
+          "reponses": [
+            {"texte": "Le démarrage", "correct": true},
+            {"texte": "La conclusion", "correct": false},
+            {"texte": "La partie centrale", "correct": false},
+            {"texte": "La gestion des questions", "correct": false}
+          ],
+          "explication": "'Le plus difficile, le plus stressant, c'est de démarrer !' Préparer un 'elevator pitch' : bienvenue + présentation en 2-3 phrases + TOP."
+        },
+        {
+          "question": "Le T.O.P. que l'on présente en introduction signifie :",
+          "reponses": [
+            {"texte": "Thème, Objectif, Plan de la réunion/présentation", "correct": true},
+            {"texte": "Temps, Organisation, Personnes impliquées", "correct": false},
+            {"texte": "Titre, Ordre du jour, Participants", "correct": false},
+            {"texte": "Thèse, Opinion, Perspective", "correct": false}
+          ],
+          "explication": "Le T.O.P. guide le public dès le départ : quel sujet, quel but pour lui, dans quel ordre on va avancer. Indispensable pour orienter l'attention."
+        },
+        {
+          "question": "La voix d'un orateur englobe plusieurs éléments. Lequel n'en fait PAS partie ?",
+          "reponses": [
+            {"texte": "Les gestes des mains", "correct": true},
+            {"texte": "Le débit", "correct": false},
+            {"texte": "Les silences", "correct": false},
+            {"texte": "L'articulation", "correct": false}
+          ],
+          "explication": "La voix = débit, volume, articulation, intonation, silences, tics de langage. Les gestes font partie du langage corporel (55%)."
+        },
+        {
+          "question": "Comment terminer efficacement une présentation orale ?",
+          "reponses": [
+            {"texte": "Soigner la conclusion : remercier, informer sur la suite, appel à l'action", "correct": true},
+            {"texte": "Résumer toutes les diapositives en détail", "correct": false},
+            {"texte": "Terminer par 'J'ai fini' ou 'C'est tout'", "correct": false},
+            {"texte": "Ouvrir une longue session de questions sans cadre", "correct": false}
+          ],
+          "explication": "Conclusion = Remercier + Informer sur la suite + Appel à l'action + Formule de conclusion ('en définitive, pour conclure...'). À préparer autant que l'introduction."
+        },
+        {
+          "question": "⚠️ L'ultracrépidarianisme est :",
+          "reponses": [
+            {"texte": "Parler avec assurance de choses qu'on ne connaît pas", "correct": true},
+            {"texte": "Parler trop longtemps lors d'une présentation", "correct": false},
+            {"texte": "Utiliser un vocabulaire trop technique", "correct": false},
+            {"texte": "Répéter plusieurs fois le même argument", "correct": false}
+          ],
+          "explication": "⚠️ Du latin 'Sutor, ne supra crepidam' : le cordonnier ne doit pas parler au-delà de la chaussure. Éviter d'affirmer ce qu'on ne maîtrise pas."
+        }
+      ]
+    },
+
+    {
+      "nom": "3️⃣ Animation de Réunion",
+      "questions": [
+        {
+          "question": "Parmi les rôles d'une réunion de travail, lequel est incorrect ?",
+          "reponses": [
+            {"texte": "Remplacer tous les échanges individuels pour gagner du temps", "correct": true},
+            {"texte": "Informer et coordonner une équipe", "correct": false},
+            {"texte": "Profiter de la dynamique créative d'un groupe", "correct": false},
+            {"texte": "Résoudre des problèmes collectivement", "correct": false}
+          ],
+          "explication": "Une réunion = fait social (échanger, collaborer) + outil de communication + espace de créativité. Elle ne remplace pas tous les échanges."
+        },
+        {
+          "question": "Quelles sont les 5 phases chronologiques d'une réunion efficace ?",
+          "reponses": [
+            {"texte": "Mise à l'aise → Contrat → Échanges → Synthèse → Bilan", "correct": true},
+            {"texte": "Accueil → Débat → Vote → Décision → Clôture", "correct": false},
+            {"texte": "Introduction → Développement → Argumentation → Conclusion → Évaluation", "correct": false},
+            {"texte": "Préparation → Animation → Participation → Compte rendu → Suivi", "correct": false}
+          ],
+          "explication": "Phase 1: Mise à l'aise | Phase 2: Élaboration du contrat (objectifs) | Phase 3: Échanges/production | Phase 4: Synthèse | Phase 5: Bilan."
+        },
+        {
+          "question": "Dans la gestion d'un groupe en réunion, le 'passif volontaire' est :",
+          "reponses": [
+            {"texte": "Quelqu'un qui choisit délibérément de ne pas participer", "correct": true},
+            {"texte": "Quelqu'un qui n'a pas été informé de la réunion", "correct": false},
+            {"texte": "Quelqu'un qui prend des notes sans intervenir", "correct": false},
+            {"texte": "Un participant introvertit par nature", "correct": false}
+          ],
+          "explication": "Le passif peut être naturel (timidité) ou volontaire (désengagement, désaccord non exprimé). L'animateur doit l'identifier et le mobiliser."
+        },
+        {
+          "question": "Le compte rendu de synthèse (par opposition au sténographique) :",
+          "reponses": [
+            {"texte": "Fait l'accord du groupe en fin de séance et se concentre sur les décisions", "correct": true},
+            {"texte": "Retranscrit mot-à-mot tous les échanges", "correct": false},
+            {"texte": "Est rédigé uniquement par le manager après la réunion", "correct": false},
+            {"texte": "Ne contient que la liste des présents et l'ordre du jour", "correct": false}
+          ],
+          "explication": "CR de synthèse = décisions + plan d'action (Qui ? Quoi ? Où ? Quand ? Comment ? Combien ? Pourquoi ?) + suivi. Base pour les réunions suivantes."
+        },
+        {
+          "question": "Les 8 points clés d'une réunion efficace incluent : Préparer, Organiser, Accueillir, Piloter, Être attentif, Trouver des solutions, Élaborer un plan d'action, et :",
+          "reponses": [
+            {"texte": "Assurer un suivi des décisions", "correct": true},
+            {"texte": "Produire un rapport de 10 pages", "correct": false},
+            {"texte": "Enregistrer la réunion", "correct": false},
+            {"texte": "Évaluer chaque participant", "correct": false}
+          ],
+          "explication": "Le 8e point est 'Assurer un suivi des décisions' + 'Évaluer la réunion'. Sans suivi, les décisions restent lettre morte."
+        },
+        {
+          "question": "Le 'leader négatif' dans un groupe de réunion peut :",
+          "reponses": [
+            {"texte": "Bloquer la dynamique du groupe et entraîner les autres dans l'opposition", "correct": true},
+            {"texte": "Uniquement améliorer la qualité des décisions", "correct": false},
+            {"texte": "Être ignoré sans conséquences pour le groupe", "correct": false},
+            {"texte": "Toujours être transformé en allié facilement", "correct": false}
+          ],
+          "explication": "Le leader peut être positif (catalyseur) ou négatif (bloquant). L'animateur doit gérer les individualités : actif+/-, passif naturel/volontaire, leader+/-, bavard."
+        }
+      ]
+    },
+
+    {
+      "nom": "4️⃣ Brainstorming & Créativité",
+      "questions": [
+        {
+          "question": "Quelle est la règle FONDAMENTALE du brainstorming ?",
+          "reponses": [
+            {"texte": "Aucune critique des idées, ni verbale ni gestuelle", "correct": true},
+            {"texte": "Seul le responsable peut valider les idées", "correct": false},
+            {"texte": "Chaque participant propose au moins 3 idées", "correct": false},
+            {"texte": "Les idées doivent être réalistes et applicables", "correct": false}
+          ],
+          "explication": "La règle absolue : ZÉRO critique pendant la phase de génération. Les idées farfelues sont les bienvenues car elles peuvent en inspirer de bonnes."
+        },
+        {
+          "question": "Comment se déroule un tour de parole correct en brainstorming ?",
+          "reponses": [
+            {"texte": "Une seule idée par personne à la fois, chacun s'exprime à tour de rôle", "correct": true},
+            {"texte": "Chacun écrit ses idées simultanément en silence", "correct": false},
+            {"texte": "Le premier qui a une idée la développe complètement", "correct": false},
+            {"texte": "Le groupe vote après chaque idée proposée", "correct": false}
+          ],
+          "explication": "Tour de table structuré : 1 idée/personne/tour, on écrit au tableau, l'animateur peut participer MAIS toujours après le tour de table."
+        },
+        {
+          "question": "La phase de validation des idées après un brainstorming consiste à :",
+          "reponses": [
+            {"texte": "Évaluer les idées selon leur pertinence par rapport à l'objectif fixé", "correct": true},
+            {"texte": "Conserver uniquement les idées de l'animateur", "correct": false},
+            {"texte": "Rejeter toutes les idées farfelues émises", "correct": false},
+            {"texte": "Classer les idées par ordre alphabétique", "correct": false}
+          ],
+          "explication": "Validation = rapporter les idées à l'objectif. Certaines sont plus probables, mieux fondées, plus applicables. Le groupe décide, l'animateur cherche le consensus, sinon vote."
+        },
+        {
+          "question": "⚠️ La créativité d'un groupe est définie dans le cours comme :",
+          "reponses": [
+            {"texte": "La capacité à imaginer des solutions originales pour faire face à un problème", "correct": true},
+            {"texte": "La somme des créativités individuelles de chaque participant", "correct": false},
+            {"texte": "L'aptitude du leader à proposer des idées innovantes", "correct": false},
+            {"texte": "La rapidité à prendre des décisions en groupe", "correct": false}
+          ],
+          "explication": "Créativité de groupe = révéler les savoirs implicites de chacun + les mettre en commun + créer une dynamique collective. Plus que la somme des parties."
+        },
+        {
+          "question": "Quel outil logiciel est cité dans le cours pour créer un storyboard de présentation ?",
+          "reponses": [
+            {"texte": "Canva", "correct": true},
+            {"texte": "Adobe Premiere", "correct": false},
+            {"texte": "Trello", "correct": false},
+            {"texte": "Microsoft Visio", "correct": false}
+          ],
+          "explication": "Le cours cite Canva comme outil de storyboard, en complément des méthodes papier (feuilles recto, 1 idée/feuille, couleurs et flèches)."
+        }
+      ]
+    },
+
+    {
+      "nom": "5️⃣ Design & Conception de Diaporama",
+      "questions": [
+        {
+          "question": "La 'logique graphique' dans un diaporama implique de :",
+          "reponses": [
+            {"texte": "Construire une hiérarchie visuelle cohérente entre les diapositives", "correct": true},
+            {"texte": "Utiliser des animations sur chaque diapositive", "correct": false},
+            {"texte": "Choisir un fond de couleur différent par section", "correct": false},
+            {"texte": "Insérer des images de haute résolution sur chaque slide", "correct": false}
+          ],
+          "explication": "Logique graphique = cohérence & pertinence des sujets, séquencement chronologique, hiérarchie et liens clairs entre diapositives. Le public doit être guidé."
+        },
+        {
+          "question": "⚠️ Pour le texte dans un PPT, quelle combinaison est recommandée ?",
+          "reponses": [
+            {"texte": "Fond blanc + textes foncés, ou titres clairs sur fond de couleur", "correct": true},
+            {"texte": "Titres foncés sur fond clair + textes clairs sur fond foncé", "correct": false},
+            {"texte": "Toujours fond noir pour le style professionnel", "correct": false},
+            {"texte": "Couleurs de texte identiques au fond pour l'harmonie", "correct": false}
+          ],
+          "explication": "⚠️ Le cours dit explicitement d'éviter les 'titres foncés sur fond clair assortis de fonds foncés et textes clairs'. Préférer fond blanc + textes foncés."
+        },
+        {
+          "question": "La règle d'alignement du texte recommandée est :",
+          "reponses": [
+            {"texte": "Aligner à gauche les lignes de texte", "correct": true},
+            {"texte": "Justifier le texte pour un rendu professionnel", "correct": false},
+            {"texte": "Centrer tous les textes pour l'équilibre visuel", "correct": false},
+            {"texte": "Aligner à droite pour les langues occidentales", "correct": false}
+          ],
+          "explication": "Aligner à gauche : évite les lignes trop courtes et les espaces irréguliers de la justification, meilleure lisibilité."
+        },
+        {
+          "question": "Le 'design du discours' précède le 'design des diapos'. Il comprend :",
+          "reponses": [
+            {"texte": "Définir le but, l'histoire et la logique de la présentation", "correct": true},
+            {"texte": "Choisir les polices et les couleurs de la charte graphique", "correct": false},
+            {"texte": "Rédiger le script complet de la présentation orale", "correct": false},
+            {"texte": "Sélectionner les images et illustrations", "correct": false}
+          ],
+          "explication": "Design du discours = But (pourquoi) → Histoire (quoi raconter) → Logique (dans quel ordre). AVANT de créer les slides. La forme suit le fond."
+        },
+        {
+          "question": "Le cours cite une règle résumée par 'simplifier pour amplifier'. Cela signifie :",
+          "reponses": [
+            {"texte": "Moins d'information = plus d'impact et de mémorisation", "correct": true},
+            {"texte": "Utiliser des images simples de petite taille", "correct": false},
+            {"texte": "Réduire la durée de la présentation à 5 minutes", "correct": false},
+            {"texte": "N'utiliser que des slides blanches sans design", "correct": false}
+          ],
+          "explication": "'Simplifier pour amplifier' : se limiter, restreindre l'angle, séparer ce qui est lié, unir ce qui est pluriel. La simplicité aide à retenir l'essentiel."
+        }
+      ]
+    }
+
+  ]
+}

@@ -5,9 +5,7 @@
     {
       "nom": "1️⃣ Fondamentaux Big Data",
       "questions": [
-
         {
-          "id": 1,
           "question": "Quelles sont les 3 caractéristiques historiques du Big Data ?",
           "reponses": [
             {"texte": "Volume, Variété, Vélocité", "correct": true},
@@ -15,73 +13,57 @@
             {"texte": "Volume, Véracité, Valeur", "correct": false},
             {"texte": "Variété, Visualisation, Vitesse", "correct": false}
           ],
-          "explication": "Les 3V : Volume, Variété, Vélocité."
+          "explication": "Les 3V fondamentaux : Volume (quantité), Variété (hétérogénéité), Vélocité (vitesse de flux et d'accès)."
         },
         {
-          "id": 2,
-          "question": "Quel V supplémentaire est souvent ajouté ?",
+          "question": "Quel 4e V est souvent ajouté aux 3V du Big Data ?",
           "reponses": [
             {"texte": "Virtualisation", "correct": false},
             {"texte": "Véracité", "correct": true},
             {"texte": "Visibilité", "correct": false},
             {"texte": "Vitesse CPU", "correct": false}
           ],
-          "explication": "La Véracité concerne la qualité des données."
+          "explication": "La Véracité concerne la qualité et la fiabilité des données : des données massives mais inexactes sont inutilisables."
         },
         {
-          "id": 3,
+          "question": "⚠️ Le Big Data remplace-t-il totalement les bases relationnelles ?",
+          "reponses": [
+            {"texte": "Oui, dans tous les cas", "correct": false},
+            {"texte": "Non, il les complète selon les besoins", "correct": true},
+            {"texte": "Uniquement en environnement cloud", "correct": false},
+            {"texte": "Seulement pour l'intelligence artificielle", "correct": false}
+          ],
+          "explication": "⚠️ Piège classique : SQL reste incontournable pour les transactions, la cohérence stricte et les données structurées. NoSQL complète, ne remplace pas."
+        },
+        {
+          "question": "La scalabilité horizontale (scale-out) consiste à :",
+          "reponses": [
+            {"texte": "Ajouter des nœuds (serveurs) au cluster", "correct": true},
+            {"texte": "Augmenter la RAM d'une machine existante", "correct": false},
+            {"texte": "Améliorer le CPU d'un seul serveur", "correct": false},
+            {"texte": "Compresser les données stockées", "correct": false}
+          ],
+          "explication": "Scale-out = ajouter des machines. Moins coûteux et plus flexible que scale-up (améliorer une seule machine)."
+        },
+        {
           "question": "Pourquoi le Big Data nécessite-t-il une architecture distribuée ?",
           "reponses": [
-            {"texte": "Pour gérer des volumes massifs efficacement", "correct": true},
-            {"texte": "Pour remplacer SQL", "correct": false},
+            {"texte": "Pour gérer des volumes que ne peut traiter une seule machine", "correct": true},
+            {"texte": "Pour remplacer le SQL", "correct": false},
             {"texte": "Pour éviter le réseau", "correct": false},
-            {"texte": "Pour réduire la RAM", "correct": false}
+            {"texte": "Pour réduire la consommation mémoire", "correct": false}
           ],
-          "explication": "Une seule machine ne suffit pas pour traiter de très gros volumes."
+          "explication": "Une machine unique est limité en CPU, RAM et disque. Le distribué permet de traiter des pétaoctets en parallèle."
         },
         {
-          "id": 4,
-          "question": "⚠ Le Big Data remplace-t-il totalement les bases relationnelles ?",
+          "question": "Twitter en 2022 générait environ 850 millions de tweets par jour. Combien cela représente-t-il par seconde ?",
           "reponses": [
-            {"texte": "Oui", "correct": false},
-            {"texte": "Non, il les complète", "correct": true},
-            {"texte": "Uniquement en cloud", "correct": false},
-            {"texte": "Seulement pour l’IA", "correct": false}
+            {"texte": "~9 850 tweets/s", "correct": true},
+            {"texte": "~850 tweets/s", "correct": false},
+            {"texte": "~1 million/s", "correct": false},
+            {"texte": "~100 000/s", "correct": false}
           ],
-          "explication": "⚠ Question piège : SQL reste essentiel."
-        },
-        {
-          "id": 5,
-          "question": "La scalabilité horizontale signifie :",
-          "reponses": [
-            {"texte": "Ajouter des serveurs", "correct": true},
-            {"texte": "Ajouter de la RAM", "correct": false},
-            {"texte": "Augmenter CPU unique", "correct": false},
-            {"texte": "Compresser données", "correct": false}
-          ],
-          "explication": "Scale-out = ajouter des machines."
-        },
-        {
-          "id": 6,
-          "question": "La scalabilité verticale signifie :",
-          "reponses": [
-            {"texte": "Ajouter des serveurs", "correct": false},
-            {"texte": "Ajouter des ressources à une machine", "correct": true},
-            {"texte": "Shard automatique", "correct": false},
-            {"texte": "Réplication réseau", "correct": false}
-          ],
-          "explication": "Scale-up = améliorer une machine existante."
-        },
-        {
-          "id": 7,
-          "question": "Pourquoi le parallélisme est clé en Big Data ?",
-          "reponses": [
-            {"texte": "Réduire le temps de traitement", "correct": true},
-            {"texte": "Réduire stockage", "correct": false},
-            {"texte": "Éviter réplication", "correct": false},
-            {"texte": "Supprimer partitions", "correct": false}
-          ],
-          "explication": "On divise le travail entre plusieurs nœuds."
+          "explication": "850 000 000 / 86 400 ≈ 9 838 tweets/s. Illustration concrète de la Vélocité."
         }
       ]
     },
@@ -89,72 +71,65 @@
     {
       "nom": "2️⃣ HDFS & Hadoop",
       "questions": [
-
         {
-          "id": 8,
-          "question": "HDFS est optimisé pour :",
-          "reponses": [
-            {"texte": "Gros fichiers séquentiels", "correct": true},
-            {"texte": "Beaucoup de petits fichiers", "correct": false},
-            {"texte": "Transactions bancaires", "correct": false},
-            {"texte": "Jointures SQL", "correct": false}
-          ],
-          "explication": "⚠ Question piège : HDFS gère mal les petits fichiers."
-        },
-        {
-          "id": 9,
-          "question": "Qui gère les métadonnées dans HDFS ?",
+          "question": "Quel composant de HDFS gère les métadonnées (où sont les blocs) ?",
           "reponses": [
             {"texte": "NameNode", "correct": true},
             {"texte": "DataNode", "correct": false},
-            {"texte": "ReduceNode", "correct": false},
-            {"texte": "WorkerNode", "correct": false}
+            {"texte": "ResourceManager", "correct": false},
+            {"texte": "ApplicationMaster", "correct": false}
           ],
-          "explication": "Le NameNode contient les informations des blocs."
+          "explication": "Le NameNode est le cerveau de HDFS : il connaît la localisation de chaque bloc sur chaque DataNode. C'est un SPOF (Single Point of Failure)."
         },
         {
-          "id": 10,
-          "question": "Rôle du DataNode ?",
+          "question": "Quel composant de HDFS stocke physiquement les blocs de données ?",
           "reponses": [
-            {"texte": "Stocker les blocs", "correct": true},
-            {"texte": "Gérer transactions", "correct": false},
-            {"texte": "Orchestrer cluster", "correct": false},
-            {"texte": "Faire requêtes SQL", "correct": false}
+            {"texte": "NameNode", "correct": false},
+            {"texte": "DataNode", "correct": true},
+            {"texte": "JobTracker", "correct": false},
+            {"texte": "ApplicationMaster", "correct": false}
           ],
-          "explication": "Le DataNode stocke physiquement les données."
+          "explication": "Les DataNodes sont les disques durs du cluster. Ils stockent les blocs et reportent régulièrement leur état au NameNode (heartbeat)."
         },
         {
-          "id": 11,
-          "question": "Un fichier de 1 Go avec blocs de 128 Mo crée combien de blocs ?",
+          "question": "Un fichier de 1 Go est découpé en blocs de 128 Mo. Combien de blocs crée-t-on ?",
           "reponses": [
-            {"texte": "8", "correct": true},
-            {"texte": "6", "correct": false},
-            {"texte": "10", "correct": false},
-            {"texte": "12", "correct": false}
+            {"texte": "8 blocs", "correct": true},
+            {"texte": "6 blocs", "correct": false},
+            {"texte": "10 blocs", "correct": false},
+            {"texte": "4 blocs", "correct": false}
           ],
-          "explication": "1024 / 128 = 8 blocs."
+          "explication": "1024 Mo / 128 Mo = 8 blocs exactement."
         },
         {
-          "id": 12,
-          "question": "Facteur réplication 3, fichier 200 Mo → espace utilisé ?",
+          "question": "Avec un facteur de réplication de 3, un fichier de 200 Mo occupe combien d'espace réel ?",
           "reponses": [
             {"texte": "600 Mo", "correct": true},
             {"texte": "200 Mo", "correct": false},
             {"texte": "400 Mo", "correct": false},
             {"texte": "800 Mo", "correct": false}
           ],
-          "explication": "200 × 3 = 600 Mo."
+          "explication": "200 Mo × 3 copies = 600 Mo. C'est le coût de la tolérance aux pannes : si 2 DataNodes tombent, les données restent disponibles."
         },
         {
-          "id": 13,
-          "question": "Que fait HDFS si un bloc est perdu ?",
+          "question": "⚠️ HDFS est optimisé pour :",
           "reponses": [
-            {"texte": "Recrée une copie automatiquement", "correct": true},
-            {"texte": "Supprime fichier", "correct": false},
-            {"texte": "Arrête cluster", "correct": false},
-            {"texte": "Ignore erreur", "correct": false}
+            {"texte": "De nombreux petits fichiers en accès aléatoire", "correct": false},
+            {"texte": "Des gros fichiers en lecture séquentielle", "correct": true},
+            {"texte": "Des transactions bancaires", "correct": false},
+            {"texte": "Des requêtes SQL complexes avec jointures", "correct": false}
           ],
-          "explication": "HDFS maintient le facteur de réplication."
+          "explication": "⚠️ HDFS est conçu pour les gros fichiers (logs, archives). Il gère très mal les millions de petits fichiers (surcharge du NameNode)."
+        },
+        {
+          "question": "Que fait HDFS automatiquement si un bloc est perdu suite à une panne ?",
+          "reponses": [
+            {"texte": "Il recrée une copie à partir d'un autre DataNode", "correct": true},
+            {"texte": "Il supprime le fichier complet", "correct": false},
+            {"texte": "Il arrête tout le cluster", "correct": false},
+            {"texte": "Il ignore la perte définitivement", "correct": false}
+          ],
+          "explication": "Le NameNode détecte la perte via les heartbeats et ordonne la re-réplication pour maintenir le facteur cible."
         }
       ]
     },
@@ -162,50 +137,55 @@
     {
       "nom": "3️⃣ MapReduce & Traitement",
       "questions": [
-
         {
-          "id": 14,
-          "question": "La phase Map produit :",
+          "question": "Que produit la phase Map dans MapReduce ?",
           "reponses": [
-            {"texte": "Paires clé-valeur", "correct": true},
-            {"texte": "Blocs HDFS", "correct": false},
-            {"texte": "Transactions SQL", "correct": false},
-            {"texte": "Copies réseau", "correct": false}
+            {"texte": "Des paires clé-valeur intermédiaires", "correct": true},
+            {"texte": "Des blocs HDFS compressés", "correct": false},
+            {"texte": "Des transactions SQL", "correct": false},
+            {"texte": "Des copies répliquées sur le réseau", "correct": false}
           ],
-          "explication": "Sortie intermédiaire clé-valeur."
+          "explication": "Map transforme chaque entrée en paires (clé, valeur). Par ex. pour compter des mots : (\"hadoop\", 1), (\"big\", 1), etc."
         },
         {
-          "id": 15,
-          "question": "Sans Reduce :",
+          "question": "Quel est le rôle de la phase Shuffle & Sort entre Map et Reduce ?",
           "reponses": [
-            {"texte": "Pas d’agrégation finale", "correct": true},
-            {"texte": "Cluster tombe", "correct": false},
-            {"texte": "Blocs supprimés", "correct": false},
-            {"texte": "CPU désactivé", "correct": false}
+            {"texte": "Regrouper toutes les valeurs par clé identique", "correct": true},
+            {"texte": "Stocker les données dans HDFS", "correct": false},
+            {"texte": "Exécuter les requêtes SQL", "correct": false},
+            {"texte": "Répliquer les blocs", "correct": false}
           ],
-          "explication": "⚠ Question piège : Map fonctionne mais sans consolidation."
+          "explication": "Shuffle trie et regroupe les paires clé-valeur : chaque Reducer reçoit toutes les valeurs d'une même clé."
         },
         {
-          "id": 16,
-          "question": "10 000 événements/s pendant 5 min = ?",
+          "question": "⚠️ Peut-on exécuter MapReduce sans phase Reduce ?",
+          "reponses": [
+            {"texte": "Non, Reduce est obligatoire", "correct": false},
+            {"texte": "Oui, dans certains cas (ex : filtrage pur)", "correct": true},
+            {"texte": "Cela provoque une erreur cluster", "correct": false},
+            {"texte": "Cela supprime les blocs HDFS", "correct": false}
+          ],
+          "explication": "⚠️ Piège : Reduce est optionnel. Un job Map-only est valide pour filtrer ou transformer les données sans agrégation."
+        },
+        {
+          "question": "10 000 événements/seconde pendant 5 minutes = combien d'événements total ?",
           "reponses": [
             {"texte": "3 000 000", "correct": true},
             {"texte": "300 000", "correct": false},
-            {"texte": "30 000", "correct": false},
+            {"texte": "50 000", "correct": false},
             {"texte": "600 000", "correct": false}
           ],
-          "explication": "10 000 × 60 × 5."
+          "explication": "10 000 × 60 × 5 = 3 000 000 événements."
         },
         {
-          "id": 17,
-          "question": "2 millions/min pendant 1h = ?",
+          "question": "Quel est le principal avantage de MapReduce par rapport au traitement séquentiel classique ?",
           "reponses": [
-            {"texte": "120 millions", "correct": true},
-            {"texte": "60 millions", "correct": false},
-            {"texte": "12 millions", "correct": false},
-            {"texte": "240 millions", "correct": false}
+            {"texte": "Parallélisation automatique sur N nœuds", "correct": true},
+            {"texte": "Syntaxe plus simple que SQL", "correct": false},
+            {"texte": "Faible latence pour les petites requêtes", "correct": false},
+            {"texte": "Garantie ACID des transactions", "correct": false}
           ],
-          "explication": "2M × 60."
+          "explication": "MapReduce divise automatiquement le travail entre tous les nœuds du cluster, réduisant le temps de traitement proportionnellement."
         }
       ]
     },
@@ -213,50 +193,65 @@
     {
       "nom": "4️⃣ NoSQL & Modèles",
       "questions": [
-
         {
-          "id": 18,
-          "question": "MongoDB est une base :",
+          "question": "⚠️ NoSQL signifie littéralement :",
           "reponses": [
-            {"texte": "Document", "correct": true},
-            {"texte": "Clé-valeur", "correct": false},
-            {"texte": "Graphe", "correct": false},
-            {"texte": "Relationnelle", "correct": false}
+            {"texte": "No SQL Allowed (SQL interdit)", "correct": false},
+            {"texte": "Not Only SQL (pas seulement SQL)", "correct": true},
+            {"texte": "New SQL Only (nouveau SQL uniquement)", "correct": false},
+            {"texte": "Non Structuré et Sans Langage", "correct": false}
           ],
-          "explication": "Documents JSON."
+          "explication": "⚠️ Piège classique à l'examen ! NoSQL = Not Only SQL, pas 'sans SQL'. Ces BD peuvent coexister avec SQL."
         },
         {
-          "id": 19,
-          "question": "Cassandra est orientée :",
+          "question": "MongoDB utilise quel modèle de données ?",
           "reponses": [
-            {"texte": "Colonnes", "correct": true},
-            {"texte": "Documents", "correct": false},
-            {"texte": "Graphes", "correct": false},
-            {"texte": "Tables SQL classiques", "correct": false}
+            {"texte": "Orienté documents (JSON/BSON)", "correct": true},
+            {"texte": "Clé-valeur simple", "correct": false},
+            {"texte": "Orienté graphe", "correct": false},
+            {"texte": "Relationnel classique", "correct": false}
           ],
-          "explication": "Base colonne distribuée."
+          "explication": "MongoDB stocke des documents JSON/BSON avec schéma flexible. Idéal pour les profils utilisateurs, catalogues produits."
         },
         {
-          "id": 20,
-          "question": "Base idéale pour réseau social complexe :",
+          "question": "Cassandra est principalement une base :",
           "reponses": [
-            {"texte": "Graphe", "correct": true},
-            {"texte": "Clé-valeur", "correct": false},
-            {"texte": "Document simple", "correct": false},
-            {"texte": "Fichier texte", "correct": false}
+            {"texte": "Orientée colonnes", "correct": true},
+            {"texte": "Orientée documents", "correct": false},
+            {"texte": "Orientée graphes", "correct": false},
+            {"texte": "Relationnelle distribuée", "correct": false}
           ],
-          "explication": "Relations optimisées."
+          "explication": "Cassandra = base colonne distribuée (Apache). Utilisée par Facebook, Twitter pour de très hauts débits."
         },
         {
-          "id": 21,
-          "question": "⚠ NoSQL signifie :",
+          "question": "Pour modéliser un réseau social avec des relations complexes (amis, likes, follows), quelle base NoSQL est la plus adaptée ?",
           "reponses": [
-            {"texte": "Not Only SQL", "correct": true},
-            {"texte": "No SQL Allowed", "correct": false},
-            {"texte": "New SQL Only", "correct": false},
-            {"texte": "Non Structuré", "correct": false}
+            {"texte": "Base orientée graphe (Neo4j)", "correct": true},
+            {"texte": "Base clé-valeur (Redis)", "correct": false},
+            {"texte": "Base document simple", "correct": false},
+            {"texte": "Base colonne (HBase)", "correct": false}
           ],
-          "explication": "⚠ Question piège classique."
+          "explication": "Les bases graphe stockent nativement les nœuds et arêtes. Neo4j est 45x plus rapide qu'une requête Hive sur ce type de données."
+        },
+        {
+          "question": "Le modèle clé-valeur (ex : Redis) souffre de quelle faiblesse principale ?",
+          "reponses": [
+            {"texte": "Requêtage uniquement possible sur la clé", "correct": true},
+            {"texte": "Pas de scalabilité horizontale", "correct": false},
+            {"texte": "Trop lent pour les caches", "correct": false},
+            {"texte": "Impossible à répliquer", "correct": false}
+          ],
+          "explication": "On ne peut interroger qu'avec la clé exacte. Toute logique de requêtage complexe est portée par l'application, pas la BD."
+        },
+        {
+          "question": "Quel type de BD NoSQL est utilisé pour les systèmes de cache et sessions distribuées ?",
+          "reponses": [
+            {"texte": "Clé-valeur (Redis, Riak)", "correct": true},
+            {"texte": "Orienté graphe (Neo4j)", "correct": false},
+            {"texte": "Orienté colonne (Cassandra)", "correct": false},
+            {"texte": "Relationnel (MySQL)", "correct": false}
+          ],
+          "explication": "La simplicité clé-valeur = performances extrêmes en lecture/écriture. Redis est souvent utilisé comme cache en mémoire."
         }
       ]
     },
@@ -264,50 +259,55 @@
     {
       "nom": "5️⃣ CAP & Cohérence",
       "questions": [
-
         {
-          "id": 22,
-          "question": "CAP signifie :",
+          "question": "Que signifie le théorème CAP ?",
           "reponses": [
             {"texte": "Consistency, Availability, Partition tolerance", "correct": true},
-            {"texte": "Compression, Architecture, Partition", "correct": false},
+            {"texte": "Compression, Architecture, Partitioning", "correct": false},
             {"texte": "Cloud, Access, Processing", "correct": false},
-            {"texte": "Control, Access, Performance", "correct": false}
+            {"texte": "Control, Availability, Performance", "correct": false}
           ],
-          "explication": "Théorème des systèmes distribués."
+          "explication": "CAP = Cohérence (tous les nœuds voient la même donnée), Disponibilité (toujours une réponse), Tolérance au partitionnement réseau."
         },
         {
-          "id": 23,
-          "question": "En cas de partition réseau, on doit choisir entre :",
+          "question": "⚠️ En cas de partition réseau (P obligatoire), un système doit choisir entre :",
           "reponses": [
-            {"texte": "C et A", "correct": true},
-            {"texte": "C et P", "correct": false},
-            {"texte": "A et P", "correct": false},
-            {"texte": "Les trois", "correct": false}
+            {"texte": "Cohérence (C) ou Disponibilité (A)", "correct": true},
+            {"texte": "Cohérence (C) ou Partitionnement (P)", "correct": false},
+            {"texte": "Disponibilité (A) ou Partitionnement (P)", "correct": false},
+            {"texte": "Il peut toujours garantir les trois", "correct": false}
           ],
-          "explication": "⚠ Question piège : P est imposé."
+          "explication": "⚠️ Piège : P (partition) est une réalité physique, pas un choix. On choisit donc C ou A. Les SGBDR classiques sont CA (pas distribués)."
         },
         {
-          "id": 24,
-          "question": "Un système AP privilégie :",
+          "question": "BASE signifie :",
           "reponses": [
-            {"texte": "Disponibilité", "correct": true},
-            {"texte": "Cohérence stricte", "correct": false},
-            {"texte": "Transactions ACID strictes", "correct": false},
-            {"texte": "SQL pur", "correct": false}
+            {"texte": "Basically Available, Soft state, Eventual consistency", "correct": true},
+            {"texte": "Big Available Scalable Engine", "correct": false},
+            {"texte": "Best Access Structured Entities", "correct": false},
+            {"texte": "Balanced Availability Stable Execution", "correct": false}
           ],
-          "explication": "Disponibilité + partition tolerance."
+          "explication": "BASE = alternative à ACID pour le NoSQL : disponibilité prioritaire, cohérence faible (soft state), convergence finale (eventual consistency)."
         },
         {
-          "id": 25,
-          "question": "Eventual consistency signifie :",
+          "question": "Eventual consistency signifie que :",
           "reponses": [
-            {"texte": "Convergence finale", "correct": true},
-            {"texte": "Incohérence permanente", "correct": false},
-            {"texte": "Pas de réplication", "correct": false},
-            {"texte": "Suppression réseau", "correct": false}
+            {"texte": "Tous les nœuds convergeront vers le même état après un certain temps", "correct": true},
+            {"texte": "La cohérence est définitivement abandonnée", "correct": false},
+            {"texte": "Il n'y a aucune réplication", "correct": false},
+            {"texte": "Chaque nœud a sa propre version permanente", "correct": false}
           ],
-          "explication": "⚠ Question piège fréquente."
+          "explication": "⚠️ Piège fréquent : 'éventuellement' = après propagation, PAS jamais. Ex : votre profil Facebook peut être temporairement incohérent entre datacenter."
+        },
+        {
+          "question": "⚠️ Les BD NoSQL ne respectent pas du tout ACID : vrai ou faux ?",
+          "reponses": [
+            {"texte": "Faux, certaines NoSQL offrent des transactions ACID partielles", "correct": true},
+            {"texte": "Vrai, NoSQL = jamais d'ACID par définition", "correct": false},
+            {"texte": "Vrai, BASE et ACID sont mutuellement exclusifs", "correct": false},
+            {"texte": "Faux, toutes les NoSQL sont ACID comme le relationnel", "correct": false}
+          ],
+          "explication": "⚠️ Nuance importante : MongoDB propose des transactions ACID depuis v4.0. CAP ne contredit pas ACID, il dit que les BD ACID ne peuvent être situées qu'en CA."
         }
       ]
     },
@@ -315,61 +315,211 @@
     {
       "nom": "6️⃣ Architecture & Performance",
       "questions": [
-
         {
-          "id": 26,
-          "question": "Le sharding permet :",
+          "question": "Le sharding (partitionnement horizontal) permet de :",
           "reponses": [
-            {"texte": "Répartition horizontale des données", "correct": true},
-            {"texte": "Réplication simple", "correct": false},
-            {"texte": "Compression", "correct": false},
-            {"texte": "Supprimer index", "correct": false}
+            {"texte": "Distribuer les données sur plusieurs serveurs selon un critère", "correct": true},
+            {"texte": "Dupliquer toutes les données pour la tolérance aux pannes", "correct": false},
+            {"texte": "Compresser les données volumineuses", "correct": false},
+            {"texte": "Supprimer les index inutiles", "correct": false}
           ],
-          "explication": "Distribution sur plusieurs serveurs."
+          "explication": "Sharding = découper une table en fragments (shards) répartis sur N serveurs. Ex : users A-M sur serveur 1, N-Z sur serveur 2."
         },
         {
-          "id": 27,
-          "question": "Pourquoi éviter jointures distribuées ?",
+          "question": "Pourquoi faut-il éviter les jointures distribuées en Big Data ?",
           "reponses": [
-            {"texte": "Coût réseau élevé", "correct": true},
-            {"texte": "Interdites", "correct": false},
-            {"texte": "Impossible techniquement", "correct": false},
-            {"texte": "Non supportées", "correct": false}
+            {"texte": "Coût réseau très élevé (latence × volume)", "correct": true},
+            {"texte": "Les jointures sont techniquement impossibles en distribué", "correct": false},
+            {"texte": "Elles sont interdites dans Hadoop", "correct": false},
+            {"texte": "Elles causent des deadlocks systématiques", "correct": false}
           ],
-          "explication": "Latence réseau dominante."
+          "explication": "Transférer des millions de lignes entre nœuds pour les joindre génère un trafic réseau énorme. On préfère la dénormalisation."
         },
         {
-          "id": 28,
-          "question": "3 appels réseau de 50ms → latence minimale ?",
+          "question": "3 appels réseau séquentiels de 50ms chacun → latence minimale totale ?",
           "reponses": [
             {"texte": "150 ms", "correct": true},
             {"texte": "50 ms", "correct": false},
             {"texte": "100 ms", "correct": false},
             {"texte": "200 ms", "correct": false}
           ],
-          "explication": "3 × 50 ms."
+          "explication": "3 × 50 ms = 150 ms minimum. Sans parallélisation, la latence s'additionne."
         },
         {
-          "id": 29,
-          "question": "Un cluster double ses nœuds → temps divisé par 2 si scalabilité parfaite ?",
+          "question": "Un cluster double le nombre de nœuds. En théorie (scalabilité parfaite), le temps de traitement est :",
           "reponses": [
-            {"texte": "Oui théoriquement", "correct": true},
-            {"texte": "Toujours non", "correct": false},
-            {"texte": "Impossible", "correct": false},
-            {"texte": "CPU limité", "correct": false}
+            {"texte": "Divisé par 2", "correct": true},
+            {"texte": "Inchangé", "correct": false},
+            {"texte": "Multiplié par 2", "correct": false},
+            {"texte": "Impossible à prédire", "correct": false}
           ],
-          "explication": "Hypothèse idéale sans overhead."
+          "explication": "Hypothèse idéale sans overhead réseau. En pratique (loi d'Amdahl), le gain est inférieur car une partie du traitement reste séquentielle."
+        }
+      ]
+    },
+
+    {
+      "nom": "7️⃣ Frameworks Big Data",
+      "questions": [
+        {
+          "question": "Quel est le principal avantage d'Apache Spark par rapport à Hadoop MapReduce ?",
+          "reponses": [
+            {"texte": "Traitement in-memory : jusqu'à 100x plus rapide", "correct": true},
+            {"texte": "Il ne nécessite pas de cluster", "correct": false},
+            {"texte": "Il remplace HDFS pour le stockage", "correct": false},
+            {"texte": "Il est écrit en Python natif", "correct": false}
+          ],
+          "explication": "Spark charge les données en RAM (RDD - Resilient Distributed Dataset), évitant les lectures/écritures disque répétitives de MapReduce."
         },
         {
-          "id": 30,
-          "question": "Pourquoi la latence réseau est critique en distribué ?",
+          "question": "Apache Spark est codé dans quel langage principal ?",
           "reponses": [
-            {"texte": "Communications dominent le temps total", "correct": true},
-            {"texte": "CPU inutiles", "correct": false},
-            {"texte": "RAM lente", "correct": false},
-            {"texte": "Stockage absent", "correct": false}
+            {"texte": "Scala", "correct": true},
+            {"texte": "Java uniquement", "correct": false},
+            {"texte": "Python", "correct": false},
+            {"texte": "C++", "correct": false}
           ],
-          "explication": "Le réseau devient le goulot d’étranglement."
+          "explication": "Spark est codé en Scala mais offre des APIs pour Scala, Java, Python (PySpark) et R."
+        },
+        {
+          "question": "⚠️ Spark est 'en passe de remplacer Hadoop'. Que remplace-t-il exactement ?",
+          "reponses": [
+            {"texte": "Le moteur MapReduce, mais pas HDFS pour le stockage", "correct": true},
+            {"texte": "L'intégralité d'Hadoop y compris HDFS", "correct": false},
+            {"texte": "Seulement les requêtes SQL", "correct": false},
+            {"texte": "Spark et Hadoop sont incompatibles", "correct": false}
+          ],
+          "explication": "⚠️ Spark remplace le moteur de traitement MapReduce mais peut lire directement depuis HDFS, HBase, Kafka, etc."
+        },
+        {
+          "question": "Apache Flink se distingue des autres frameworks par :",
+          "reponses": [
+            {"texte": "Une API de streaming native avec opérateurs itératifs avancés", "correct": true},
+            {"texte": "Son stockage propriétaire incompatible HDFS", "correct": false},
+            {"texte": "Son langage exclusif non-open-source", "correct": false},
+            {"texte": "L'absence de gestion de cluster", "correct": false}
+          ],
+          "explication": "Flink = streaming natif (contrairement à Spark qui fait du micro-batching). Flink SQL permet des requêtes type SQL sur les streams."
+        },
+        {
+          "question": "Apache Storm est particulièrement adapté pour :",
+          "reponses": [
+            {"texte": "Le traitement de flux temps-réel (streaming)", "correct": true},
+            {"texte": "Le stockage distribué de fichiers", "correct": false},
+            {"texte": "Les requêtes SQL analytiques", "correct": false},
+            {"texte": "L'orchestration de workflows MapReduce", "correct": false}
+          ],
+          "explication": "Storm = traitement de streams temps réel, compatible tous langages (via Thrift). Utilisé pour l'analyse en temps réel de flux d'événements."
+        },
+        {
+          "question": "YARN (Yet Another Resource Negotiator) a été introduit dans Hadoop v2. Son rôle principal est :",
+          "reponses": [
+            {"texte": "Gestionnaire de ressources générique pour tout type de job (pas uniquement MapReduce)", "correct": true},
+            {"texte": "Système de fichiers alternatif à HDFS", "correct": false},
+            {"texte": "Langage de requête SQL pour Hadoop", "correct": false},
+            {"texte": "Outil de réplication des blocs HDFS", "correct": false}
+          ],
+          "explication": "Hadoop v1 : seul MapReduce. Hadoop v2 + YARN : Spark, Flink, Storm peuvent tous tourner sur le même cluster géré par YARN."
+        },
+        {
+          "question": "Dans l'architecture YARN, quel composant alloue les ressources à chaque job ?",
+          "reponses": [
+            {"texte": "ResourceManager (RM)", "correct": true},
+            {"texte": "NameNode", "correct": false},
+            {"texte": "DataNode", "correct": false},
+            {"texte": "ApplicationMaster", "correct": false}
+          ],
+          "explication": "Le RM est le daemon maître unique du cluster YARN. Il gère les SLA, priorités, et optimise l'utilisation des ressources via un scheduler."
+        },
+        {
+          "question": "⚠️ Le ResourceManager (RM) de YARN est un SPOF. Comment le rendre hautement disponible ?",
+          "reponses": [
+            {"texte": "Mode High Availability (HA) avec un RM standby", "correct": true},
+            {"texte": "En ajoutant un second NameNode", "correct": false},
+            {"texte": "En augmentant la RAM du RM", "correct": false},
+            {"texte": "Le RM n'est pas un SPOF par conception", "correct": false}
+          ],
+          "explication": "⚠️ Le RM est bien un SPOF mais peut être configuré en HA avec ZooKeeper pour la coordination du failover automatique."
+        },
+        {
+          "question": "Apache Hive sert à :",
+          "reponses": [
+            {"texte": "Faire des requêtes SQL (HiveQL) sur des données Hadoop", "correct": true},
+            {"texte": "Stocker des données NoSQL en temps réel", "correct": false},
+            {"texte": "Gérer les ressources du cluster comme YARN", "correct": false},
+            {"texte": "Traiter des flux de données en streaming", "correct": false}
+          ],
+          "explication": "HiveQL ≈ SQL-92 qui se compile en jobs MapReduce/Spark. Forte latence mais très accessible aux analystes SQL."
+        },
+        {
+          "question": "⚠️ Quelle limitation importante a HiveQL par rapport à SQL standard ?",
+          "reponses": [
+            {"texte": "Il ne supporte pas les transactions et les index sont limités", "correct": true},
+            {"texte": "Il ne supporte aucune requête de sélection", "correct": false},
+            {"texte": "Il est incompatible avec HDFS", "correct": false},
+            {"texte": "Il ne peut traiter que des petits fichiers", "correct": false}
+          ],
+          "explication": "⚠️ HiveQL supporte les insertions multi-tables mais PAS les transactions ni les index classiques. Latence élevée (batch, pas temps réel)."
+        },
+        {
+          "question": "Apache Pig utilise quel langage propre pour traiter les données ?",
+          "reponses": [
+            {"texte": "Pig Latin (langage procédural sur flux de données)", "correct": true},
+            {"texte": "HiveQL (proche de SQL)", "correct": false},
+            {"texte": "Scala (comme Spark)", "correct": false},
+            {"texte": "SPARQL (pour graphes RDF)", "correct": false}
+          ],
+          "explication": "Pig Latin est procédural (contrairement au SQL déclaratif). Avantage majeur : accepte les données brutes sans schéma préalable."
+        },
+        {
+          "question": "Quel est l'avantage de Pig par rapport à Hive pour des données non structurées ?",
+          "reponses": [
+            {"texte": "Pig lit les données brutes sans nécessiter de schéma défini à l'avance", "correct": true},
+            {"texte": "Pig est plus rapide que Hive en toutes circonstances", "correct": false},
+            {"texte": "Pig supporte les transactions ACID contrairement à Hive", "correct": false},
+            {"texte": "Pig remplace HDFS pour le stockage", "correct": false}
+          ],
+          "explication": "On peut 'laisser les données à l'état brut et demander à Pig de les lire'. Idéal pour les logs et données semi-structurées."
+        },
+        {
+          "question": "Apache ZooKeeper est utilisé pour :",
+          "reponses": [
+            {"texte": "Coordonner les nœuds d'un cluster distribué (config, synchro, HA)", "correct": true},
+            {"texte": "Stocker les métadonnées HDFS", "correct": false},
+            {"texte": "Exécuter des requêtes SQL analytiques", "correct": false},
+            {"texte": "Ingérer des flux de données temps réel", "correct": false}
+          ],
+          "explication": "ZooKeeper = service de coordination : gestion de configuration, synchronisation, élection de leader, gestion du HA (notamment du RM YARN et NameNode)."
+        },
+        {
+          "question": "Apache Oozie est :",
+          "reponses": [
+            {"texte": "Un ordonnanceur de workflows MapReduce/Hive/Pig", "correct": true},
+            {"texte": "Un système de stockage distribué", "correct": false},
+            {"texte": "Un moteur de requêtes SQL temps réel", "correct": false},
+            {"texte": "Un framework de streaming concurrent de Kafka", "correct": false}
+          ],
+          "explication": "Oozie coordonne des chaînes de traitements MapReduce. Un problème nécessite souvent plusieurs jobs enchaînés : Oozie les orchestre."
+        },
+        {
+          "question": "Flume est principalement utilisé pour :",
+          "reponses": [
+            {"texte": "Collecter et ingérer des logs en masse vers HDFS", "correct": true},
+            {"texte": "Exécuter des requêtes SQL sur Hadoop", "correct": false},
+            {"texte": "Gérer les ressources du cluster", "correct": false},
+            {"texte": "Répliquer les données entre clusters", "correct": false}
+          ],
+          "explication": "Flume = Source (données) → Channel (buffer) → Sink (HDFS, HBase, Kafka...). Conçu pour les journaux serveur en très haut débit."
+        },
+        {
+          "question": "Sqoop permet de :",
+          "reponses": [
+            {"texte": "Transférer des données entre Hadoop et des bases relationnelles (dans les deux sens)", "correct": true},
+            {"texte": "Ordonnancer des jobs MapReduce", "correct": false},
+            {"texte": "Monitorer les nœuds du cluster", "correct": false},
+            {"texte": "Traiter des flux temps réel", "correct": false}
+          ],
+          "explication": "Sqoop (Cloudera) = pont HDFS ↔ SGBDR. Importe/exporte des tables SQL vers HDFS/Hive/HBase. SQL → Big Data et inversement."
         }
       ]
     }

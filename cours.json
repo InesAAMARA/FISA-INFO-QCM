@@ -1,0 +1,861 @@
+{
+  "SR72": {
+    "Problématique de la synchronisation": {
+      "emoji": "⚙️",
+      "intro": "Quand plusieurs processus ou threads partagent des ressources, des problèmes de cohérence apparaissent. La synchronisation garantit un accès ordonné et correct.",
+      "sections": [
+        {
+          "titre": "Processus vs Threads",
+          "contenu": [
+            "**Processus** : espace mémoire isolé, communication coûteuse (IPC)",
+            "**Thread** : partage la mémoire du processus, communication rapide mais dangereuse",
+            "Plusieurs threads dans un même processus → risque d'accès concurrent à des données partagées"
+          ]
+        },
+        {
+          "titre": "Section critique",
+          "contenu": [
+            "Portion de code qui accède à une ressource partagée",
+            "**Problème** : si deux threads entrent simultanément → incohérence des données",
+            "**Race condition** : résultat dépend de l'ordre d'exécution des threads"
+          ]
+        },
+        {
+          "titre": "Conditions de Coffman (exclusion mutuelle)",
+          "contenu": [
+            "**1. Exclusion mutuelle** : un seul thread en section critique à la fois",
+            "**2. Progrès** : si personne en SC, un thread en attente doit pouvoir entrer",
+            "**3. Attente bornée** : un thread ne doit pas attendre indéfiniment",
+            "**4. Pas d'hypothèse sur les vitesses** : l'algorithme fonctionne quelle que soit la vitesse"
+          ]
+        },
+        {
+          "titre": "Problèmes classiques",
+          "contenu": [
+            "**Producteur/Consommateur** : un thread produit, un autre consomme via un buffer",
+            "**Lecteurs/Rédacteurs** : plusieurs lecteurs simultanés OK, mais un rédacteur exclusif",
+            "**Philosophes dîneurs** : 5 philosophes, 5 fourchettes → risque d'interblocage"
+          ]
+        }
+      ],
+      "a_retenir": "La section critique doit être protégée par un mécanisme d'exclusion mutuelle. Une race condition survient quand le résultat dépend de l'ordre d'exécution."
+    },
+    "Exclusion mutuelle logicielle": {
+      "emoji": "🔒",
+      "intro": "Avant les instructions matérielles dédiées, des algorithmes purement logiciels ont été conçus pour garantir l'exclusion mutuelle.",
+      "sections": [
+        {
+          "titre": "Algorithme de Peterson (2 threads)",
+          "contenu": [
+            "Utilise deux variables : `flag[i]` (intention d'entrer) et `turn` (qui cède la priorité)",
+            "Thread i : `flag[i]=true; turn=j; while(flag[j] && turn==j);` ... SC ... `flag[i]=false`",
+            "**Correct** : satisfait exclusion mutuelle, progrès et attente bornée",
+            "**Limites** : ne fonctionne qu'avec 2 threads, suppose une mémoire cohérente"
+          ]
+        },
+        {
+          "titre": "Algorithme de Lamport (Boulangerie)",
+          "contenu": [
+            "Généralisé à N threads, inspiré de la boulangerie (ticket de caisse)",
+            "Chaque thread tire un numéro, le plus petit entre en premier",
+            "Gère les égalités avec l'identifiant du thread",
+            "**Limite** : les numéros peuvent croître indéfiniment"
+          ]
+        },
+        {
+          "titre": "Solutions matérielles",
+          "contenu": [
+            "**Test-and-Set (TAS)** : instruction atomique qui teste et modifie un verrou en une opération",
+            "**Compare-and-Swap (CAS)** : compare une valeur et la remplace si égale, atomiquement",
+            "**Avantage** : indivisible → pas de race condition possible sur le verrou lui-même"
+          ]
+        }
+      ],
+      "a_retenir": "Peterson est l'algorithme logiciel de référence pour 2 threads. Pour N threads, Lamport (boulangerie). En pratique, on utilise des instructions atomiques matérielles (TAS, CAS)."
+    },
+    "Sémaphores": {
+      "emoji": "🚦",
+      "intro": "Un sémaphore est un entier protégé avec deux opérations atomiques : P (attendre) et V (signaler). C'est l'outil fondamental de synchronisation d'Edsger Dijkstra (1965).",
+      "sections": [
+        {
+          "titre": "Définition et opérations",
+          "contenu": [
+            "**Sémaphore S** : entier ≥ 0 + file d'attente",
+            "**P(S) / wait(S)** : si S>0 alors S-- sinon bloquer le thread",
+            "**V(S) / signal(S)** : S++ puis réveiller un thread en attente si file non vide",
+            "**Atomicité** : P et V sont indivisibles (pas de préemption pendant leur exécution)"
+          ]
+        },
+        {
+          "titre": "Types de sémaphores",
+          "contenu": [
+            "**Sémaphore binaire** (mutex) : valeur 0 ou 1 → exclusion mutuelle",
+            "**Sémaphore compteur** : valeur ≥ 0 → contrôle d'accès à N ressources identiques",
+            "Initialisation : mutex=1 (libre), compteur=N (N ressources disponibles)"
+          ]
+        },
+        {
+          "titre": "Problèmes des sémaphores",
+          "contenu": [
+            "**Interblocage** : P(S1) puis P(S2) par thread A, P(S2) puis P(S1) par thread B",
+            "**Inversion de priorité** : un thread haute priorité bloqué par un bas priorité",
+            "**Oubli de V** : thread en SC ne fait pas V → tous les autres bloqués à jamais"
+          ]
+        }
+      ],
+      "a_retenir": "P=attendre (décrémenter ou bloquer), V=signaler (incrémenter ou réveiller). Mutex initialisé à 1. Ne jamais oublier le V sous peine de deadlock permanent."
+    },
+    "Moniteurs": {
+      "emoji": "🏛️",
+      "intro": "Un moniteur est un module de synchronisation de haut niveau qui encapsule les données partagées et les protège automatiquement contre les accès concurrents.",
+      "sections": [
+        {
+          "titre": "Définition",
+          "contenu": [
+            "Structure regroupant : **données partagées** + **procédures** + **initialisation**",
+            "**Exclusion mutuelle automatique** : un seul thread actif dans le moniteur à la fois",
+            "Plus sûr que les sémaphores : la protection est implicite"
+          ]
+        },
+        {
+          "titre": "Variables condition",
+          "contenu": [
+            "**c.wait()** : libère le moniteur et bloque le thread sur la condition c",
+            "**c.signal()** : réveille un thread en attente sur c (si aucun → no-op)",
+            "Différence avec sémaphore : condition n'a pas de mémoire (signal perdu si personne n'attend)"
+          ]
+        },
+        {
+          "titre": "Sémantique : Hoare vs Mesa",
+          "contenu": [
+            "**Hoare** : signal → le thread réveillé prend immédiatement le moniteur",
+            "**Mesa** (Java, POSIX) : signal → le thread réveillé est mis en file, le signalant continue",
+            "Avec Mesa : utiliser **while** (pas if) pour re-vérifier la condition au réveil",
+            "Java : `wait()`, `notify()`, `notifyAll()` implémentent la sémantique Mesa"
+          ]
+        }
+      ],
+      "a_retenir": "Le moniteur garantit l'exclusion mutuelle automatiquement. Variables condition : wait() libère + bloque, signal() réveille. Avec Mesa (Java), toujours utiliser while pour re-vérifier."
+    },
+    "Interblocages (Deadlocks)": {
+      "emoji": "🔄",
+      "intro": "Un interblocage survient quand un ensemble de threads se bloquent mutuellement, chacun attendant une ressource détenue par un autre. Personne ne peut avancer.",
+      "sections": [
+        {
+          "titre": "4 conditions nécessaires (Coffman 1971)",
+          "contenu": [
+            "**1. Exclusion mutuelle** : les ressources ne sont pas partageables",
+            "**2. Détention et attente** : un thread détient des ressources et en attend d'autres",
+            "**3. Pas de préemption** : on ne peut pas forcer un thread à libérer une ressource",
+            "**4. Attente circulaire** : cycle T1→R1→T2→R2→T1 dans le graphe d'allocation",
+            "**Toutes 4 conditions doivent être présentes** pour qu'un deadlock existe"
+          ]
+        },
+        {
+          "titre": "Stratégies de traitement",
+          "contenu": [
+            "**Prévention** : éliminer au moins une des 4 conditions",
+            "**Évitement** : décider dynamiquement si une allocation est sûre (Algorithme du Banquier)",
+            "**Détection + Récupération** : laisser les deadlocks survenir, détecter puis briser",
+            "**Ignorance** (Autruche) : ignorer le problème (utilisé en pratique dans certains OS)"
+          ]
+        }
+      ],
+      "a_retenir": "4 conditions Coffman : exclusion mutuelle + détention-attente + non-préemption + attente circulaire. Briser une seule suffit à prévenir le deadlock."
+    },
+    "Algorithme du Banquier": {
+      "emoji": "🏦",
+      "intro": "L'algorithme du Banquier (Dijkstra) est un algorithme d'évitement des deadlocks. Avant chaque allocation, il vérifie si l'état résultant est 'sûr'.",
+      "sections": [
+        {
+          "titre": "Structures de données",
+          "contenu": [
+            "**Available** : vecteur des ressources disponibles",
+            "**Max** : matrice des besoins maximaux de chaque thread",
+            "**Allocation** : matrice des ressources actuellement allouées",
+            "**Need** = Max - Allocation : ce qu'il reste à allouer à chaque thread"
+          ]
+        },
+        {
+          "titre": "Algorithme de vérification d'état sûr",
+          "contenu": [
+            "1. Work = Available ; Finish = [false, ..., false]",
+            "2. Trouver i tel que Finish[i]=false ET Need[i] ≤ Work",
+            "3. Work = Work + Allocation[i] ; Finish[i] = true → retour en 2",
+            "4. Si tous Finish[i]=true → **état sûr** ; sinon refuser l'allocation"
+          ]
+        },
+        {
+          "titre": "Limites",
+          "contenu": [
+            "Doit connaître à l'avance le **maximum** des besoins (irréaliste)",
+            "Coût en temps : O(n² × m) pour n threads et m types de ressources",
+            "Nombre de threads et ressources doit être **fixe**"
+          ]
+        }
+      ],
+      "a_retenir": "État sûr = séquence d'exécution où tous les threads peuvent terminer. Need[i] = Max[i] - Allocation[i]. L'algorithme cherche à satisfaire les besoins restants avec les ressources disponibles."
+    },
+    "Détection et récupération": {
+      "emoji": "🔍",
+      "intro": "Au lieu de prévenir ou éviter les deadlocks, on laisse le système fonctionner normalement, on détecte les interblocages quand ils surviennent, puis on les brise.",
+      "sections": [
+        {
+          "titre": "Algorithme de détection",
+          "contenu": [
+            "Similaire à l'algorithme du Banquier mais sans la contrainte Max",
+            "Utilise : **Available**, **Allocation**, **Request** (requêtes en attente)",
+            "Si impossible → les threads non terminés sont **en deadlock**"
+          ]
+        },
+        {
+          "titre": "Stratégies de récupération",
+          "contenu": [
+            "**Terminaison de processus** : tuer un ou plusieurs threads",
+            "**Préemption de ressources** : forcer un thread à libérer ses ressources (checkpoint + rollback)",
+            "**Risque de famine** : toujours choisir le même thread comme victime → il ne termine jamais"
+          ]
+        }
+      ],
+      "a_retenir": "Détection = variante du Banquier sans Max. Récupération = tuer un thread ou préempter des ressources. Attention au risque de famine."
+    }
+  },
+
+  "GE79": {
+    "Human Resources – Fondamentaux": {
+      "emoji": "👥",
+      "intro": "Le management des RH couvre l'ensemble du cycle de vie des ressources humaines dans un projet : de la planification à la libération, en passant par l'acquisition et le développement.",
+      "sections": [
+        {
+          "titre": "5 processus du management RH",
+          "contenu": [
+            "**1. Plan RH** : définir rôles, RACI, OBS, stratégie d'acquisition et plan de formation",
+            "**2. Acquisition** : confirmer disponibilité et intégrer les ressources",
+            "**3. Développement** : améliorer compétences, renforcer cohésion (team-building, formations)",
+            "**4. Management** : suivre performances, résoudre problèmes, gérer changements",
+            "**5. Contrôle** : s'assurer que les ressources sont disponibles conformément au plan"
+          ]
+        },
+        {
+          "titre": "Matrice RACI",
+          "contenu": [
+            "**R – Responsible** : qui réalise la tâche",
+            "**A – Accountable** : qui est garant du résultat (un seul A par tâche !)",
+            "**C – Consulted** : qui est consulté pour son expertise",
+            "**I – Informed** : qui est informé de l'avancement"
+          ]
+        },
+        {
+          "titre": "Modèle de Tuckman (5 phases)",
+          "contenu": [
+            "**Forming** → Constitution : présentation, politesse, incertitude",
+            "**Storming** → Conflits : personnalités s'affirment, tensions",
+            "**Norming** → Normalisation : règles établies, cohésion naît",
+            "**Performing** → Performance : équipe efficace et autonome",
+            "**Adjourning** → Dissolution : fin du projet, séparation"
+          ]
+        },
+        {
+          "titre": "Styles de management (matrice)",
+          "contenu": [
+            "**Directif** (- compétent, - motivé) : fixe règles, donne directives",
+            "**Persuasif** (- compétent, + motivé) : décide seul mais explique",
+            "**Participatif** (+ compétent, - motivé) : implique dans la décision pour remotiver",
+            "**Délégatif** (+ compétent, + motivé) : confie la décision, facilite l'autonomie"
+          ]
+        }
+      ],
+      "a_retenir": "RACI : un seul A par tâche. Tuckman : 5 phases Forming→Storming→Norming→Performing→Adjourning. Style selon compétence + motivation du collaborateur."
+    },
+    "Gestion des conflits": {
+      "emoji": "⚔️",
+      "intro": "Les conflits sont inévitables dans un projet. Le PMP a une approche structurée avec 5 techniques dont chacune est adaptée à des situations spécifiques.",
+      "sections": [
+        {
+          "titre": "5 techniques de résolution",
+          "contenu": [
+            "**Collaborating** (Privilégiée PMP) : solution win-win basée sur les faits → durable mais prend du temps",
+            "**Compromising** : chaque partie cède → rapide mais solution sous-optimale",
+            "**Smoothing** : minimiser les différences → préserve l'harmonie mais problème non résolu",
+            "**Forcing** : imposer par autorité → efficace en crise mais génère résistance",
+            "**Avoiding** : reporter/ignorer → temporairement utile mais problème persiste"
+          ]
+        }
+      ],
+      "a_retenir": "Le PMP privilégie toujours Collaborating (win-win, durable). Forcing uniquement en urgence. Avoiding ne résout rien. Compromising si temps contraint."
+    },
+    "Leadership": {
+      "emoji": "🌟",
+      "intro": "Le chef de projet est avant tout un leader, pas un manager hiérarchique. Son rôle est d'inspirer, faciliter et développer son équipe.",
+      "sections": [
+        {
+          "titre": "Leadership transformationnel vs transactionnel",
+          "contenu": [
+            "**Transactionnel** : basé sur récompenses/sanctions, management par objectifs classique",
+            "**Transformationnel** : inspire une vision, transforme les comportements, développe l'autonomie",
+            "**4 dimensions** : Influence idéalisée, Motivation inspirante, Stimulation intellectuelle, Considération individualisée"
+          ]
+        },
+        {
+          "titre": "Modèle de Hofstede (interculturel)",
+          "contenu": [
+            "**Distance hiérarchique** : autorité du PM acceptée ou non",
+            "**Individualisme/Collectivisme** : décisions individuelles vs groupe",
+            "**Masculinité/Féminité** : performance vs consensus",
+            "**Évitement de l'incertitude** : tolérance au risque"
+          ]
+        }
+      ],
+      "a_retenir": "Transformationnel = inspire une vision + développe l'autonomie. 4 dimensions : Influence, Motivation, Stimulation, Considération. Hofstede pour l'interculturel."
+    },
+    "Communication": {
+      "emoji": "📢",
+      "intro": "La communication représente 80% du travail du chef de projet. Elle doit être planifiée, adaptée à l'audience et maîtrisée.",
+      "sections": [
+        {
+          "titre": "Formule des canaux",
+          "contenu": [
+            "**Nombre de canaux = n(n-1)/2**",
+            "5 personnes → 10 canaux | 10 personnes → 45 canaux | 20 personnes → 190 canaux !",
+            "**La responsabilité de la compréhension appartient à l'émetteur**"
+          ]
+        },
+        {
+          "titre": "Gestion des stakeholders",
+          "contenu": [
+            "**Fort pouvoir + Faible intérêt** → Garder satisfait",
+            "**Fort pouvoir + Fort intérêt** → Manager étroitement",
+            "**Faible pouvoir + Fort intérêt** → Garder informé",
+            "**Faible pouvoir + Faible intérêt** → Suivre (effort minimal)"
+          ]
+        }
+      ],
+      "a_retenir": "n(n-1)/2 canaux. Responsabilité de la compréhension = émetteur. Matrice Pouvoir/Intérêt pour classer les stakeholders."
+    },
+    "Procurement (Achats)": {
+      "emoji": "🛒",
+      "intro": "Le procurement couvre toutes les activités liées à l'acquisition de biens et services externes : de la décision make-or-buy jusqu'à la clôture des contrats.",
+      "sections": [
+        {
+          "titre": "Types de contrats",
+          "contenu": [
+            "**FFP** : prix totalement fixe → faible risque acheteur, élevé vendeur",
+            "**CPFF** : coûts remboursés + fee fixe → risque élevé acheteur, faible vendeur",
+            "**T&M** : taux horaire fixe, quantité variable → risque partagé"
+          ]
+        },
+        {
+          "titre": "Scoring pondéré (sélection fournisseur)",
+          "contenu": [
+            "Score total = Σ (pondération × note)",
+            "Exemple : Technique 50%×80 + Prix 30%×60 + Expérience 20%×90 = **76**"
+          ]
+        },
+        {
+          "titre": "Gestion des litiges",
+          "contenu": [
+            "Approche PMP : **Négociation → Médiation → Arbitrage → Litige judiciaire**",
+            "Toujours commencer par la négociation amiable"
+          ]
+        }
+      ],
+      "a_retenir": "FFP = risque vendeur. CR = risque acheteur. T&M = risque partagé. Litiges : Négociation → Médiation → Arbitrage → Judiciaire."
+    },
+    "Gestion des risques": {
+      "emoji": "⚠️",
+      "intro": "Un risque est un événement incertain dont la survenue aurait un impact sur les objectifs du projet. Les risques peuvent être des menaces (négatifs) ou des opportunités (positifs).",
+      "sections": [
+        {
+          "titre": "Risque vs Issue",
+          "contenu": [
+            "**Risque** : incertain, futur → suivi dans le **Risk Register**",
+            "**Issue** : certain, présent → suivi dans l'**Issue Log**",
+            "7 processus : Plan → Identify → Qualitative → Quantitative → Plan Responses → Implement → Monitor"
+          ]
+        },
+        {
+          "titre": "Analyse quantitative",
+          "contenu": [
+            "**Enveloppe = Probabilité × Impact × Coût (€)**",
+            "Exemple : 0,5 × 0,5 × 10 000€ = **2 500€** à provisionner"
+          ]
+        },
+        {
+          "titre": "Réponses aux risques",
+          "contenu": [
+            "**Menaces** : Éviter | Accepter | Mitiger (réduire P ou I) | Transférer",
+            "**Opportunités** : Exploiter | Accepter | Optimiser (augmenter P) | Partager"
+          ]
+        }
+      ],
+      "a_retenir": "Enveloppe = P × I × Coût. Delphi = experts anonymes + itérations. 4 réponses menaces : Éviter/Accepter/Mitiger/Transférer."
+    },
+    "Qualité": {
+      "emoji": "✅",
+      "intro": "La qualité en management de projet s'applique à la fois au produit livré et au processus de management lui-même.",
+      "sections": [
+        {
+          "titre": "Coût de la Qualité (CoQ)",
+          "contenu": [
+            "**Conformité** → Prévention + Évaluation",
+            "**Non-conformité** → Interne (gaspillage, rework) + Externe (plaintes, rappels)",
+            "CoQ = **23 à 34%** du coût de développement !"
+          ]
+        },
+        {
+          "titre": "PDCA (Roue de Deming)",
+          "contenu": [
+            "**Plan** → **Do** → **Check** → **Act** : cycle continu d'amélioration",
+            "**Pareto** : 80% des problèmes causés par 20% des causes",
+            "**8D** : 8 étapes de résolution (Constitution équipe → Féliciter)"
+          ]
+        },
+        {
+          "titre": "CMMI (Maturité)",
+          "contenu": [
+            "**Niveau 1** Initial | **Niveau 2** Piloté | **Niveau 3** Standardisé | **Niveau 4** Mesuré | **Niveau 5** Optimisé",
+            "Niveau 3 = processus communs et obligatoires, taux de retour 5-15%"
+          ]
+        }
+      ],
+      "a_retenir": "PDCA = cycle d'amélioration continue. Pareto = 80/20. 8D = 8 étapes. CoQ représente 23-34% du coût de développement."
+    },
+    "Organisation matricielle": {
+      "emoji": "🏢",
+      "intro": "Dans une organisation matricielle, les membres ont deux lignes hiérarchiques : manager fonctionnel et chef de projet.",
+      "sections": [
+        {
+          "titre": "3 types de matrice",
+          "contenu": [
+            "**Matrice faible** : PM à pouvoir très limité, organisation fonctionnelle dominante",
+            "**Matrice équilibrée** : pouvoir partagé, co-décision",
+            "**Matrice forte** : PM à pouvoir élevé, structure orientée projet"
+          ]
+        },
+        {
+          "titre": "Conflits typiques et solutions",
+          "contenu": [
+            "**Conflits** : priorité des ressources, charge de travail, objectifs divergents",
+            "**Solutions** : RACI clair, escalade formalisée, accords écrits, alignement sponsor"
+          ]
+        }
+      ],
+      "a_retenir": "Matrice forte = PM puissant. Matrice faible = fonctionnel dominant. Clé : RACI clair + escalade formalisée + alignement sponsor."
+    }
+  },
+
+  "BD71": {
+    "1️⃣ Fondamentaux Big Data": {
+      "emoji": "📊",
+      "intro": "Le Big Data désigne des volumes de données si massifs, variés et rapides qu'ils dépassent les capacités des outils traditionnels. Il nécessite des architectures distribuées et de nouveaux paradigmes de traitement.",
+      "sections": [
+        {
+          "titre": "Les 3V (+ 4e V)",
+          "contenu": [
+            "**Volume** : quantité exponentielle de données (Go → To → Po → Zo)",
+            "**Variété** : données structurées, semi-structurées, non structurées (texte, vidéo, IoT…)",
+            "**Vélocité** : vitesse de génération ET d'accès (Twitter 2022 : 850M tweets/jour ≈ 9 800/s)",
+            "**Véracité** (4e V) : qualité et fiabilité des données — des données fausses = inutilisables"
+          ]
+        },
+        {
+          "titre": "Scalabilité",
+          "contenu": [
+            "**Scalabilité horizontale** (scale-out) : ajouter des serveurs au cluster → Big Data",
+            "**Scalabilité verticale** (scale-up) : améliorer une seule machine → SQL classique",
+            "⚠️ Big Data NE REMPLACE PAS SQL — il le complète pour les volumes massifs"
+          ]
+        },
+        {
+          "titre": "Pourquoi distribué ?",
+          "contenu": [
+            "Une machine seule : limitée en CPU, RAM, disque",
+            "Distribution = diviser le travail entre N nœuds → traitement parallèle",
+            "Coût : machines standard moins cher qu'un super-serveur unique"
+          ]
+        }
+      ],
+      "a_retenir": "3V : Volume, Variété, Vélocité + Véracité (4e V). Scale-out = ajouter des serveurs. Big Data complète SQL, ne le remplace pas. Twitter ≈ 9 800 tweets/s pour mémoriser la Vélocité."
+    },
+    "2️⃣ HDFS & Hadoop": {
+      "emoji": "🗄️",
+      "intro": "HDFS (Hadoop Distributed File System) est le système de fichiers distribué de Hadoop. Il découpe les fichiers en blocs répartis sur plusieurs DataNodes, avec réplication pour la tolérance aux pannes.",
+      "sections": [
+        {
+          "titre": "Architecture HDFS",
+          "contenu": [
+            "**NameNode** : cerveau du cluster — stocke les métadonnées (où est chaque bloc). SPOF !",
+            "**DataNode** : disques du cluster — stocke physiquement les blocs de données",
+            "**Heartbeat** : les DataNodes envoient régulièrement leur état au NameNode",
+            "**Facteur de réplication** : chaque bloc copié 3 fois par défaut → tolérance aux pannes"
+          ]
+        },
+        {
+          "titre": "Calcul de blocs et réplication",
+          "contenu": [
+            "Taille de bloc par défaut : **128 Mo**",
+            "1 Go = 1024 Mo / 128 = **8 blocs**",
+            "Espace réel = taille × facteur réplication (200 Mo × 3 = **600 Mo**)",
+            "Perte de bloc → NameNode ordonne la re-réplication automatique"
+          ]
+        },
+        {
+          "titre": "⚠️ Ce que HDFS ne fait PAS bien",
+          "contenu": [
+            "Millions de **petits fichiers** → surcharge du NameNode",
+            "Accès **aléatoire** : HDFS est optimisé pour la lecture **séquentielle**",
+            "**Transactions** et accès temps réel → préférer HBase ou Cassandra"
+          ]
+        }
+      ],
+      "a_retenir": "NameNode = métadonnées (SPOF). DataNode = stockage physique. Bloc = 128 Mo. 1 Go = 8 blocs. Réplication × 3 = ×3 l'espace. HDFS ≠ adapté aux petits fichiers ni aux transactions."
+    },
+    "3️⃣ MapReduce & Traitement": {
+      "emoji": "🔀",
+      "intro": "MapReduce est le paradigme de traitement distribué de Hadoop. Il découpe un calcul en deux phases : Map (transformation parallèle) et Reduce (agrégation).",
+      "sections": [
+        {
+          "titre": "Les 3 phases",
+          "contenu": [
+            "**Map** : chaque nœud traite son bloc en parallèle → produit des paires (clé, valeur)",
+            "**Shuffle & Sort** : regroupe toutes les valeurs par clé identique (réseau !)",
+            "**Reduce** : agrège les valeurs de chaque clé → résultat final",
+            "⚠️ Reduce est optionnel : un job Map-only est valide (filtrage pur)"
+          ]
+        },
+        {
+          "titre": "Avantages et limites",
+          "contenu": [
+            "**Avantage** : parallélisation automatique, tolérance aux pannes",
+            "**Limite** : lecture/écriture disque entre chaque étape → lent pour les itérations",
+            "**Spark** résout ce problème avec le traitement in-memory"
+          ]
+        },
+        {
+          "titre": "Calculs de vélocité",
+          "contenu": [
+            "10 000 événements/s × 300 s (5 min) = **3 000 000 événements**",
+            "2 millions/min × 60 min = **120 millions d'événements**",
+            "Méthode : multiplier le débit par la durée (convertir en même unité)"
+          ]
+        }
+      ],
+      "a_retenir": "Map → Shuffle&Sort → Reduce. Map produit des (clé, valeur). Reduce est optionnel. Limite : I/O disque intensif → Spark le remplace avec in-memory."
+    },
+    "4️⃣ NoSQL & Modèles": {
+      "emoji": "🗃️",
+      "intro": "NoSQL = Not Only SQL. 4 grands modèles de BD NoSQL, chacun optimisé pour un type de données et d'usage. Ils favorisent disponibilité et scalabilité sur la cohérence stricte.",
+      "sections": [
+        {
+          "titre": "Les 4 modèles NoSQL",
+          "contenu": [
+            "**Clé-Valeur** (Redis, Riak) : le plus simple — requête uniquement sur clé. Idéal : cache, sessions",
+            "**Colonne** (Cassandra, HBase) : très nombreuses colonnes dynamiques. Idéal : logs, analytics",
+            "**Document** (MongoDB, CouchDB) : documents JSON/BSON avec schéma flexible. Idéal : profils",
+            "**Graphe** (Neo4j) : nœuds et arêtes pour les relations complexes. Idéal : réseaux sociaux"
+          ]
+        },
+        {
+          "titre": "Avantages et inconvénients",
+          "contenu": [
+            "✅ Schéma dynamique, scalabilité horizontale massive, hautes performances",
+            "❌ Cohérence non garantie (BASE vs ACID)",
+            "❌ Pas de langage de requête universel → plus de développement spécifique"
+          ]
+        },
+        {
+          "titre": "⚠️ Pièges classiques",
+          "contenu": [
+            "NoSQL = Not Only SQL (pas 'sans SQL' ni 'non structuré')",
+            "MongoDB = Document | Cassandra = Colonne | Redis = Clé-Valeur | Neo4j = Graphe",
+            "Certaines NoSQL (MongoDB v4+) offrent des transactions ACID partielles"
+          ]
+        }
+      ],
+      "a_retenir": "4 modèles : Clé-Valeur / Colonne / Document / Graphe. Redis=KV, Cassandra=Colonne, MongoDB=Document, Neo4j=Graphe. NoSQL = Not Only SQL."
+    },
+    "5️⃣ CAP & Cohérence": {
+      "emoji": "⚖️",
+      "intro": "Le théorème CAP (Brewer, 2000) stipule qu'un système distribué ne peut garantir simultanément que 2 des 3 propriétés : Cohérence, Disponibilité, Tolérance au partitionnement.",
+      "sections": [
+        {
+          "titre": "Les 3 propriétés CAP",
+          "contenu": [
+            "**C – Consistency** : tous les nœuds voient exactement la même donnée au même instant",
+            "**A – Availability** : le système répond toujours, même en cas de panne partielle",
+            "**P – Partition tolerance** : le système fonctionne malgré la coupure du réseau"
+          ]
+        },
+        {
+          "titre": "Positionnement des BD",
+          "contenu": [
+            "**CA** : SGBDR classiques (MySQL, Oracle) — non distribués",
+            "**CP** : HBase, MongoDB — cohérence stricte, peut refuser des requêtes",
+            "**AP** : Cassandra, CouchDB — disponibilité prioritaire, cohérence éventuelle",
+            "⚠️ P est obligatoire en pratique (réseau = toujours faillible) → choix entre C et A"
+          ]
+        },
+        {
+          "titre": "ACID vs BASE",
+          "contenu": [
+            "**ACID** : Atomicity, Consistency, Isolation, Durability → intégrité stricte",
+            "**BASE** : Basically Available, Soft state, Eventual consistency → disponibilité prioritaire",
+            "**Eventual consistency** : les nœuds convergeront vers le même état après propagation (pas jamais !)"
+          ]
+        }
+      ],
+      "a_retenir": "CAP : on ne peut avoir que 2/3. P est obligatoire → choix C ou A. ACID = cohérence stricte (SQL). BASE = disponibilité prioritaire (NoSQL). Eventual consistency ≠ incohérence permanente."
+    },
+    "6️⃣ Architecture & Performance": {
+      "emoji": "🏗️",
+      "intro": "Concevoir une architecture Big Data performante nécessite de maîtriser la distribution des données (sharding), la gestion des ressources et les impacts de la latence réseau.",
+      "sections": [
+        {
+          "titre": "Sharding et distribution",
+          "contenu": [
+            "**Sharding** : partitionnement horizontal — fragments de données sur N serveurs selon un critère",
+            "Éviter les **jointures distribuées** : coût réseau = principal goulot d'étranglement",
+            "Préférer la **dénormalisation** (dupliquer les données) pour éviter les jointures"
+          ]
+        },
+        {
+          "titre": "Calculs de performance",
+          "contenu": [
+            "**Latence séquentielle** : 3 appels de 50ms = 150ms minimum",
+            "**Scalabilité linéaire** (théorique) : ×2 nœuds = ÷2 temps",
+            "**Loi d'Amdahl** (réel) : gain limité par la partie séquentielle non parallélisable"
+          ]
+        }
+      ],
+      "a_retenir": "Sharding = distribution horizontale. Jointures distribuées = coûteuses (éviter). Latence séquentielle = somme. ×2 nœuds ≠ ÷2 temps en pratique (Amdahl)."
+    },
+    "7️⃣ Frameworks Big Data": {
+      "emoji": "⚡",
+      "intro": "L'écosystème Hadoop est riche en outils complémentaires. Chaque framework répond à un besoin spécifique : traitement batch, streaming temps réel, requêtage SQL, orchestration ou collecte de données.",
+      "sections": [
+        {
+          "titre": "Frameworks de traitement",
+          "contenu": [
+            "**Hadoop MapReduce** : traitement batch parallèle, I/O disque, référence historique",
+            "**Apache Spark** : in-memory (100× plus rapide que MR), codé en Scala, APIs Python/Java/R. Remplace MR mais PAS HDFS",
+            "**Apache Flink** : streaming natif (≠ micro-batching de Spark), Flink SQL, déployable sur YARN/Mesos/Docker",
+            "**Apache Storm** : streaming temps réel, compatible tous langages, traitement événement par événement"
+          ]
+        },
+        {
+          "titre": "YARN (Hadoop v2)",
+          "contenu": [
+            "**YARN** = Yet Another Resource Negotiator : gestionnaire de ressources générique",
+            "Hadoop v1 : seul MapReduce. Hadoop v2 + YARN : Spark, Flink, Storm sur le même cluster",
+            "**ResourceManager (RM)** : daemon maître unique, alloue les ressources (SPOF → mode HA avec ZooKeeper)",
+            "**ApplicationMaster (AM)** : un par job, négocie avec RM, surveille ses tâches dans des containers",
+            "**NodeManager (NM)** : un par nœud esclave, exécute les tâches"
+          ]
+        },
+        {
+          "titre": "Outils de requêtage (Hive & Pig)",
+          "contenu": [
+            "**Hive** : HiveQL (≈ SQL-92) compilé en MapReduce/Spark. Forte latence, pas de transactions, index limités",
+            "**Pig** : Pig Latin (procédural), lit les données brutes sans schéma préalable (développé par Yahoo)",
+            "Pig > Hive pour les données non structurées ; Hive > Pig pour les analystes SQL"
+          ]
+        },
+        {
+          "titre": "Outils de l'écosystème",
+          "contenu": [
+            "**ZooKeeper** : coordination de cluster (config, synchronisation, élection de leader, HA du RM/NameNode)",
+            "**Oozie** : ordonnanceur de workflows MapReduce/Hive/Pig (chaîne de traitements)",
+            "**Flume** : collecte et ingestion de logs → HDFS/HBase/Kafka (Source → Channel → Sink)",
+            "**Sqoop** (Cloudera) : transfert bidirectionnel Hadoop ↔ SGBDR"
+          ]
+        }
+      ],
+      "a_retenir": "Spark = in-memory, remplace MR (pas HDFS). Flink = streaming natif. Storm = streaming temps réel. YARN = gestionnaire ressources (Hadoop v2). Hive = SQL sur Hadoop. Pig = données brutes. ZooKeeper = coordination. Oozie = workflows. Flume = logs. Sqoop = SGBDR↔Hadoop."
+    }
+  },
+
+  "TI73": {
+    "1️⃣ PowerPoint Performant": {
+      "emoji": "🎨",
+      "intro": "Un PowerPoint performant n'est pas un document de référence mais un support visuel qui amplifie un message oral. La règle d'or : simplifier pour amplifier.",
+      "sections": [
+        {
+          "titre": "Les principes fondamentaux",
+          "contenu": [
+            "**Objectif** : informer, expliquer, convaincre, former — un seul message clair",
+            "**Message simple et structuré** : 1 message clé, pas plusieurs messages",
+            "**Design épuré** : sans surcharge ni confusion",
+            "**Complémentarité avec l'oral** : le PPT illustre, l'orateur explique"
+          ]
+        },
+        {
+          "titre": "Le design du discours (AVANT les slides)",
+          "contenu": [
+            "**1. But** : pourquoi cette présentation ? Quel objectif pour le public ?",
+            "**2. Histoire** : quelle narration (Big Picture → détails) ?",
+            "**3. Logique** : quel ordre, quelle chronologie ?",
+            "**Storyboard** : 1 idée par feuille, dessiner/écrire, organiser la séquence (outil : Canva ou papier)"
+          ]
+        },
+        {
+          "titre": "Règles graphiques",
+          "contenu": [
+            "**Règle 1/3 – 2/3** : équilibre et hiérarchie visuelle de la mise en page",
+            "**4 couleurs maximum** : palettes complémentaires, analogues, triadiques ou monochromatiques",
+            "**Polices** : minuscules > majuscules (plus lisibles). Éviter les polices fantaisie",
+            "**Alignement gauche** : plus lisible que le centré ou le justifié",
+            "**Fond blanc + textes foncés** recommandé (éviter titres foncés sur fond clair)"
+          ]
+        },
+        {
+          "titre": "⚠️ Ce qu'il faut ÉVITER",
+          "contenu": [
+            "❌ **Bullet-point slides** : éloignent de l'objectif, ressemblent à une liste",
+            "❌ **MAJUSCULES** sur de longs passages : agressif, moins lisible",
+            "❌ **Surcharge d'information** : une slide = un message",
+            "❌ **Images déformées** : format horizontal recommandé, toute la largeur"
+          ]
+        }
+      ],
+      "a_retenir": "Simplifier pour amplifier ! Design du discours AVANT les slides (But → Histoire → Logique). 4 couleurs max. Fond blanc + texte foncé. Interdire les bullet-point slides. Storyboard = 1 idée/feuille."
+    },
+    "2️⃣ Prise de Parole en Public": {
+      "emoji": "🎤",
+      "intro": "Prendre la parole en public est une compétence qui s'apprend et se prépare. La maîtrise du sujet, la structure claire et le langage corporel sont les trois piliers.",
+      "sections": [
+        {
+          "titre": "La règle des 3V de la communication orale",
+          "contenu": [
+            "**Mots (contenu verbal)** : seulement 7% de l'impact",
+            "**Voix** (débit, volume, articulation, intonation, silences, tics) : 38%",
+            "**Langage corporel** (gestes, posture, expressions, regard) : 55%",
+            "⚠️ On retient surtout le non-verbal — soigner sa posture et son regard !"
+          ]
+        },
+        {
+          "titre": "La structure d'une bonne présentation",
+          "contenu": [
+            "**Introduction (elevator pitch)** : Accueillir + Se présenter (2-3 phrases) + T.O.P.",
+            "**T.O.P.** : Thème (sujet), Objectif (ce que le public va gagner), Plan (sommaire)",
+            "**Transitions** : soigner les liens entre chaque partie",
+            "**Conclusion** : Remercier + Informer sur la suite + Appel à l'action + Formule finale"
+          ]
+        },
+        {
+          "titre": "Connaissance de l'auditoire",
+          "contenu": [
+            "Identifier ce que veut l'auditoire : quelles questions se pose-t-il ?",
+            "Adapter le niveau technique au public",
+            "**Ultracrépidarianisme** : parler avec assurance de ce qu'on ne connaît pas → à bannir !"
+          ]
+        }
+      ],
+      "a_retenir": "3V : Mots 7% / Voix 38% / Corps 55%. T.O.P. = Thème + Objectif + Plan. Démarrage = moment le plus difficile. Préparer son elevator pitch ET sa conclusion."
+    },
+    "3️⃣ Animation de Réunion": {
+      "emoji": "🤝",
+      "intro": "Une réunion efficace ne s'improvise pas. Elle nécessite une préparation rigoureuse, une animation structurée et un suivi des décisions.",
+      "sections": [
+        {
+          "titre": "Les 5 phases d'une réunion",
+          "contenu": [
+            "**Phase 1** : Mise à l'aise — accueil, ambiance positive",
+            "**Phase 2** : Élaboration du contrat — objectifs clairs, règles du jeu",
+            "**Phase 3** : Échanges et production — le cœur de la réunion",
+            "**Phase 4** : Synthèse générale — récapituler les décisions",
+            "**Phase 5** : Bilan — évaluation de la réunion elle-même"
+          ]
+        },
+        {
+          "titre": "Les 8 points clés",
+          "contenu": [
+            "Préparer | Organiser | Accueillir | Piloter | Être attentif",
+            "Trouver des solutions | Élaborer un plan d'action | **Assurer un suivi des décisions**"
+          ]
+        },
+        {
+          "titre": "Gestion des individualités",
+          "contenu": [
+            "**Actif positif/négatif** | **Passif naturel/volontaire** | **Leader positif/négatif** | **Bavard**",
+            "L'animateur doit identifier et adapter son approche à chaque profil"
+          ]
+        },
+        {
+          "titre": "Le compte rendu",
+          "contenu": [
+            "**CR sténographique** : retranscription mot-à-mot des échanges",
+            "**CR de synthèse** : décisions + plan d'action (Qui ? Quoi ? Où ? Quand ? Comment ? Combien ? Pourquoi ?)"
+          ]
+        }
+      ],
+      "a_retenir": "5 phases : Aise → Contrat → Échanges → Synthèse → Bilan. CR de synthèse = décisions + plan d'action (7 questions). Suivi des décisions = clé de l'efficacité."
+    },
+    "4️⃣ Brainstorming & Créativité": {
+      "emoji": "💡",
+      "intro": "Le brainstorming est une technique de créativité collective permettant de générer un maximum d'idées en suspendant tout jugement. La quantité prime sur la qualité pendant la génération.",
+      "sections": [
+        {
+          "titre": "Les 5 règles du brainstorming",
+          "contenu": [
+            "**1. Zéro critique** : aucune critique verbale ni gestuelle pendant la génération",
+            "**2. Idées farfelues bienvenues** : elles peuvent inspirer de bonnes idées",
+            "**3. Une seule idée par personne à la fois** : pas de monologue",
+            "**4. Tour de table** : chacun s'exprime à son tour (équité)",
+            "**5. Écrire au tableau** : rendre les idées visibles pour tous"
+          ]
+        },
+        {
+          "titre": "Rôle de l'animateur et validation",
+          "contenu": [
+            "Peut participer MAIS toujours APRÈS un tour de table complet",
+            "Phase de validation : évaluer chaque idée par rapport à l'objectif",
+            "Critères : probabilité, faisabilité, applicabilité, coût",
+            "Chercher le consensus → sinon vote démocratique"
+          ]
+        },
+        {
+          "titre": "Créativité collective",
+          "contenu": [
+            "Révèle les **savoirs implicites** de chacun — mis en commun en temps réel",
+            "Dynamique collective > somme des créativités individuelles"
+          ]
+        }
+      ],
+      "a_retenir": "Règle absolue : ZÉRO critique pendant la génération. 1 idée/personne/tour. L'animateur participe APRÈS le tour de table. Validation = rapport à l'objectif. Créativité collective > individuelle."
+    },
+    "5️⃣ Design & Conception de Diaporama": {
+      "emoji": "🖼️",
+      "intro": "Le design d'un diaporama va au-delà de l'esthétique : il s'agit de construire une logique graphique qui guide le public et renforce la mémorisation du message.",
+      "sections": [
+        {
+          "titre": "La Big Picture",
+          "contenu": [
+            "Déterminer la **vue d'ensemble** avant les détails",
+            "Identifier les **idées-forces** et mots/notions clés",
+            "Se limiter : séparer ce qui est lié, unir ce qui est pluriel",
+            "Clarifier 'ce que je veux que mes interlocuteurs retiennent'"
+          ]
+        },
+        {
+          "titre": "Cohérence et séquencement",
+          "contenu": [
+            "**Cohérence** : sujets liés entre eux, volume proportionnel à l'importance",
+            "**Séquencement** : chronologie et étapes logiques respectées",
+            "**Hiérarchie** : liens clairs entre diapositives, slides de transition",
+            "**Logique graphique** : utiliser les règles et grilles de mise en page"
+          ]
+        },
+        {
+          "titre": "Conseils pratiques",
+          "contenu": [
+            "Préférer les schémas aux listes pour les relations entre concepts",
+            "Images : format horizontal, toute la largeur, non déformées",
+            "Alterner approches analytiques et créatives pour maintenir l'attention",
+            "Titres informatifs (pas 'Le contexte' mais 'Les enjeux du projet X')"
+          ]
+        }
+      ],
+      "a_retenir": "Big Picture AVANT les détails. Cohérence + Séquencement + Hiérarchie = logique graphique. Schémas > listes. Titres informatifs. Le design suit la logique du discours, pas l'inverse."
+    }
+  }
+}
