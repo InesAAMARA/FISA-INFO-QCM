@@ -1,0 +1,625 @@
+{
+  "titre": "SR74 – Introduction au Système d'Exploitation",
+  "categories": [
+    {
+      "nom": "1️⃣ OS & Distributions GNU/Linux",
+      "questions": [
+        {
+          "question": "Quel est le rôle principal d'un système d'exploitation (OS) ?",
+          "reponses": [
+            {"texte": "Fournir une couche d'abstraction entre le matériel et les applications", "correct": true},
+            {"texte": "Exécuter directement les applications utilisateur sans intermédiaire", "correct": false},
+            {"texte": "Gérer uniquement les fichiers sur le disque dur", "correct": false},
+            {"texte": "Remplacer le BIOS pour démarrer la machine", "correct": false}
+          ],
+          "explication": "L'OS fournit une couche d'abstraction qui masque la complexité du matériel (différents processeurs, mémoires, stockages) aux applications et services, leur évitant de gérer directement chaque composant."
+        },
+        {
+          "question": "Dans GNU/Linux, quelle est la différence entre 'Linux' et une 'distribution' ?",
+          "reponses": [
+            {"texte": "Linux est le noyau (abstraction du matériel) ; une distribution combine le noyau avec des logiciels (shell, serveur graphique, gestionnaire de fenêtres, etc.)", "correct": true},
+            {"texte": "Linux est l'interface graphique ; la distribution est le noyau bas niveau", "correct": false},
+            {"texte": "Linux est un logiciel propriétaire ; les distributions sont ses versions gratuites", "correct": false},
+            {"texte": "Il n'y a pas de différence, les deux termes sont synonymes", "correct": false}
+          ],
+          "explication": "Linux désigne uniquement le noyau du système (qui abstrait le matériel). Une distribution (Ubuntu, Fedora, Debian…) est l'assemblage du noyau Linux avec un shell, un serveur graphique, un gestionnaire de fenêtres et d'autres logiciels pour former un système complet."
+        },
+        {
+          "question": "Parmi les OS suivants, lequel est spécialisé pour la robotique ?",
+          "reponses": [
+            {"texte": "ROS", "correct": true},
+            {"texte": "IOS (Cisco)", "correct": false},
+            {"texte": "Android", "correct": false},
+            {"texte": "MacOS", "correct": false}
+          ],
+          "explication": "ROS (Robot Operating System) est un OS spécialisé pour la robotique. IOS (Cisco) est destiné aux équipements réseau. Android et MacOS sont des OS grand public. Attention à la casse : iOS (Apple) ≠ IOS (Cisco)."
+        },
+        {
+          "question": "Lequel de ces éléments N'est PAS un rôle de l'OS ?",
+          "reponses": [
+            {"texte": "Compiler le code source des applications", "correct": true},
+            {"texte": "Gérer les processus et leur ordonnancement", "correct": false},
+            {"texte": "Gérer la mémoire et les entrées/sorties", "correct": false},
+            {"texte": "Gérer les fichiers", "correct": false}
+          ],
+          "explication": "L'OS gère les processus, la mémoire, les E/S, les fichiers et la synchronisation. La compilation du code source est le rôle d'un compilateur (gcc, javac…), pas de l'OS lui-même."
+        },
+        {
+          "question": "Quelle commande shell permet de connaître la version du noyau Linux en cours d'exécution ?",
+          "reponses": [
+            {"texte": "uname", "correct": true},
+            {"texte": "mount", "correct": false},
+            {"texte": "ip a", "correct": false},
+            {"texte": "df", "correct": false}
+          ],
+          "explication": "La commande 'uname' (avec l'option -a pour tout afficher) donne des informations sur le noyau du système, notamment sa version. 'mount' liste les partitions montées, 'ip a' donne les adresses IP, 'df' l'occupation des partitions."
+        },
+        {
+          "question": "Quelle commande affiche l'état du réseau (adresses IP et IPv6) sur un système Linux moderne ?",
+          "reponses": [
+            {"texte": "ip a", "correct": true},
+            {"texte": "ifconfig", "correct": false},
+            {"texte": "route", "correct": false},
+            {"texte": "netstat", "correct": false}
+          ],
+          "explication": "La commande 'ip a' est la commande moderne pour afficher les adresses IP. 'ifconfig' et 'route' sont considérées comme obsolètes (à éviter), même si elles peuvent encore être présentes selon la distribution."
+        }
+      ]
+    },
+    {
+      "nom": "2️⃣ Système de Fichiers UNIX",
+      "questions": [
+        {
+          "question": "Quel type de système de fichiers est le défaut sur la plupart des distributions Linux modernes ?",
+          "reponses": [
+            {"texte": "ext4", "correct": true},
+            {"texte": "FAT32", "correct": false},
+            {"texte": "NTFS", "correct": false},
+            {"texte": "btrfs", "correct": false}
+          ],
+          "explication": "ext4 (Extended File System 4) est le système de fichiers par défaut sur la plupart des distributions Linux. btrfs est le défaut sur Fedora. NTFS est le FS de Windows. FAT32 est un ancien FS compatible multi-OS."
+        },
+        {
+          "question": "Qu'est-ce qu'un inode dans un système de fichiers UNIX ?",
+          "reponses": [
+            {"texte": "Un identifiant unique (entier) d'un fichier contenant ses métadonnées (taille, droits, propriétaire, dates…)", "correct": true},
+            {"texte": "Le nom visible d'un fichier dans l'explorateur", "correct": false},
+            {"texte": "Un bloc de données sur le disque dur", "correct": false},
+            {"texte": "Un répertoire racine du système", "correct": false}
+          ],
+          "explication": "L'inode (index node) est un identifiant numérique unique par fichier dans le système de fichiers. Il contient toutes les métadonnées : taille, permissions, propriétaire, groupe, dates (atime/mtime/ctime), nombre de liens. Le nom du fichier est une représentation 'humaine' qui pointe vers cet inode."
+        },
+        {
+          "question": "Que représente l'arborescence Linux suivante : /bin, /etc, /home, /var ?",
+          "reponses": [
+            {"texte": "/bin = exécutables essentiels ; /etc = fichiers de config ; /home = répertoires personnels des utilisateurs ; /var = données variables (logs…)", "correct": true},
+            {"texte": "/bin = données variables ; /etc = exécutables ; /home = configuration ; /var = répertoires personnels", "correct": false},
+            {"texte": "/bin = répertoire racine ; /etc = périphériques ; /home = bibliothèques ; /var = fichiers temporaires", "correct": false},
+            {"texte": "/bin = fichiers boot ; /etc = réseau ; /home = montages ; /var = binaires système", "correct": false}
+          ],
+          "explication": "/bin contient les exécutables essentiels (commandes système et utilisateurs). /etc contient les fichiers de configuration du système. /home est la racine des répertoires personnels des utilisateurs. /var contient les données variables (logs dans /var/log, files d'impression, etc.)."
+        },
+        {
+          "question": "Quel est le rôle du répertoire /proc sous Linux ?",
+          "reponses": [
+            {"texte": "Pseudo-répertoire (pseudo FS) faisant le lien entre le noyau et l'espace utilisateur (état du système et des processus)", "correct": true},
+            {"texte": "Stockage des processus en attente d'exécution", "correct": false},
+            {"texte": "Répertoire des fichiers de configuration des processus", "correct": false},
+            {"texte": "Répertoire de procédures d'administration système", "correct": false}
+          ],
+          "explication": "/proc est un système de fichiers virtuel (pseudo-FS) qui n'existe pas physiquement sur disque. Il expose en temps réel des informations du noyau Linux : état des processus, utilisation mémoire, configuration réseau, etc. La liste des systèmes de fichiers supportés se trouve dans /proc/filesystems."
+        },
+        {
+          "question": "Quels sont les 5 types de fichiers sous UNIX ?",
+          "reponses": [
+            {"texte": "Fichiers ordinaires, répertoires, fichiers spéciaux (/dev), liens symboliques, tubes nommés", "correct": true},
+            {"texte": "Fichiers texte, fichiers binaires, dossiers, archives, exécutables", "correct": false},
+            {"texte": "Fichiers locaux, fichiers réseau, fichiers temporaires, fichiers cachés, fichiers système", "correct": false},
+            {"texte": "Fichiers read-only, fichiers read-write, fichiers exécutables, répertoires, liens", "correct": false}
+          ],
+          "explication": "UNIX distingue 5 types : 1) Fichiers ordinaires (texte ou binaire), 2) Répertoires (liste de références à d'autres fichiers), 3) Fichiers spéciaux dans /dev (drivers de périphériques), 4) Liens symboliques (pointeurs vers d'autres fichiers), 5) Tubes nommés (canaux de communication semi-permanents)."
+        },
+        {
+          "question": "Quelle est la signification des droits 'rwxr-xr--' sur un fichier ?",
+          "reponses": [
+            {"texte": "Propriétaire : lecture+écriture+exécution ; Groupe : lecture+exécution ; Autres : lecture seulement", "correct": true},
+            {"texte": "Propriétaire : lecture seulement ; Groupe : lecture+exécution ; Autres : lecture+écriture+exécution", "correct": false},
+            {"texte": "Propriétaire : lecture+écriture ; Groupe : lecture+écriture+exécution ; Autres : lecture+exécution", "correct": false},
+            {"texte": "Tous ont les droits complets rwx", "correct": false}
+          ],
+          "explication": "Les droits se lisent par groupe de 3 : [rwx][r-x][r--]. rwx = propriétaire peut lire (r), écrire (w), exécuter (x). r-x = groupe peut lire et exécuter, pas écrire. r-- = les autres peuvent seulement lire. En octal : 7 (rwx) + 5 (r-x) + 4 (r--) = 754."
+        },
+        {
+          "question": "Quelle commande crée un lien symbolique 'mon_lien' vers 'mon_fichier' ?",
+          "reponses": [
+            {"texte": "ln -s mon_fichier mon_lien", "correct": true},
+            {"texte": "cp -s mon_fichier mon_lien", "correct": false},
+            {"texte": "link mon_fichier mon_lien", "correct": false},
+            {"texte": "mv mon_fichier mon_lien", "correct": false}
+          ],
+          "explication": "La commande 'ln -s fichier lien' crée un lien symbolique. Le lien symbolique est un fichier qui contient uniquement une référence (pointeur) vers un autre fichier, permettant d'utiliser un même fichier sous plusieurs noms sans duplication."
+        },
+        {
+          "question": "Qu'est-ce que l'umask 027 applique comme restriction aux nouveaux fichiers (droits par défaut rw-rw-rw-) ?",
+          "reponses": [
+            {"texte": "Retire --- w- rwx, soit les droits résultants rw- r-- ---  (640)", "correct": true},
+            {"texte": "Ajoute les droits 027 aux fichiers existants", "correct": false},
+            {"texte": "Donne les droits 027 en octal au propriétaire uniquement", "correct": false},
+            {"texte": "L'umask 027 n'a aucun effet sur les fichiers ordinaires", "correct": false}
+          ],
+          "explication": "L'umask correspond aux droits à RETIRER. umask 027 = --- w- rwx. Appliqué aux droits par défaut rw-rw-rw- : on retire (w sur groupe) et (rwx sur others) → résultat rw-r--— = 640. Le propriétaire garde rw-, le groupe garde r--, les autres n'ont rien."
+        },
+        {
+          "question": "Quelle est la différence entre MBR et GPT comme table de partitionnement ?",
+          "reponses": [
+            {"texte": "MBR : 4 partitions max, limite 2,2 To ; GPT : 128 partitions max, 256 To par partition", "correct": true},
+            {"texte": "MBR : 128 partitions, 256 To ; GPT : 4 partitions, 2,2 To", "correct": false},
+            {"texte": "MBR et GPT sont identiques, seul le nom change selon l'OS", "correct": false},
+            {"texte": "MBR est pour les SSD ; GPT est pour les disques magnétiques", "correct": false}
+          ],
+          "explication": "MBR (Master Boot Record) est l'ancien standard : max 4 partitions primaires, limite à 2,2 To par partition. GPT (GUID Partition Table) est le nouveau standard : jusqu'à 128 partitions, 256 To par partition. GPT est obligatoire pour les disques > 2,2 To."
+        },
+        {
+          "question": "Quelle commande permet de monter une clé USB (filesystem vfat) sur /dev/sdb1 dans /mnt/usb avec droits lecture/écriture ?",
+          "reponses": [
+            {"texte": "mount -t vfat -o rw /dev/sdb1 /mnt/usb", "correct": true},
+            {"texte": "mount /mnt/usb /dev/sdb1", "correct": false},
+            {"texte": "attach -t vfat /dev/sdb1 /mnt/usb", "correct": false},
+            {"texte": "ln -s /dev/sdb1 /mnt/usb", "correct": false}
+          ],
+          "explication": "La syntaxe générale est : mount [options] [fichier_spécial] [point_de_montage]. -t spécifie le type de FS (vfat pour FAT32), -o les options (rw pour read-write). Le fichier spécial /dev/sdb1 représente la première partition du deuxième disque SCSI/USB."
+        },
+        {
+          "question": "Quelle est la commande pour démonter un système de fichiers monté sur /mnt/usb ?",
+          "reponses": [
+            {"texte": "umount /mnt/usb", "correct": true},
+            {"texte": "unmount /mnt/usb", "correct": false},
+            {"texte": "mount -d /mnt/usb", "correct": false},
+            {"texte": "detach /mnt/usb", "correct": false}
+          ],
+          "explication": "La commande est 'umount' (sans 'n' entre 'u' et 'm'). Il faut toujours démonter un périphérique avant de le débrancher pour finaliser les opérations en cours et éviter la corruption des données."
+        },
+        {
+          "question": "Dans l'arborescence Linux, quel est le rôle de /dev ?",
+          "reponses": [
+            {"texte": "Répertoire de fichiers spéciaux servant de canaux de communication avec les périphériques (disques, réseau, son…)", "correct": true},
+            {"texte": "Répertoire des logiciels en développement", "correct": false},
+            {"texte": "Répertoire des fichiers de démarrage (boot loader)", "correct": false},
+            {"texte": "Répertoire des développeurs avec accès administrateur", "correct": false}
+          ],
+          "explication": "/dev contient des fichiers spéciaux qui servent de points d'accès aux périphériques. Ex : /dev/sda (premier disque SCSI/SATA), /dev/sda1 (première partition), /dev/nvme0n1p1 (NVMe), /dev/scd0 (CD-ROM). Ces fichiers permettent la communication avec les drivers noyau."
+        }
+      ]
+    },
+    {
+      "nom": "3️⃣ Administration Système & Sécurité",
+      "questions": [
+        {
+          "question": "Parmi les bonnes pratiques d'administration système, laquelle est INCORRECTE ?",
+          "reponses": [
+            {"texte": "Copier-coller des scripts depuis des tutoriels sans les comprendre pour gagner du temps", "correct": true},
+            {"texte": "Prendre des notes structurées et versionner la documentation avec git", "correct": false},
+            {"texte": "Automatiser tout ce qui peut l'être et privilégier la stabilité", "correct": false},
+            {"texte": "Tester périodiquement les sauvegardes et procédures de restauration", "correct": false}
+          ],
+          "explication": "Recopier des scripts sans les comprendre est une mauvaise pratique : risque majeur pour la stabilité et la sécurité du SI. Comprendre permet d'adapter, faire évoluer, s'approprier une solution et progresser en compétences."
+        },
+        {
+          "question": "Pourquoi faut-il bannir l'urgence en administration système ?",
+          "reponses": [
+            {"texte": "L'urgence est souvent le signe d'un manque d'anticipation et conduit à des erreurs en cascade", "correct": true},
+            {"texte": "L'urgence est acceptable si le problème vient d'un utilisateur", "correct": false},
+            {"texte": "L'urgence améliore la réactivité de l'équipe informatique", "correct": false},
+            {"texte": "L'urgence n'a aucun impact sur la qualité du travail", "correct": false}
+          ],
+          "explication": "L'urgence provient souvent d'un manque d'anticipation, d'effectif insuffisant, d'une panne matérielle non prévue ou d'une demande de dernière minute. Elle conduit à des erreurs en cascade. Solutions : faire un planning, alerter la hiérarchie, prévoir de la redondance, communiquer avec les utilisateurs."
+        },
+        {
+          "question": "Concernant la sécurité informatique, quelle affirmation est correcte ?",
+          "reponses": [
+            {"texte": "La sécurité absolue n'existe pas ; il faut placer la barre à un niveau acceptable de risque en fonction de la criticité et du budget", "correct": true},
+            {"texte": "Un niveau de sécurité maximal doit toujours être visé, quel que soit le coût", "correct": false},
+            {"texte": "La sécurité ne concerne que la protection contre les actes malveillants, pas les pannes", "correct": false},
+            {"texte": "Les sauvegardes suffisent à assurer la sécurité d'un système d'information", "correct": false}
+          ],
+          "explication": "La sécurité en informatique regroupe DEUX aspects : la sûreté de fonctionnement (reprise en cas d'incident) ET la protection contre les actes malveillants. La sécurité absolue n'existe pas ; chaque niveau supplémentaire voit son coût exploser. Il faut un compromis acceptable selon la criticité des métiers et les budgets."
+        },
+        {
+          "question": "Quelle est la réponse correcte face au risque de 'vol de données' ?",
+          "reponses": [
+            {"texte": "Mots de passe forts, filtrage d'accès, récupération des vieilles machines, chiffrement des partitions", "correct": true},
+            {"texte": "Sauvegardes régulières et contrats de maintenance", "correct": false},
+            {"texte": "Antivirus et patchs de sécurité uniquement", "correct": false},
+            {"texte": "Filtrage réseau et IDS/IPS uniquement", "correct": false}
+          ],
+          "explication": "Le vol de données se combat par : mots de passe solides, filtrage des accès, récupération/destruction sécurisée des vieilles machines (qui peuvent contenir des données), chiffrement des partitions. Les sauvegardes concernent la perte de données ; les antivirus les virus/malwares ; IDS/IPS les intrusions réseau."
+        },
+        {
+          "question": "Pourquoi un administrateur système ne doit-il PAS supprimer un fichier/configuration mais plutôt le renommer ou le versionner ?",
+          "reponses": [
+            {"texte": "Pour pouvoir revenir en arrière en cas de problème et garder un historique", "correct": true},
+            {"texte": "Parce que la suppression est interdite par le système Linux", "correct": false},
+            {"texte": "Pour libérer de la place sans réellement supprimer les données", "correct": false},
+            {"texte": "Car la commande rm ne fonctionne pas avec les fichiers de configuration", "correct": false}
+          ],
+          "explication": "Principe de prudence : 'On ne supprime pas, on renomme ou on versionne'. Cela permet de revenir en arrière si la modification cause un problème. git est l'outil idéal pour versionner l'ensemble de la documentation et des configurations."
+        }
+      ]
+    },
+    {
+      "nom": "4️⃣ DHCP & DNS",
+      "questions": [
+        {
+          "question": "Quel est le rôle du protocole DHCP ?",
+          "reponses": [
+            {"texte": "Configurer automatiquement les clients réseau (adresse IP, masque, passerelle, DNS)", "correct": true},
+            {"texte": "Mapper des noms de domaine sur des adresses IP", "correct": false},
+            {"texte": "Sécuriser les échanges réseau par chiffrement", "correct": false},
+            {"texte": "Authentifier les utilisateurs sur le réseau", "correct": false}
+          ],
+          "explication": "DHCP (Dynamic Host Configuration Protocol) permet la configuration automatique des clients réseau. Sans DHCP, il faudrait configurer manuellement chaque machine (IP, masque, passerelle, DNS) — long, fastidieux, source d'erreurs. DNS résout les noms en IP."
+        },
+        {
+          "question": "Dans le protocole DHCP, quel est l'ordre correct des messages échangés lors d'une initialisation ?",
+          "reponses": [
+            {"texte": "DISCOVER → OFFER → REQUEST → ACK", "correct": true},
+            {"texte": "REQUEST → DISCOVER → OFFER → ACK", "correct": false},
+            {"texte": "OFFER → DISCOVER → ACK → REQUEST", "correct": false},
+            {"texte": "ACK → REQUEST → OFFER → DISCOVER", "correct": false}
+          ],
+          "explication": "Le protocole DHCP suit 4 étapes : 1) DHCPDISCOVER (client cherche un serveur), 2) DHCPOFFER (serveur(s) proposent une config), 3) DHCPREQUEST (client choisit une offre et la demande), 4) DHCPACK (serveur valide et confirme la configuration)."
+        },
+        {
+          "question": "Dans la configuration ISC dhcpd, que fait ce bloc ?\n\nsubnet 192.168.0.0 netmask 255.255.255.0 {\n  range 192.168.0.50 192.168.0.100;\n  option routers 192.168.0.1;\n}",
+          "reponses": [
+            {"texte": "Définit un pool DHCP pour le réseau 192.168.0.0/24, distribuant des IPs entre .50 et .100, avec passerelle .1", "correct": true},
+            {"texte": "Bloque toutes les IPs de .50 à .100 sur ce réseau", "correct": false},
+            {"texte": "Crée une route statique entre .50 et .100", "correct": false},
+            {"texte": "Configure le serveur DNS pour le réseau 192.168.0.0", "correct": false}
+          ],
+          "explication": "Ce bloc définit un subnet DHCP : 'range' détermine la plage d'IPs distribuables aux clients (.50 à .100). 'option routers' indique la passerelle par défaut à communiquer aux clients. Le fichier de configuration est /etc/dhcp/dhcpd.conf."
+        },
+        {
+          "question": "Qu'est-ce qu'un FQDN (Fully Qualified Domain Name) ?",
+          "reponses": [
+            {"texte": "Le nom de domaine complet incluant tous les labels jusqu'à la racine (ex : www.utbm.fr.)", "correct": true},
+            {"texte": "Une adresse IP version 6 complète", "correct": false},
+            {"texte": "Le nom d'un serveur DNS racine", "correct": false},
+            {"texte": "Un nom de domaine réservé aux grandes entreprises", "correct": false}
+          ],
+          "explication": "Un FQDN (Fully Qualified Domain Name) est le nom complet d'un nœud dans l'arborescence DNS, incluant la racine (.). Ex : www.utbm.fr. est un FQDN (le . final représente la racine). Il ne comporte pas d'ambiguïté et permet de retrouver l'enregistrement DNS depuis la racine."
+        },
+        {
+          "question": "Quelle est la différence entre un serveur DNS 'résolveur (récursif)' et un serveur 'faisant autorité' ?",
+          "reponses": [
+            {"texte": "Le résolveur obtient des enregistrements depuis d'autres serveurs (peut avoir un cache) ; le serveur faisant autorité gère et est responsable d'un domaine spécifique", "correct": true},
+            {"texte": "Le résolveur est primaire ; le serveur faisant autorité est le serveur de secours", "correct": false},
+            {"texte": "Les deux types sont identiques, seule la terminologie diffère", "correct": false},
+            {"texte": "Le résolveur répond uniquement aux requêtes IPv6 ; le serveur faisant autorité aux requêtes IPv4", "correct": false}
+          ],
+          "explication": "Deux types de serveurs DNS : 1) Résolveurs (récursifs) : interrogent d'autres serveurs pour résoudre des noms et peuvent mettre en cache les réponses. 2) Serveurs faisant autorité : gèrent et sont responsables d'une zone DNS spécifique. Ils renvoient les informations de leur zone ou délèguent."
+        },
+        {
+          "question": "Dans un fichier de zone DNS, quel type d'enregistrement associe un nom d'hôte à une adresse IPv4 ?",
+          "reponses": [
+            {"texte": "A (Address)", "correct": true},
+            {"texte": "AAAA", "correct": false},
+            {"texte": "CNAME", "correct": false},
+            {"texte": "PTR", "correct": false}
+          ],
+          "explication": "Les enregistrements DNS : A = IPv4, AAAA = IPv6, CNAME = alias (canonical name), PTR = résolution inverse (IP→nom), MX = serveur mail, NS = serveur DNS du domaine, SOA = début de zone, TXT = texte libre (SPF, DKIM…)."
+        },
+        {
+          "question": "Combien de serveurs DNS racine existent sur Internet ?",
+          "reponses": [
+            {"texte": "13", "correct": true},
+            {"texte": "1", "correct": false},
+            {"texte": "256", "correct": false},
+            {"texte": "Autant que de pays dans le monde", "correct": false}
+          ],
+          "explication": "Il existe 13 serveurs racines (root servers) dans le DNS, nommés de A à M. Ils sont le point de départ de toute résolution DNS récursive. Dans les faits, chacun est répliqué sur des centaines d'instances via anycast, donc physiquement beaucoup plus que 13 machines."
+        },
+        {
+          "question": "Quelle institution gère l'allocation des domaines TLD (Top Level Domain) comme .com et .fr ?",
+          "reponses": [
+            {"texte": "ICANN pour la racine et les TLD ; AFNIC gère .fr", "correct": true},
+            {"texte": "ONU pour tous les TLD", "correct": false},
+            {"texte": "ISC (Internet Systems Consortium) gère tous les TLD", "correct": false},
+            {"texte": "Google gère les TLD génériques (.com, .net…)", "correct": false}
+          ],
+          "explication": "ICANN (Internet Corporation for Assigned Names and Numbers) gère la racine et les TLD. IANA (département de l'ICANN) gère les IPs. AFNIC gère .fr, .re, .tf, .yt, .pm, .wf. Verisign gère .com et .net. ISC édite des logiciels DNS (Bind9) et DHCP."
+        }
+      ]
+    },
+    {
+      "nom": "5️⃣ LDAP & Active Directory",
+      "questions": [
+        {
+          "question": "Que signifie LDAP et quel est son rôle principal ?",
+          "reponses": [
+            {"texte": "Lightweight Directory Access Protocol — protocole pour interroger et modifier un annuaire (utilisateurs, groupes, machines)", "correct": true},
+            {"texte": "Large Data Access Protocol — protocole de transfert de fichiers volumineux", "correct": false},
+            {"texte": "Linux Directory Administration Protocol — outil d'administration Linux", "correct": false},
+            {"texte": "Local Dynamic Address Protocol — attribution d'adresses IP locales", "correct": false}
+          ],
+          "explication": "LDAP (Lightweight Directory Access Protocol) est un protocole permettant d'interroger et de modifier un annuaire électronique. Il centralise les informations d'authentification, les droits d'accès, les utilisateurs et groupes. Très utilisé avec Active Directory (Microsoft) ou OpenLDAP."
+        },
+        {
+          "question": "Qu'est-ce qu'un DN (Distinguished Name) dans LDAP ? Donnez un exemple.",
+          "reponses": [
+            {"texte": "Le chemin complet d'un objet dans l'annuaire. Ex : cn=Jean Dupont,ou=users,dc=example,dc=com", "correct": true},
+            {"texte": "Le mot de passe d'un utilisateur LDAP chiffré", "correct": false},
+            {"texte": "Le nom du serveur LDAP maître", "correct": false},
+            {"texte": "Un identifiant numérique unique similaire à un inode", "correct": false}
+          ],
+          "explication": "Le DN (Distinguished Name) est le chemin complet unique d'un objet dans l'annuaire LDAP. Il est composé de labels : cn (Common Name), ou (Organizational Unit), dc (Domain Component). Ex : cn=Jean Dupont,ou=users,dc=example,dc=com identifie Jean Dupont dans l'unité users du domaine example.com."
+        },
+        {
+          "question": "Quelle commande LDAP permet de rechercher des entrées ? Donnez la syntaxe de base.",
+          "reponses": [
+            {"texte": "ldapsearch -x -b \"baseDN\" \"filtre\"", "correct": true},
+            {"texte": "ldapquery -u \"baseDN\" -f \"filtre\"", "correct": false},
+            {"texte": "ldapfind -d \"baseDN\" \"filtre\"", "correct": false},
+            {"texte": "ldapget -b \"baseDN\" \"filtre\"", "correct": false}
+          ],
+          "explication": "Les 4 commandes LDAP principales : ldapsearch (recherche), ldapadd (ajout), ldapmodify (modification), ldapdelete (suppression). Pour ldapsearch : -x = authentification simple, -b = base de recherche, -H = URL serveur, -D = DN de bind, -W = mot de passe interactif."
+        },
+        {
+          "question": "Sur quels ports LDAP écoute-t-il par défaut ?",
+          "reponses": [
+            {"texte": "389 pour LDAP standard ; 636 pour LDAPS (SSL)", "correct": true},
+            {"texte": "80 pour LDAP ; 443 pour LDAPS", "correct": false},
+            {"texte": "21 pour LDAP ; 22 pour LDAPS", "correct": false},
+            {"texte": "1389 pour LDAP ; 1636 pour LDAPS", "correct": false}
+          ],
+          "explication": "LDAP standard écoute sur le port 389. LDAPS (LDAP over SSL/TLS, sécurisé) écoute sur le port 636. Pour référence : HTTP=80, HTTPS=443, FTP=21, SSH=22, DNS=53, DHCP=67/68."
+        },
+        {
+          "question": "Quels sont les composants principaux d'Active Directory (AD) ?",
+          "reponses": [
+            {"texte": "ADDS (gestion des domaines), LDAP (protocole d'accès), Kerberos (authentification), DNS (résolution de noms)", "correct": true},
+            {"texte": "FTP (transfert), HTTP (web), SMTP (mail), DNS (noms)", "correct": false},
+            {"texte": "DHCP (adressage), NFS (fichiers), SSH (accès distant), SNMP (supervision)", "correct": false},
+            {"texte": "Samba (partage), OpenLDAP (annuaire), RADIUS (auth), NTP (temps)", "correct": false}
+          ],
+          "explication": "Active Directory intègre : ADDS (Active Directory Domain Services) pour la gestion des domaines et objets, LDAP pour les opérations CRUD sur les données, Kerberos pour l'authentification sécurisée par tickets, et DNS pour la résolution de noms et la localisation des contrôleurs de domaine."
+        },
+        {
+          "question": "Comment Kerberos assure-t-il l'authentification dans un environnement Active Directory ?",
+          "reponses": [
+            {"texte": "Par un système de tickets en 3 étapes : demande de ticket (TGT), obtention du ticket de service, validation du ticket", "correct": true},
+            {"texte": "Par transmission du mot de passe en clair au serveur d'authentification", "correct": false},
+            {"texte": "Par certificats SSL uniquement", "correct": false},
+            {"texte": "Par une base de données locale sur chaque poste", "correct": false}
+          ],
+          "explication": "Kerberos utilise un système de tickets : 1) Le client demande un TGT (Ticket Granting Ticket) au service AS, 2) L'AS renvoie le TGT chiffré, 3) Le client demande un ticket de service au TGS en présentant le TGT, 4) Le TGS renvoie le ticket de service, 5) Le client accède au service avec ce ticket. Avantage : le mot de passe ne transite jamais en clair."
+        },
+        {
+          "question": "Dans Active Directory, quelle est la différence entre un 'Domaine', un 'Arbre' et une 'Forêt' ?",
+          "reponses": [
+            {"texte": "Domaine = contient les objets AD ; Arbre = groupe de domaines avec espace de noms continu ; Forêt = plusieurs arbres avec relations de confiance", "correct": true},
+            {"texte": "Domaine = groupe d'utilisateurs ; Arbre = groupe de serveurs ; Forêt = ensemble de bâtiments", "correct": false},
+            {"texte": "Forêt < Arbre < Domaine en termes de taille", "correct": false},
+            {"texte": "Les trois termes désignent la même structure mais à des échelles différentes", "correct": false}
+          ],
+          "explication": "Hiérarchie AD : Domaine (contient les objets : utilisateurs, groupes, machines) → Arbre (groupe de domaines partageant un espace de noms continu, ex : utbm.fr + etud.utbm.fr) → Forêt (ensemble d'arbres liés par des relations de confiance). La forêt est la structure AD la plus large."
+        }
+      ]
+    },
+    {
+      "nom": "6️⃣ NFS, Samba & FTP",
+      "questions": [
+        {
+          "question": "Qu'est-ce que NFS et sur quel port écoute-t-il ?",
+          "reponses": [
+            {"texte": "Network File System — protocole de partage de fichiers en réseau, écoute sur le port 2049 (et 111 pour portmap)", "correct": true},
+            {"texte": "Network Firewall System — firewall réseau, écoute sur le port 80", "correct": false},
+            {"texte": "New File Sync — synchronisation de fichiers, écoute sur le port 443", "correct": false},
+            {"texte": "NFS n'utilise pas de port fixe, il est dynamique", "correct": false}
+          ],
+          "explication": "NFS (Network File System) est un protocole développé par Sun Microsystems en 1984 permettant à un ordinateur d'accéder via réseau à des fichiers distants comme s'ils étaient locaux. Il utilise RPC (Remote Procedure Call). Port 2049 pour NFS, port 111 pour portmap (rpcbind). NFSv4 n'utilise que le port 2049."
+        },
+        {
+          "question": "Quelle est la principale amélioration de NFSv4 par rapport à NFSv3 ?",
+          "reponses": [
+            {"texte": "Gestion complète de la sécurité (Kerberos, chiffrement), système à état (statefull), reprise sur incident, compatibilité Windows/Mac", "correct": true},
+            {"texte": "NFSv4 est plus rapide uniquement grâce à la compression", "correct": false},
+            {"texte": "NFSv4 supporte IPv4 alors que NFSv3 ne supportait qu'IPv6", "correct": false},
+            {"texte": "NFSv4 utilise UDP alors que NFSv3 utilisait TCP", "correct": false}
+          ],
+          "explication": "NFSv4 apporte des améliorations majeures : sécurité totale (négociation de niveau, Kerberos 5, chiffrement), système STATEFULL (contrairement aux v1-3 qui étaient stateless), reprise sur incident intégrée, délégation, migration/réplication transparentes. En contrepartie, NFSv4 est incompatible avec NFSv3 et ne supporte pas UDP."
+        },
+        {
+          "question": "Quel fichier configure les partages NFS exportés par un serveur Linux ?",
+          "reponses": [
+            {"texte": "/etc/exports", "correct": true},
+            {"texte": "/etc/nfs.conf", "correct": false},
+            {"texte": "/etc/fstab", "correct": false},
+            {"texte": "/etc/shares", "correct": false}
+          ],
+          "explication": "/etc/exports est le fichier de configuration principal du serveur NFS. Il liste les répertoires à exporter et les paramètres (clients autorisés, droits). La commande 'exportfs' permet d'appliquer les modifications. /etc/fstab est pour les montages côté client au démarrage."
+        },
+        {
+          "question": "Quelle est la principale différence de sécurité entre FTP et SFTP ?",
+          "reponses": [
+            {"texte": "FTP transmet données et mots de passe en clair ; SFTP chiffre tout (basé sur SSH, port 22)", "correct": true},
+            {"texte": "FTP est plus sécurisé car il utilise deux ports (20 et 21) ; SFTP n'en utilise qu'un", "correct": false},
+            {"texte": "Il n'y a pas de différence de sécurité, seulement de vitesse", "correct": false},
+            {"texte": "SFTP est moins sécurisé car le mot de passe transite en clair", "correct": false}
+          ],
+          "explication": "FTP (ports 20/21) ne chiffre pas les données ni les mots de passe → vulnérable aux interceptions. SFTP (Secure FTP, port 22) est techniquement une extension du protocole SSH — tout est chiffré. FTPS (port 990) utilise SSL/TLS sur FTP. Depuis les versions récentes, SFTP et FTPS sont recommandés."
+        },
+        {
+          "question": "Quels sont les ports utilisés par FTP (données et contrôle) ?",
+          "reponses": [
+            {"texte": "Port 21 (canal de contrôle) et port 20 (canal de données)", "correct": true},
+            {"texte": "Port 80 (HTTP) et port 443 (HTTPS)", "correct": false},
+            {"texte": "Port 22 (SSH) uniquement", "correct": false},
+            {"texte": "Port 25 (SMTP) et port 110 (POP3)", "correct": false}
+          ],
+          "explication": "FTP utilise deux canaux : le port 21 pour le canal de contrôle (commandes et réponses) et le port 20 pour le canal de données (transfert de fichiers). SFTP utilise uniquement le port 22. FTPS écoute sur le port 990 (mode implicite)."
+        },
+        {
+          "question": "Que signifient les codes de réponse FTP commençant par 2xx ?",
+          "reponses": [
+            {"texte": "Réponse positive de réalisation : l'action a été réalisée avec succès", "correct": true},
+            {"texte": "Réponse d'erreur temporaire : réessayer plus tard", "correct": false},
+            {"texte": "Réponse préliminaire : action en cours", "correct": false},
+            {"texte": "Erreur permanente : requête refusée", "correct": false}
+          ],
+          "explication": "Codes FTP : 1xx = préliminaire positive (action en cours), 2xx = positive de réalisation (succès, nouvelle commande possible), 3xx = intermédiaire positive (informations supplémentaires requises), 4xx = négative temporaire (réessayer), 5xx = négative permanente (requête différente nécessaire)."
+        }
+      ]
+    },
+    {
+      "nom": "7️⃣ SSH",
+      "questions": [
+        {
+          "question": "Quelle est la différence principale entre RSH et SSH ?",
+          "reponses": [
+            {"texte": "RSH (Remote Shell) n'est pas sécurisé (pas de chiffrement) ; SSH (Secure Shell) chiffre toutes les communications", "correct": true},
+            {"texte": "RSH est plus récent et sécurisé que SSH", "correct": false},
+            {"texte": "SSH ne supporte que l'authentification par certificat ; RSH supporte les mots de passe", "correct": false},
+            {"texte": "RSH fonctionne sur le port 22 ; SSH sur le port 23", "correct": false}
+          ],
+          "explication": "RSH (Remote Shell) est l'ancêtre de SSH : il permet la connexion distante mais sans chiffrement, donc obsolète. SSH (Secure Shell) fait la même chose mais avec chiffrement de toutes les communications. SSH écoute sur le port 22 par défaut."
+        },
+        {
+          "question": "Quel fichier de configuration SSH permet d'interdire la connexion root par mot de passe ?",
+          "reponses": [
+            {"texte": "/etc/ssh/sshd_config avec 'PermitRootLogin prohibit-password' ou 'PermitRootLogin no'", "correct": true},
+            {"texte": "/etc/ssh/ssh_config avec 'BlockRoot yes'", "correct": false},
+            {"texte": "/root/.ssh/config avec 'NoPassword true'", "correct": false},
+            {"texte": "/etc/security/access.conf avec 'deny root'", "correct": false}
+          ],
+          "explication": "Le fichier /etc/ssh/sshd_config configure le serveur SSH. PermitRootLogin no = refuse toute connexion root. PermitRootLogin prohibit-password = autorise root seulement par clé (bonne pratique). PermitRootLogin yes = autorise root par clé ET mot de passe (mauvaise pratique). /etc/ssh/ssh_config configure le client SSH."
+        },
+        {
+          "question": "Quelle commande se connecte en SSH sur remote_host en tant qu'utilisateur 'toto' sur le port 2222 ?",
+          "reponses": [
+            {"texte": "ssh -p 2222 toto@remote_host", "correct": true},
+            {"texte": "ssh -P 2222 toto@remote_host", "correct": false},
+            {"texte": "ssh --port 2222 toto remote_host", "correct": false},
+            {"texte": "ssh toto@remote_host:2222", "correct": false}
+          ],
+          "explication": "La commande SSH : 'ssh user@host' pour une connexion simple. Option -p (minuscule) pour spécifier le port. Option -P (majuscule) est utilisée pour scp, pas ssh. L'option -C active la compression, -X active le forwarding graphique (X11)."
+        },
+        {
+          "question": "Quelles sont les 2 étapes pour configurer l'authentification SSH par clé (sans mot de passe) ?",
+          "reponses": [
+            {"texte": "1) ssh-keygen (générer la paire de clés) ; 2) ssh-copy-id user@host (envoyer la clé publique sur le serveur)", "correct": true},
+            {"texte": "1) ssh-create-key ; 2) ssh-send user@host", "correct": false},
+            {"texte": "1) Copier manuellement la clé privée sur le serveur ; 2) Redémarrer sshd", "correct": false},
+            {"texte": "1) openssl genrsa ; 2) scp ~/.ssh/id_rsa root@host:/etc/ssh/", "correct": false}
+          ],
+          "explication": "Pour une authentification SSH par clé : 1) 'ssh-keygen' génère une paire clé privée/publique (stockées dans ~/.ssh/). 2) 'ssh-copy-id user@host' copie la clé PUBLIQUE sur le serveur (dans ~/.ssh/authorized_keys). La clé PRIVÉE ne quitte jamais le client. Avantage : plus sécurisé qu'un mot de passe, et plus confortable (connexion sans saisie de MDP)."
+        },
+        {
+          "question": "Que fait la commande 'scp fichier.txt user@host:~' ?",
+          "reponses": [
+            {"texte": "Copie 'fichier.txt' depuis le client vers le répertoire home de user sur host, via SSH (chiffré)", "correct": true},
+            {"texte": "Supprime 'fichier.txt' localement et le crée sur host", "correct": false},
+            {"texte": "Crée un lien symbolique de fichier.txt vers host", "correct": false},
+            {"texte": "Synchronise fichier.txt avec la version sur host", "correct": false}
+          ],
+          "explication": "scp (Secure Copy) est similaire à cp mais via SSH. Syntaxe : 'scp source destination'. Le ~ désigne le répertoire home de l'utilisateur. Pour copier récursivement un répertoire : scp -r. Pour spécifier le port SSH : scp -P (majuscule, contrairement à ssh -p)."
+        },
+        {
+          "question": "Qu'est-ce que le port forwarding SSH et dans quel cas l'utilise-t-on ?",
+          "reponses": [
+            {"texte": "Rediriger les connexions d'un port local vers un service derrière un firewall via SSH (ssh -L mon_port:fhost:fport user@host)", "correct": true},
+            {"texte": "Changer le port d'écoute du serveur SSH", "correct": false},
+            {"texte": "Transférer des fichiers d'un port FTP vers SSH", "correct": false},
+            {"texte": "Ouvrir tous les ports du firewall via SSH", "correct": false}
+          ],
+          "explication": "Le port forwarding (tunneling SSH) permet d'accéder à des services derrière un firewall si le port SSH est ouvert. 'ssh -L mon_port:fhost:fport user@remote_host' : les paquets envoyés à mon_port local sont forwardés via remote_host vers fhost:fport. Très utile pour accéder à des services internes depuis l'extérieur."
+        }
+      ]
+    },
+    {
+      "nom": "8️⃣ Ansible & Virtualisation",
+      "questions": [
+        {
+          "question": "Quelles sont les 3 fonctions principales d'Ansible ?",
+          "reponses": [
+            {"texte": "Déploiement de logiciels sur parc, gestion de configuration, exécuteur de tâches", "correct": true},
+            {"texte": "Surveillance réseau, sauvegarde automatique, gestion des utilisateurs", "correct": false},
+            {"texte": "Virtualisation, conteneurisation, orchestration DNS", "correct": false},
+            {"texte": "Chiffrement, authentification, journalisation", "correct": false}
+          ],
+          "explication": "Ansible est une plateforme logicielle d'automatisation avec 3 fonctions principales : 1) Déploiement de logiciels sur un parc de machines, 2) Gestionnaire de configuration (maintenir un état cohérent), 3) Exécuteur de tâches (lancer des commandes sur de nombreuses machines). Il repose sur SSH pour la communication."
+        },
+        {
+          "question": "Dans Ansible, qu'est-ce qu'un 'inventaire' ?",
+          "reponses": [
+            {"texte": "Un fichier (YAML ou INI) qui liste et organise les nœuds gérés par Ansible (machines, groupes, variables)", "correct": true},
+            {"texte": "La liste des tâches à exécuter sur les machines", "correct": false},
+            {"texte": "Le journal des opérations effectuées par Ansible", "correct": false},
+            {"texte": "Le fichier de configuration du serveur Ansible", "correct": false}
+          ],
+          "explication": "L'inventaire Ansible liste et organise les nœuds gérés. Il peut être en format YAML ou INI. Il définit des hôtes individuels, des groupes (debian_servers, web_servers…), des métagroupes et des variables (ansible_host, http_port…). On l'utilise avec -i inventory.yaml dans les commandes Ansible."
+        },
+        {
+          "question": "Quelle est la hiérarchie conceptuelle dans Ansible : Playbook, Play, Task, Module ?",
+          "reponses": [
+            {"texte": "Playbook (liste de Plays) → Play (liste de Tasks sur des hôtes) → Task (1+ Modules) → Module (script/binaire exécuté)", "correct": true},
+            {"texte": "Module → Task → Playbook → Play (du plus petit au plus grand)", "correct": false},
+            {"texte": "Play = Playbook = Task = Module (ce sont des synonymes)", "correct": false},
+            {"texte": "Playbook → Module → Play → Task", "correct": false}
+          ],
+          "explication": "Hiérarchie Ansible : Playbook (un fichier contenant une liste ordonnée de Plays) → Play (une liste de tâches ordonnées mappées sur des hôtes) → Task (une ou plusieurs opérations utilisant des Modules) → Module (script ou binaire qu'Ansible exécute sur les nœuds cibles, ex: ansible.builtin.ping)."
+        },
+        {
+          "question": "Quelle commande exécute un playbook Ansible nommé 'deploy.yaml' avec l'inventaire 'hosts.yaml' ?",
+          "reponses": [
+            {"texte": "ansible-playbook -i hosts.yaml deploy.yaml", "correct": true},
+            {"texte": "ansible -i hosts.yaml -p deploy.yaml", "correct": false},
+            {"texte": "ansible-run deploy.yaml --inventory hosts.yaml", "correct": false},
+            {"texte": "ansible play -f deploy.yaml -i hosts.yaml", "correct": false}
+          ],
+          "explication": "La commande 'ansible-playbook' exécute un playbook. -i spécifie le fichier d'inventaire. La sortie récapitulative (PLAY RECAP) indique pour chaque hôte : ok (tâches réussies sans changement), changed (modifications effectuées), failed (erreurs)."
+        },
+        {
+          "question": "Quelle est la différence entre la virtualisation et la conteneurisation ?",
+          "reponses": [
+            {"texte": "Virtualisation = émule un système complet (CPU, mémoire, OS) via un hyperviseur ; Conteneurisation = isole un processus en partageant le noyau de l'hôte (pas de virtualisation matérielle)", "correct": true},
+            {"texte": "Virtualisation = uniquement pour serveurs ; Conteneurisation = uniquement pour postes clients", "correct": false},
+            {"texte": "Les deux technologies sont identiques, seul le nom change", "correct": false},
+            {"texte": "Conteneurisation utilise un hyperviseur ; Virtualisation utilise des namespaces Linux", "correct": false}
+          ],
+          "explication": "Virtualisation : émulation d'une machine complète (CPU virtuel, mémoire, stockage, périphériques) via un hyperviseur (VMware, VirtualBox, Proxmox, KVM). Chaque VM a son propre OS. Conteneurisation : exécute un processus dans un environnement isolé EN PARTAGEANT le noyau de l'hôte. Plus léger et rapide qu'une VM. Ex : Docker, Podman, LXC."
+        },
+        {
+          "question": "Dans un Dockerfile, que font les instructions FROM, RUN, CMD et EXPOSE ?",
+          "reponses": [
+            {"texte": "FROM = image de base ; RUN = commandes exécutées à la construction ; CMD = commande au démarrage du conteneur ; EXPOSE = ouvre un port accessible par l'hôte", "correct": true},
+            {"texte": "FROM = fichier source ; RUN = lancement du conteneur ; CMD = configuration réseau ; EXPOSE = chiffrement", "correct": false},
+            {"texte": "FROM = dossier de travail ; RUN = installation du OS ; CMD = commande d'arrêt ; EXPOSE = partage de volumes", "correct": false},
+            {"texte": "Les 4 instructions sont synonymes et font la même chose", "correct": false}
+          ],
+          "explication": "Instructions Dockerfile : FROM (image de base, ex: debian:latest), WORKDIR (répertoire de travail), RUN (commandes lancées UNE FOIS lors du 'build', ex: apt-get install), CMD (commande exécutée au DÉMARRAGE du conteneur, une seule par Dockerfile), EXPOSE (déclare un port accessible depuis l'hôte)."
+        },
+        {
+          "question": "Quelle commande podman construit une image à partir d'un Dockerfile et la nomme 'mon_image:latest' ?",
+          "reponses": [
+            {"texte": "podman build -f Dockerfile -t mon_image:latest", "correct": true},
+            {"texte": "podman create -d Dockerfile -n mon_image:latest", "correct": false},
+            {"texte": "podman image -f Dockerfile mon_image:latest", "correct": false},
+            {"texte": "podman run -b Dockerfile mon_image:latest", "correct": false}
+          ],
+          "explication": "La commande 'podman build' (identique à 'docker build') construit une image. -f spécifie le fichier Dockerfile, -t spécifie le nom et le tag de l'image. Pour lancer un conteneur depuis cette image : 'podman run --rm -p 8080:80 mon_image:latest' (--rm supprime le CT après, -p mappe les ports)."
+        },
+        {
+          "question": "Dans podman-compose, que fait la directive 'depends_on: - db' dans la section 'wordpress' ?",
+          "reponses": [
+            {"texte": "Indique que le conteneur wordpress ne démarrera qu'après le conteneur db", "correct": true},
+            {"texte": "Permet à wordpress d'accéder aux volumes de db", "correct": false},
+            {"texte": "Partage les variables d'environnement entre wordpress et db", "correct": false},
+            {"texte": "Crée un réseau privé entre wordpress et db uniquement", "correct": false}
+          ],
+          "explication": "La directive 'depends_on' dans podman-compose/docker-compose définit les dépendances entre services. 'depends_on: - db' garantit que le service db démarrera avant le service wordpress. Cela est essentiel quand un service (wordpress) nécessite qu'un autre (base de données mariadb) soit disponible au démarrage."
+        }
+      ]
+    }
+  ]
+}

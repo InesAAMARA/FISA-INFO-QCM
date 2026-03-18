@@ -443,7 +443,6 @@
       "a_retenir": "Matrice forte = PM puissant. Matrice faible = fonctionnel dominant. Clé : RACI clair + escalade formalisée + alignement sponsor."
     }
   },
-
   "BD71": {
     "1️⃣ Fondamentaux Big Data": {
       "emoji": "📊",
@@ -673,7 +672,6 @@
       "a_retenir": "Spark = in-memory, remplace MR (pas HDFS). Flink = streaming natif. Storm = streaming temps réel. YARN = gestionnaire ressources (Hadoop v2). Hive = SQL sur Hadoop. Pig = données brutes. ZooKeeper = coordination. Oozie = workflows. Flume = logs. Sqoop = SGBDR↔Hadoop."
     }
   },
-
   "TI73": {
     "1️⃣ PowerPoint Performant": {
       "emoji": "🎨",
@@ -856,6 +854,442 @@
         }
       ],
       "a_retenir": "Big Picture AVANT les détails. Cohérence + Séquencement + Hiérarchie = logique graphique. Schémas > listes. Titres informatifs. Le design suit la logique du discours, pas l'inverse."
+    }
+  },
+  "SR74": {
+    "1️⃣ OS & Distributions GNU/Linux": {
+      "emoji": "🖥️",
+      "intro": "Un système d'exploitation (OS) est la couche logicielle fondamentale qui abstrait le matériel pour les applications. Linux est le noyau ; une distribution est l'assemblage complet (noyau + shell + logiciels).",
+      "sections": [
+        {
+          "titre": "Rôles de l'OS",
+          "contenu": [
+            "**Abstraction matérielle** : masque la complexité des composants (CPU AMD/Intel, mémoire Hynix/Samsung, stockage SSD/HDD, réseau…)",
+            "**Gestion des processus** : ordonnancement, synchronisation, utilisation des ressources",
+            "**Gestion mémoire** : allocation, protection, swap",
+            "**Entrées/Sorties** : drivers, accès aux périphériques",
+            "**Système de fichiers** : organisation et accès aux données"
+          ]
+        },
+        {
+          "titre": "Distribution GNU/Linux",
+          "contenu": [
+            "**Linux** = noyau uniquement (abstraction du matériel)",
+            "**Distribution** = noyau + shell + serveur graphique + gestionnaire de fenêtres (Gnome/KDE/XFCE) + autres logiciels",
+            "Exemples : Ubuntu, Debian, Fedora, Red Hat, Arch…",
+            "**OS grand public** : Windows, MacOS, Linux, Android, iOS (Apple)",
+            "**OS spécialisés** : IOS (Cisco, réseau), ROS (robotique)"
+          ]
+        },
+        {
+          "titre": "Commandes système essentielles",
+          "contenu": [
+            "`uname` : version du noyau en cours (`uname -a` pour tout afficher)",
+            "`ip a` : adresses IP et IPv6 (remplace `ifconfig` — obsolète)",
+            "`ip r` : table de routage (remplace `route`)",
+            "`mount` : partitions montées (filtrer avec `grep /dev`)",
+            "`df` : occupation des partitions"
+          ]
+        }
+      ],
+      "a_retenir": "Linux = noyau seul. Distribution = noyau + logiciels. `uname` pour le noyau, `ip a` pour le réseau (ifconfig est obsolète). OS spécialisés : IOS (Cisco) ≠ iOS (Apple)."
+    },
+    "2️⃣ Système de Fichiers UNIX": {
+      "emoji": "📁",
+      "intro": "Le système de fichiers UNIX organise toutes les données en une unique arborescence logique à partir de la racine /. Tout est fichier : données, périphériques, processus. L'inode est l'identifiant interne d'un fichier.",
+      "sections": [
+        {
+          "titre": "Types de systèmes de fichiers",
+          "contenu": [
+            "**ext4** : défaut Linux (successeur ext3, volumes jusqu'à 1 exbioctet)",
+            "**btrfs** : Copy-On-Write, défaut Fedora, utilisé dans NAS Synology/QNAP",
+            "**xfs** : journalisation 64 bits, défaut Red Hat Enterprise 7",
+            "**reiserfs** : premier FS journalisé intégré au noyau Linux (v2.4.1)",
+            "**NFS** : Network File System (accès réseau), **ZFS** : très robuste (open-source CDDL)",
+            "Linux peut aussi gérer FAT32, NTFS (Windows). Liste dans `/proc/filesystems`"
+          ]
+        },
+        {
+          "titre": "Arborescence et répertoires principaux",
+          "contenu": [
+            "**/** : racine — sommet de l'arborescence unique (mono-tête, contrairement à Windows C:/D:/…)",
+            "**/bin** : exécutables essentiels (commandes système)",
+            "**/boot** : bootloader (grub/lilo), noyau compressé (vmlinuz)",
+            "**/dev** : fichiers spéciaux pour les périphériques (disques, réseau, son…)",
+            "**/etc** : fichiers de configuration système (/etc/fstab, /etc/rc.d, /etc/cron…)",
+            "**/home** : répertoires personnels des utilisateurs",
+            "**/lib** : bibliothèques et modules du noyau",
+            "**/mnt** : points de montage des FS périphériques",
+            "**/proc** : pseudo-FS liant noyau et espace utilisateur (état des processus, RAM…)",
+            "**/root** : répertoire personnel de root",
+            "**/sbin** : exécutables statiques pour l'administration",
+            "**/tmp** : fichiers temporaires",
+            "**/usr** : programmes accessibles à tous les utilisateurs",
+            "**/var** : données variables (logs dans /var/log, files d'impression…)"
+          ]
+        },
+        {
+          "titre": "Inodes et types de fichiers",
+          "contenu": [
+            "**Inode** : identifiant unique (entier) d'un fichier. Contient : taille, permissions, propriétaire, groupe, nombre de liens, dates (atime/mtime/ctime)",
+            "**5 types de fichiers UNIX** : fichiers ordinaires, répertoires, fichiers spéciaux (/dev), liens symboliques, tubes nommés",
+            "**Lien symbolique** : fichier contenant un pointeur vers un autre fichier (`ln -s fichier lien`)",
+            "**Nommage** : majuscules/minuscules différenciées, longueur max 1024 caractères, seuls `/` et ASCII 0 interdits"
+          ]
+        },
+        {
+          "titre": "Droits et permissions",
+          "contenu": [
+            "**3 niveaux** : user (propriétaire), group (groupe), other (reste du monde)",
+            "**3 types** par niveau : r (lecture=4), w (écriture=2), x (exécution=1)",
+            "Exemple : `rwxr-xr--` = 754 (user=7, group=5, other=4)",
+            "`chmod 755 fichier` (octal) ou `chmod u+rwx fichier` (symbolique)",
+            "`chmod -R a+rw /repertoire` : récursif sur un répertoire",
+            "**umask** : droits à RETIRER lors de la création. umask 027 : retire ---w-rwx → résultat 640 sur rw-rw-rw-"
+          ]
+        },
+        {
+          "titre": "Commandes fichiers et répertoires",
+          "contenu": [
+            "`ls -la` : lister avec détails et fichiers cachés",
+            "`cd chemin` : changer de répertoire (absolu ou relatif). `.` = courant, `..` = parent",
+            "`mkdir nom` : créer répertoire",
+            "`rmdir nom` : supprimer répertoire vide",
+            "`rm fichier` : supprimer fichier",
+            "`cp source dest` : copier",
+            "`mv source dest` : déplacer/renommer",
+            "`pwd` : afficher le chemin du répertoire courant",
+            "`file fichier` : identifier le type d'un fichier",
+            "`touch fichier` : créer un fichier vide ou mettre à jour la date"
+          ]
+        },
+        {
+          "titre": "Partitionnement et montage",
+          "contenu": [
+            "**MBR** : ancien standard, 4 partitions max, limite 2,2 To. **GPT** : nouveau standard, 128 partitions, 256 To",
+            "Périphériques : `/dev/sda` (SATA/SCSI/USB), `/dev/nvme0n1` (NVMe), `/dev/hda` (IDE, obsolète)",
+            "Partitions : `/dev/sda1` à `/dev/sda4` (primaires), `/dev/nvme0n1p1` (NVMe)",
+            "`mount -t type -o options /dev/sdb1 /mnt/usb` : monter un FS",
+            "`umount /mnt/usb` : démonter (toujours finir par umount !)",
+            "**Montage automatique** : décrit dans `/etc/fstab`. `mount -a` monte tous les FS de fstab"
+          ]
+        }
+      ],
+      "a_retenir": "Tout est fichier sous UNIX. Arborescence unique depuis /. Inode = identifiant interne du fichier. Droits rwx sur 3 niveaux (ugo). umask = droits à RETIRER. MBR (4 partitions/2,2To) vs GPT (128 partitions/256To). Toujours umount avant de débrancher !"
+    },
+    "3️⃣ Administration Système": {
+      "emoji": "⚙️",
+      "intro": "L'administrateur système gère l'infrastructure informatique (installations, paramétrages, sauvegardes, sécurité) et assiste les utilisateurs. Il doit avoir une déontologie irréprochable et suivre des bonnes pratiques strictes.",
+      "sections": [
+        {
+          "titre": "Bonnes pratiques essentielles",
+          "contenu": [
+            "**Prendre des notes** : RETEX structuré à chaque tâche/incident, versionner avec git",
+            "**Privilégier la stabilité** : automatiser, parcs homogènes, éviter les comptes locaux sans réplication",
+            "**Faire preuve de prudence** : ne pas supprimer (renommer/versionner), n'installer que le strict nécessaire, valider pas à pas",
+            "**Bannir l'urgence** : anticiper, planifier, alerter la hiérarchie si insuffisance de moyens",
+            "**Ne rien laisser au hasard** : NTP (synchronisation), rotation des logs, tester les sauvegardes, identifier les équipements",
+            "**Sensibiliser les utilisateurs** : charte informatique, mails réguliers, former à remonter les incidents",
+            "**Comprendre** : ne jamais recopier des scripts/configs sans les comprendre — risque majeur"
+          ]
+        },
+        {
+          "titre": "Déontologie",
+          "contenu": [
+            "Confidentialité des données utilisateurs (mots de passe, mails)",
+            "Secret des mots de passe système (root, BIOS/EFI)",
+            "Respect des licences logicielles",
+            "Gestion des logs : archivage et destruction appropriée",
+            "Alerter la hiérarchie si un utilisateur ne respecte pas la charte"
+          ]
+        },
+        {
+          "titre": "Gestion des risques",
+          "contenu": [
+            "**Risques** : vandalisme, vol de matériel/données, perte de données, interruption de service, incendie, intrusion internet, virus/malwares",
+            "**Vol de matériel** → contrats de maintenance, onduleurs, redondance, accès physiques sécurisés",
+            "**Perte de données** → sauvegardes testées, stockage serveur/synchronisé",
+            "**Vol de données** → mots de passe, filtrage, chiffrement des partitions, récupération machines",
+            "**Interruption** → assurance, PCA/PRA (Plans de Continuité/Reprise d'Activité)",
+            "**Intrusions internet** → filtrage, réduction surface d'attaque, IDS/IPS",
+            "**Virus/malwares** → antivirus, patchs de sécurité",
+            "**Sécurité absolue impossible** : placer la barre à un niveau acceptable selon criticité et budget"
+          ]
+        }
+      ],
+      "a_retenir": "Bonnes pratiques : notes (RETEX + git), automatisation, prudence (renommer ≠ supprimer), pas d'urgence, NTP, tester les sauvegardes. Sécurité = sûreté DE fonctionnement + protection CONTRE actes malveillants. La sécurité absolue n'existe pas."
+    },
+    "4️⃣ DHCP & DNS": {
+      "emoji": "🌐",
+      "intro": "DHCP configure automatiquement les clients réseau (IP, masque, passerelle, DNS). DNS résout les noms de domaine en adresses IP. Ces deux services sont indispensables dans tout réseau.",
+      "sections": [
+        {
+          "titre": "DHCP — Fonctionnement",
+          "contenu": [
+            "**4 étapes** : DISCOVER (client cherche serveur) → OFFER (serveur propose config) → REQUEST (client choisit et demande) → ACK (serveur confirme)",
+            "**Lease time** : durée de validité de l'attribution IP (max-lease-time, default-lease-time)",
+            "**Un routeur Cisco** peut faire office de serveur DHCP (avec limitations)",
+            "**ISC dhcpd** : logiciel serveur DHCP libre, très utilisé. Remplacé progressivement par Kea"
+          ]
+        },
+        {
+          "titre": "Configuration ISC dhcpd (/etc/dhcp/dhcpd.conf)",
+          "contenu": [
+            "**Paramètres globaux** : `option domain-name \"utbm.fr\";` et `option domain-name-servers ns1.isc.org;`",
+            "**Réseau** : `subnet 192.168.0.0 netmask 255.255.255.0 { range 192.168.0.50 192.168.0.100; option routers 192.168.0.1; }`",
+            "**Hôte fixe** : `host pc1 { hardware ethernet 0:c0:c3:49:2b:57; fixed-address 192.168.0.93; }`",
+            "**Cisco IOS** : `ip dhcp excluded-address 192.168.0.1 192.168.0.10` puis `ip dhcp pool MON_POOL`"
+          ]
+        },
+        {
+          "titre": "DNS — Architecture et terminologie",
+          "contenu": [
+            "**DNS** : Domain Name System — associe un nom (string) à une adresse IP",
+            "**Architecture hiérarchique** : racine (.) → TLD (.fr, .com, .org…) → domaines → sous-domaines",
+            "**13 serveurs racines** sur Internet (répliqués via anycast)",
+            "**FQDN** : Fully Qualified Domain Name = nom complet incluant la racine (ex: www.utbm.fr.)",
+            "**Résolveur (récursif)** : interroge d'autres serveurs, peut cacher les résultats",
+            "**Serveur faisant autorité** : gère et répond pour une zone spécifique",
+            "**ICANN** gère la racine et les TLD. **AFNIC** gère .fr. **Verisign** gère .com et .net"
+          ]
+        },
+        {
+          "titre": "Enregistrements DNS",
+          "contenu": [
+            "**A** : nom → adresse IPv4",
+            "**AAAA** : nom → adresse IPv6",
+            "**CNAME** : alias (canonical name) → autre nom",
+            "**PTR** : résolution inverse (IP → nom)",
+            "**MX** : serveur mail du domaine",
+            "**NS** : serveur DNS du domaine",
+            "**SOA** : Start of Authority, infos générales de zone (serial, refresh, retry, expire, TTL)",
+            "**TXT** : texte libre (SPF, DKIM, vérification de domaine…)"
+          ]
+        },
+        {
+          "titre": "Bind9 — Configuration",
+          "contenu": [
+            "**Logiciel DNS** de ISC. Installation : `sudo apt install bind9`",
+            "**Fichiers** : `/etc/bind/named.conf` (principal), `named.conf.local` (zones locales)",
+            "**Zone locale** : `zone \"my_domain.org\" { type master; file \"db.my_domain.org\"; };`",
+            "**Zone inverse** : `zone \"0.0.10.in-addr.arpa\" { type master; file \"rev.my_domain.org\"; };`",
+            "Enregistrement inverse avec champs **PTR** : `1.52.168.192 IN PTR host1.my_domain.org.`"
+          ]
+        }
+      ],
+      "a_retenir": "DHCP : DISCOVER→OFFER→REQUEST→ACK. ISC dhcpd config dans /etc/dhcp/dhcpd.conf. DNS : 13 serveurs racines, architecture hiérarchique. Types : A(IPv4), AAAA(IPv6), CNAME(alias), PTR(inverse), MX(mail), NS(DNS). FQDN = nom complet avec racine."
+    },
+    "5️⃣ LDAP & Active Directory": {
+      "emoji": "🔐",
+      "intro": "LDAP est un protocole standard pour accéder et modifier un annuaire électronique. Active Directory (Microsoft) est la mise en œuvre la plus répandue en entreprise, intégrant LDAP, Kerberos et DNS.",
+      "sections": [
+        {
+          "titre": "LDAP — Structure et commandes",
+          "contenu": [
+            "**DN** (Distinguished Name) : chemin complet d'un objet. Ex : `cn=Jean Dupont,ou=users,dc=example,dc=com`",
+            "**Attributs** : cn (Common Name), ou (Organizational Unit), dc (Domain Component), sn, mail, uid",
+            "**Format LDIF** : format texte pour ajouter/modifier/supprimer des entrées",
+            "**Ports** : 389 (LDAP standard), 636 (LDAPS sécurisé SSL)",
+            "`ldapsearch -x -b \"baseDN\" \"filtre\"` : rechercher",
+            "`ldapadd -x -D \"adminDN\" -W -f fichier.ldif` : ajouter",
+            "`ldapmodify -x -D \"adminDN\" -W -f fichier.ldif` : modifier",
+            "`ldapdelete -x -D \"adminDN\" -W \"DN\"` : supprimer",
+            "**Filtres** : `(cn=Jean*)`, `(&(objectClass=person)(cn=Jean*))`, opérateurs &(ET), |(OU), !(NON)"
+          ]
+        },
+        {
+          "titre": "Active Directory — Structure",
+          "contenu": [
+            "**ADDS** (Active Directory Domain Services) : composant principal, gère les domaines, basé sur LDAP pour CRUD",
+            "**Domaine** : contient les objets AD (utilisateurs, groupes, machines)",
+            "**Arbre** : groupe de domaines avec espace de noms continu",
+            "**Forêt** : plusieurs arbres liés par des relations de confiance",
+            "**Relations d'approbation** : unidirectionnelles ou bidirectionnelles, transitives (A→B→C implique A→C) sauf entre forêts"
+          ]
+        },
+        {
+          "titre": "Kerberos — Authentification par tickets",
+          "contenu": [
+            "Protocole d'authentification par **tickets** pour environnements distribués",
+            "**3 étapes** : demande TGT (AS) → obtention ticket de service (TGS) → validation et accès au service",
+            "**Avantage** : mot de passe ne transite jamais en clair, protection contre le rejeu (horodatage)",
+            "**Inconvénients** : tous les services doivent être 'kerberisés', synchronisation NTP obligatoire, si AS compromis = tout compromis, ne chiffre que l'authentification (pas les données de session)",
+            "**AS** = service d'authentification, **TGS** = service délivrant tickets d'accès, **TGT** = ticket d'accès au TGS"
+          ]
+        },
+        {
+          "titre": "SYSVOL et réplication AD",
+          "contenu": [
+            "**SYSVOL** : partage répliqué entre contrôleurs de domaine (GPO, scripts de connexion)",
+            "Structure : domain/Policies (GPOs par GUID) + domain/scripts",
+            "**KCC** (Knowledge Consistency Checker) : génère automatiquement la topologie de réplication",
+            "**Délai de réplication** : 5 minutes par défaut. Réplication urgente pour actions sécurité (désactivation compte, changement MDP)",
+            "**Protocole** : RPC over IP (intrasite et intersite), SMTP secondaire pour liaisons lentes"
+          ]
+        },
+        {
+          "titre": "Logiciels LDAP",
+          "contenu": [
+            "**Serveurs** : OpenLDAP, Apache Directory Server, Oracle Unified Server, Microsoft Active Directory",
+            "**Clients** : LDAPBrowser, LDAP Admin, Apache Directory Studio, phpLDAPadmin, FusionDirectory, Microsoft Outlook"
+          ]
+        }
+      ],
+      "a_retenir": "LDAP = annuaire hiérarchique, ports 389/636. DN = chemin complet, format LDIF. Commandes : ldapsearch/ldapadd/ldapmodify/ldapdelete. AD = ADDS + LDAP + Kerberos + DNS. Kerberos = tickets (TGT→TGS→service), mot de passe jamais en clair. KCC gère la réplication AD."
+    },
+    "6️⃣ NFS, Samba & FTP": {
+      "emoji": "🗃️",
+      "intro": "NFS partage des fichiers entre systèmes UNIX en réseau. Samba permet l'interopérabilité avec Windows. FTP est le protocole de transfert de fichiers historique, remplacé par SFTP pour la sécurité.",
+      "sections": [
+        {
+          "titre": "NFS — Network File System",
+          "contenu": [
+            "Développé par Sun Microsystems (1984). Partage de fichiers principalement entre systèmes UNIX",
+            "Utilise **RPC** (Remote Procedure Call). Port **2049** (NFS) + port **111** (portmap, non utilisé en v4)",
+            "**NFSv1/2/3** : sans état (stateless), sécurité basique, UDP puis TCP",
+            "**NFSv4** : à état (statefull), sécurité complète (Kerberos 5, chiffrement), reprise sur incident, compatible Windows/Mac. Port 2049 uniquement. INCOMPATIBLE NFSv3. Pas UDP.",
+            "**5 services RPC NFS** : nfs (fichiers), mountd (montage), nsm (monitoring), nlm (locks), quotad (quotas)",
+            "**Config serveur** : `/etc/exports` + commande `exportfs`. Aussi `/etc/hosts.allow` et `/etc/hosts.deny`",
+            "**Installation** : `sudo apt-get install nfs-kernel-server`"
+          ]
+        },
+        {
+          "titre": "FTP — File Transfer Protocol",
+          "contenu": [
+            "**Port 21** (contrôle) + **Port 20** (données). Non sécurisé par défaut (clair)",
+            "**FTPS** (FTP-SSL) : port 990, TLS implicite. **FTPES** : démarre sur port 21 puis upgrade TLS",
+            "**SFTP** : NOT FTP ! Basé sur SSH, port 22, tout chiffré",
+            "**Types** : Anonyme (sans MDP), Protégé MDP (port 21), Sécurisé FTPS (port 990), SFTP SSH (port 22)",
+            "Clients FTP : FileZilla, Cyberduck, WinSCP, WS_FTP",
+            "**pureFTPd** : serveur FTP léger et sécurisé (`sudo apt install pureftpd`)"
+          ]
+        },
+        {
+          "titre": "Commandes FTP principales",
+          "contenu": [
+            "**Contrôle d'accès** : USER (login), PASS (mot de passe), CWD (change dir), CDUP (répertoire parent), QUIT (fermer session)",
+            "**Transfert** : RETR (télécharger), STOR (envoyer), REST (reprendre transfert), DELE (supprimer), RNFR/RNTO (renommer)",
+            "**Répertoires** : MKD (créer), RMD (supprimer), LIST (lister), PWD (répertoire courant)",
+            "**Codes réponse** : 1xx préliminaire, **2xx succès**, 3xx intermédiaire, 4xx erreur temporaire, 5xx erreur permanente"
+          ]
+        }
+      ],
+      "a_retenir": "NFS : port 2049, RPC, /etc/exports. NFSv4 = statefull, sécurisé, incompatible v3. FTP : port 21(contrôle)+20(données), non sécurisé. SFTP ≠ FTP (c'est SSH port 22). Codes FTP : 2xx=succès, 4xx=erreur temporaire, 5xx=erreur permanente."
+    },
+    "7️⃣ SSH": {
+      "emoji": "🔒",
+      "intro": "SSH (Secure Shell) est le standard pour l'administration distante sécurisée. Il remplace RSH (non chiffré). Il permet la connexion distante, le transfert de fichiers (scp/sshfs), et le tunneling réseau.",
+      "sections": [
+        {
+          "titre": "SSH — Bases",
+          "contenu": [
+            "**Port par défaut** : 22 (TCP). Bonne pratique : changer le port (`Port 12345` dans sshd_config)",
+            "**RSH** (obsolète) = connexion distante non chiffrée. **SSH** = même chose mais chiffré",
+            "**Fichiers de config** : `/etc/ssh/sshd_config` (serveur), `/etc/ssh/ssh_config` (client)",
+            "Recharger après modification : `sudo systemctl reload sshd.service`"
+          ]
+        },
+        {
+          "titre": "Commandes SSH de base",
+          "contenu": [
+            "`ssh remote_host` : se connecter (utilisateur courant)",
+            "`ssh user@remote_host` : se connecter en tant que user",
+            "`ssh -p 2222 user@remote_host` : port spécifique",
+            "`ssh -CX user@remote_host` : export graphique (X11) avec compression",
+            "`scp fichier user@host:~` : copier un fichier vers le serveur",
+            "`scp -r repertoire user@host:~` : copier récursivement",
+            "`scp -P 2222 fichier user@host:~` : scp avec port spécifique (P majuscule !)",
+            "`sshfs user@host:/chemin /local -p 12345` : monter un répertoire distant via SSH"
+          ]
+        },
+        {
+          "titre": "Authentification par clé (recommandée)",
+          "contenu": [
+            "**Étape 1** : `ssh-keygen` → génère paire clé privée (`~/.ssh/id_rsa`) + clé publique (`~/.ssh/id_rsa.pub`)",
+            "**Étape 2** : `ssh-copy-id user@host` → envoie la clé publique sur le serveur (`~/.ssh/authorized_keys`)",
+            "La clé **privée ne quitte JAMAIS le client**. Plus sécurisé et plus confortable qu'un MDP",
+            "ssh-agent : `eval $(ssh-agent -s)` puis `ssh-add ~/.ssh/id_rsa` pour charger la clé en mémoire"
+          ]
+        },
+        {
+          "titre": "Sécurisation du serveur SSH",
+          "contenu": [
+            "`PermitRootLogin no` : refuse toute connexion root",
+            "`PermitRootLogin prohibit-password` : autorise root par clé seulement (recommandé)",
+            "`PasswordAuthentication no` : interdit l'auth par mot de passe globalement",
+            "`X11Forwarding yes` : active le forwarding graphique",
+            "`Match Address 192.168.100.*` + `PubkeyAuthentication yes` : règles par IP"
+          ]
+        },
+        {
+          "titre": "Port forwarding (tunneling SSH)",
+          "contenu": [
+            "`ssh -L mon_port:fhost:fport user@remote_host` : forward local vers service distant",
+            "Permet d'accéder à des services derrière un firewall si le port SSH (22) est ouvert",
+            "Les paquets envoyés à mon_port sont forwardés via remote_host vers fhost:fport"
+          ]
+        }
+      ],
+      "a_retenir": "SSH port 22. sshd_config (serveur), ssh_config (client). PermitRootLogin prohibit-password = root par clé seulement. Auth par clé : ssh-keygen + ssh-copy-id. scp : copie chiffrée (-P majuscule pour port). sshfs : monter répertoire distant. -p minuscule pour ssh, -P majuscule pour scp."
+    },
+    "8️⃣ Ansible & Virtualisation": {
+      "emoji": "🤖",
+      "intro": "Ansible automatise la gestion de parc informatique (déploiement, configuration, tâches). La virtualisation et la conteneurisation (Docker/Podman) permettent d'isoler des applications pour faciliter leur déploiement.",
+      "sections": [
+        {
+          "titre": "Ansible — Concepts fondamentaux",
+          "contenu": [
+            "**3 fonctions** : déploiement logiciels, gestion de configuration, exécution de tâches",
+            "Repose sur **SSH** pour communiquer avec les nœuds gérés (nécessite des clés SSH)",
+            "**Installation** : `pip install --user ansible`",
+            "Test : créer `/etc/ansible/hosts`, puis `ansible all -m ping`",
+            "**Hiérarchie** : Playbook → Play (tâches sur hôtes) → Task (modules) → Module (script exécuté)"
+          ]
+        },
+        {
+          "titre": "Inventaire Ansible (YAML)",
+          "contenu": [
+            "Définit les hôtes, groupes et variables. Format YAML ou INI",
+            "**Groupe simple** : `mon_groupe: hosts: host1: ansible_host: 192.168.0.100`",
+            "**Métagroupe** : regroupe plusieurs groupes via `children`",
+            "**Variables de groupe** : via `vars: ansible_user: invite`",
+            "Un hôte peut appartenir à **plusieurs groupes**",
+            "`ansible-inventory --list -i inventory.yaml` : vérifier l'inventaire",
+            "`ansible mes_machines -m ping -i inventory.yaml` : tester la connectivité"
+          ]
+        },
+        {
+          "titre": "Playbooks",
+          "contenu": [
+            "`ansible-playbook -i inventaire.yaml playbook.yaml` : exécuter un playbook",
+            "**Résultat** : ok (succès sans changement), changed (modifié), failed (erreur), unreachable (inaccessible)",
+            "**Rôle** : unité réutilisable (variables, tâches, fichiers). Créer avec `ansible-galaxy role init mon_role`",
+            "Structure rôle : `tasks/` (main.yml), `handlers/`, `defaults/`, `vars/`, `templates/` (Jinja2)",
+            "**Collection** : conteneur global (rôles + modules + plugins + playbooks). `ansible-galaxy collection init ns.collection`"
+          ]
+        },
+        {
+          "titre": "Virtualisation",
+          "contenu": [
+            "**Principe** : émulation d'une machine complète (CPU, mémoire, stockage, périphériques) via un **hyperviseur**",
+            "**Hyperviseurs** : VirtualPC, VMware, VirtualBox (poste de travail), Proxmox (datacenter), KVM (Linux)",
+            "Plusieurs VMs dans une machine physique. Chaque VM a son propre OS complet"
+          ]
+        },
+        {
+          "titre": "Conteneurisation (Podman/Docker)",
+          "contenu": [
+            "**Principe** : isole un processus en **partageant le noyau hôte**. Plus léger qu'une VM",
+            "**Podman** : similaire à Docker mais sans daemon root. Mêmes commandes que Docker",
+            "**Dockerfile — instructions principales** : FROM (image base), WORKDIR (répertoire), RUN (à la construction), CMD (au démarrage, une seule), EXPOSE (port accessible)",
+            "`podman build -f Dockerfile -t image:latest` : construire une image",
+            "`podman run --rm -p 8080:80 -v $PWD/php/:/php:O image:latest` : lancer un conteneur",
+            "**podman-compose** : compose plusieurs services en YAML, `depends_on` pour les dépendances",
+            "**Variables** dans fichier `.env` : WP_VERSION, DB_USER, DB_PASSWD…"
+          ]
+        }
+      ],
+      "a_retenir": "Ansible = SSH + inventaire (hôtes/groupes) + playbooks (Plays/Tasks/Modules). ansible-playbook -i inventaire.yaml playbook.yaml. Virtualisation = hyperviseur + OS complet. Conteneurisation = partage noyau hôte, plus léger. Dockerfile : FROM/RUN(build)/CMD(démarrage)/EXPOSE. podman build/run. podman-compose pour multi-services."
     }
   }
 }

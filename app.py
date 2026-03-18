@@ -155,6 +155,14 @@ SUBJECTS = {
         "description": "PowerPoint, Prise de parole, Réunion, Brainstorming",
         "color": "#f59e0b",
     },
+    "SR74": {
+        "file": "questions_sr74.json",
+        "icon": "🌐",
+        "label": "SR74",
+        "subtitle": "Introduction au Système d'Exploitation",
+        "description": "OS, UNIX, DHCP, DNS, LDAP, AD, NFS, SSH, Ansible, Docker",
+        "color": "#10b981",
+    },
 }
 
 
